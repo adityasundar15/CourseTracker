@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home.tsx";
 import Courses from "./pages/Courses.tsx";
 import Profile from "./pages/Profile.tsx";
+import PopUp from "./components/InitModal.tsx";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/courses" element={<Courses />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
+      <PopUp />
     </>
   );
 }

@@ -22,7 +22,7 @@ function Navbar() {
               }}
             ></div>
           </div>
-          <span className="fs-4 fw-semi-bold">CourseTracker</span>
+          <span className="fs-4 fw-semi-bold">Course Tracker</span>
         </Link>
         <button
           className="navbar-toggler"
