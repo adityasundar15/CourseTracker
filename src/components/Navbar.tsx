@@ -1,5 +1,6 @@
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import { ReactNode } from "react";
+import "../App.css";
 
 interface Props {
   to: string;

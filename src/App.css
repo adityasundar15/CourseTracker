@@ -5,4 +5,14 @@
 
 body {
     font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure full viewport height */
+}
+  
+
+.modal-init{
+    max-height: none !important;
+    max-width: none !important;
+    width: 50% !important; 
 }
