@@ -1,6 +1,8 @@
+/* #region global */
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -9,12 +11,16 @@ body {
     height: 100%;
 }
 
-html, body, #root, #outer-container, #page-wrap, #home-page, #profile-page {
+html, body, #root, #outer-container, #page-wrap, #parent-container, #profile-page {
     min-height: 100vh;
     height: 100%;
 }
 
-/* ---- Home page ---- */
+/* #endregion */
+
+/* ---------------- */
+
+/* #region Home page  */
 
 /* Thing on top-right */
 
@@ -35,12 +41,18 @@ html, body, #root, #outer-container, #page-wrap, #home-page, #profile-page {
 
 /* Total wrapper */
 
-#home-page {
+#parent-container {
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }  
+
+.home-background {
+    background-image: url("/src/assets/background.png");
+    background-size: auto;
+    background-position: center; 
+}
 
 /* Popup modal */
 
@@ -78,9 +90,11 @@ html, body, #root, #outer-container, #page-wrap, #home-page, #profile-page {
     letter-spacing: 1px;
 }
 
-/* ------------ */
+/* #endregion */
 
-/* Hamburg menu item */
+/* ---------------- */
+
+/* #region Hamburg menu item */
 
 .menu-title {
     font-family: "ClashDisplay-Medium";
@@ -97,11 +111,10 @@ html, body, #root, #outer-container, #page-wrap, #home-page, #profile-page {
     color: white;
     font-family: "Outfit";
     font-size: 2rem;
-    padding-top: 20px;
 }
 
 .menu-item:hover {
-    color: rgb(177, 176, 176);
+    color: rgb(89, 103, 100);
 }
   
 /* Hamburg CSS */
@@ -117,12 +130,12 @@ html, body, #root, #outer-container, #page-wrap, #home-page, #profile-page {
   
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-    background: #373a47;
+    background: #ffffff;
 }
   
 /* Color/shape of burger icon bars on hover*/
 .bm-burger-bars-hover {
-    background: #9b6a6a;
+    background: #5e5e5e;
 }
   
 /* Position and sizing of clickable cross button */
@@ -172,3 +185,130 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .bm-overlay {
     background: rgba(0, 0, 0, 0.3);
 }
+
+/* #endregion */
+
+/* ---------------- */
+
+/* #region Profile page */
+
+.prof-msg {
+    font-family: "Outfit";
+    font-size: 2.5rem;
+    letter-spacing: 0px;
+}
+
+.form-label, .form-control, .form-select {
+    font-family: "Outfit";
+}
+
+.form-label {
+    font-size: 1.3rem;
+}
+
+.save-prof {
+    font-family: "Outfit" !important;
+    font-weight: 200;
+}
+
+/* #endregion */
+
+/* ---------------- */
+
+/* #region Welcome Page */
+
+.welcome-title {
+    font-family: "Outfit";
+    font-size: 3.4rem;
+}
+
+.get-started {
+    font-family: "Outfit" !important;
+    font-size: 1.5rem !important;
+}
+
+.welcome-button {
+    background-color: #000000 !important;
+    border-radius: 30px !important;
+}
+
+/* #endregion */
+
+/* ---------------- */
+
+/* #region Courses Page */
+
+.course-page-title {
+    font-size: 3.43rem;
+    font-family: 'Outfit';
+    padding: 10% 0% 3rem;
+}
+
+.course {
+    width: 100%;
+}
+
+/* #endregion Courses Page */
+
+/* ---------------- */
+
+/* #region misc */
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+}
+
+.outfit {
+    font-family: "Outfit";
+}
+
+/* #endregion */
+
+/* ---------------- */
+
+/* #region Animations  */
+
+.fade-slide-in {
+    opacity: 0;
+    transform: translateX(50%);
+    animation: fadeSlideIn 0.5s forwards ease-out;
+}
+  
+@keyframes fadeSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(50%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+
+
+.fade-slide-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeSlideUp 0.5s forwards ease-out;
+  }
+  
+@keyframes fadeSlideUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+}
+  
+/* #endregion */
+
+/* ---------------- */

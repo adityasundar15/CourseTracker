@@ -30,7 +30,7 @@ function BurgerMenu() {
         <div className="row">
           <div className="col-md-9">
             <div className="d-flex justify-content-center align-items-center">
-              <span className="menu-title menu-left-title text-center">
+              <span className="menu-title menu-left-title text-center noselect">
                 Credit
               </span>
             </div>
@@ -39,28 +39,36 @@ function BurgerMenu() {
         <div className="row">
           <div className="col-md-5 offset-md-5">
             <div className="d-flex justify-content-center align-items-center">
-              <span className="menu-title menu-right-title text-center">
+              <span className="menu-title menu-right-title text-center noselect">
                 Ledger
               </span>
             </div>
           </div>
         </div>
       </div>
-
-      <Link id="home-link" className="menu-item" to="/" onClick={closeMenu}>
+      <hr className="mt-5"></hr>
+      <Link
+        id="home-link"
+        className="menu-item noselect"
+        to="/"
+        onClick={closeMenu}
+      >
         Home
       </Link>
+      <hr></hr>
       <Link
         id="courses-link"
-        className="menu-item"
+        className="menu-item noselect"
         to="/courses"
         onClick={closeMenu}
       >
         Courses
       </Link>
-      <Link to="/profile" className="menu-item" onClick={closeMenu}>
+      <hr></hr>
+      <Link to="/profile" className="menu-item noselect" onClick={closeMenu}>
         Profile
       </Link>
+      <hr></hr>
     </Menu>
   );
 }

@@ -12,8 +12,8 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home.tsx";
 import Courses from "./pages/Courses.tsx";
 import Profile from "./pages/Profile.tsx";
-import PopUp from "./components/InitModal.tsx";
 import BurgerMenu from "./components/Hamburg.tsx";
+import Welcome from "./pages/welcome.tsx";
 
 function App() {
   return (
@@ -25,8 +25,9 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/courses" element={<Courses />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/welcome" element={<Welcome />} />
           </Routes>
-          <PopUp />
+          {/* <PopUp /> */}
         </main>
       </div>
     </>
