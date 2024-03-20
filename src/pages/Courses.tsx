@@ -1,13 +1,31 @@
-import { Button, Card, Row } from "react-bootstrap";
+import { Button, Card, Row, ProgressBar } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import placeHolderPic from "../assets/default_courses.png";
 
-function Courses() {
+function New() {
   const navigate = useNavigate();
 
   const navigateHome = () => {
     navigate("/");
   };
+
+  const navigateToCourse = (course: string) => {
+    navigate(`/${course.toLowerCase()}`);
+  };
+
+  const courses = [
+    { name: "Introductory", completed: 8, total: 12 },
+    { name: "Intermediate", completed: 7, total: 12 },
+    { name: "Advanced", completed: 10, total: 12 },
+    { name: "Seminar", completed: 4, total: 8 },
+    { name: "Language", completed: 18, total: 22 },
+    { name: "Unititled", completed: 0, total: 0 },
+  ];
+
+  // Calculate overall progress
+  const totalCompleted = courses.reduce((acc, course) => acc + course.completed, 0);
+  const totalCourses = courses.reduce((acc, course) => acc + course.total, 0);
+  const overallProgress = ((totalCompleted / totalCourses) * 100).toFixed(1); 
 
   return (
     <div id="parent-container">
@@ -18,89 +36,34 @@ function Courses() {
       </div>
       <div className="w-75 h-100 d-flex flex-column">
         <span className="course-page-title">Courses</span>
+        <div className="d-flex align-items-center">
+            <ProgressBar className="flex-grow-1" now={parseFloat(overallProgress)} label={`${overallProgress}% (${totalCompleted}/${totalCourses})`} />
+        </div>
         <Row xs={1} md={2} lg={3}>
-          <div className="g-col-6 g-col-md-4 mb-4">
-            <Card className="course">
-              <Card.Img
-                variant="top"
-                src={placeHolderPic}
-                className="card-image"
-              />
-              <Card.Body>
-                <Card.Title>Introductory</Card.Title>
-                <Card.Text>8/12 completed</Card.Text>
-              </Card.Body>
-            </Card>
-          </div>
-          <div className="g-col-6 g-col-md-4 mb-4">
-            <Card className="course">
-              <Card.Img
-                variant="top"
-                src={placeHolderPic}
-                className="card-image"
-              />
-              <Card.Body>
-                <Card.Title>Intermediate</Card.Title>
-                <Card.Text>7/12 completed</Card.Text>
-              </Card.Body>
-            </Card>
-          </div>
-          <div className="g-col-6 g-col-md-4 mb-4">
-            <Card className="course">
-              <Card.Img
-                variant="top"
-                src={placeHolderPic}
-                className="card-image"
-              />
-              <Card.Body>
-                <Card.Title>Advanced</Card.Title>
-                <Card.Text>10/12 completed</Card.Text>
-              </Card.Body>
-            </Card>
-          </div>
-          <div className="g-col-6 g-col-md-4 mb-4">
-            <Card className="course">
-              <Card.Img
-                variant="top"
-                src={placeHolderPic}
-                className="card-image"
-              />
-              <Card.Body>
-                <Card.Title>Seminar</Card.Title>
-                <Card.Text>4/8 completed</Card.Text>
-              </Card.Body>
-            </Card>
-          </div>
-          <div className="g-col-6 g-col-md-4 mb-4">
-            <Card className="course">
-              <Card.Img
-                variant="top"
-                src={placeHolderPic}
-                className="card-image"
-              />
-              <Card.Body>
-                <Card.Title>Language</Card.Title>
-                <Card.Text>18/22 completed</Card.Text>
-              </Card.Body>
-            </Card>
-          </div>
-          <div className="g-col-6 g-col-md-4 mb-4">
-            <Card className="course">
-              <Card.Img
-                variant="top"
-                src={placeHolderPic}
-                className="card-image"
-              />
-              <Card.Body>
-                <Card.Title>Untitled</Card.Title>
-                <Card.Text>0/0 completed</Card.Text>
-              </Card.Body>
-            </Card>
-          </div>
+          {courses.map((course, index) => (
+            <div className="g-col-6 g-col-md-4 mb-4" key={index}>
+              <button
+                className="course"
+                onClick={() => navigateToCourse(course.name)}
+              >
+                <Card.Img
+                  variant="top"
+                  src={placeHolderPic}
+                  className="card-image"
+                />
+                <Card.Body className="cardtext">
+                  <Card.Title>{course.name}</Card.Title>
+                  <Card.Text>
+                    {course.completed}/{course.total} completed
+                  </Card.Text>
+                </Card.Body>
+              </button>
+            </div>
+          ))}
         </Row>
       </div>
     </div>
   );
 }
 
-export default Courses;
+export default New;

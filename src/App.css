@@ -246,6 +246,17 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 .course {
     width: 100%;
+    border-color: white;
+    border-width: 1px;
+    border-radius: 1%;
+    text-align: start;
+    background-color: white;
+}
+
+.cardtext {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px
 }
 
 /* #endregion Courses Page */
@@ -268,6 +279,10 @@ Note: Beware of modifying this element as it can break the animations - you shou
     font-family: "Outfit";
 }
 
+.flex-grow-1{
+    position: relative;
+  margin-bottom: 20px; 
+}
 /* #endregion */
 
 /* ---------------- */
