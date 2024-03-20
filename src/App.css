@@ -259,6 +259,30 @@ Note: Beware of modifying this element as it can break the animations - you shou
     margin-left: 20px
 }
 
+.custom-progress-bar {
+    position: relative;
+  }
+  
+  .custom-progress-bar .progress-bar {
+    border-radius: 10px; /* Rounded corners */
+    background-color: black;
+  }
+
+  /*.custom-progress-bar::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    width: 10px; 
+    height: 10px; 
+    background-color: black; 
+    border-radius: 50%;
+    z-index: 2; 
+  }
+  */ /* This is for the circle at the end of the progress bar (no use)*/
+
+  
 /* #endregion Courses Page */
 
 /* ---------------- */

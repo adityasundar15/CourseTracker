@@ -1,8 +1,7 @@
 function Advanced() {
     return (
         <div>
-          <h1>Welcome to Introductory Page</h1>
-          <p>This is a simple introductory page built using React.</p>
+          <h1>Welcome to Advanced Page</h1>
         </div>
       );
 }

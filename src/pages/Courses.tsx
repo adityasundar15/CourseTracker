@@ -1,8 +1,10 @@
 import { Button, Card, Row, ProgressBar } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import placeHolderPic from "../assets/default_courses.png";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'; 
 
-function New() {
+function Courses() {
   const navigate = useNavigate();
 
   const navigateHome = () => {
@@ -36,8 +38,16 @@ function New() {
       </div>
       <div className="w-75 h-100 d-flex flex-column">
         <span className="course-page-title">Courses</span>
-        <div className="d-flex align-items-center">
-            <ProgressBar className="flex-grow-1" now={parseFloat(overallProgress)} label={`${overallProgress}% (${totalCompleted}/${totalCourses})`} />
+        <div className="progress-container">
+          <div className="progress-bar">
+            <div className="progress-indicator" style={{ width: `${overallProgress}%` }}>
+              <span className="percentage">{`${overallProgress}%`}</span>
+            </div>
+          </div>
+        </div>
+        <div className="d-flex align-items-center" style={{marginBottom: '10px'}}>
+          <ProgressBar className="flex-grow-1 custom-progress-bar" now={parseFloat(overallProgress)} />
+          <FontAwesomeIcon icon={faCheckCircle} color= 'green' size='lg' style={{ marginTop: '-20px', marginLeft: '5px' }}/>
         </div>
         <Row xs={1} md={2} lg={3}>
           {courses.map((course, index) => (
@@ -66,4 +76,4 @@ function New() {
   );
 }
 
-export default New;
+export default Courses;
