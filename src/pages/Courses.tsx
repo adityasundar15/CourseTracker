@@ -1,8 +1,8 @@
-import { Button, Card, Row, ProgressBar } from 'react-bootstrap';
+import { Button, Card, Row, ProgressBar } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import placeHolderPic from "../assets/default_courses.png";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'; 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 function Courses() {
   const navigate = useNavigate();
@@ -25,9 +25,12 @@ function Courses() {
   ];
 
   // Calculate overall progress
-  const totalCompleted = courses.reduce((acc, course) => acc + course.completed, 0);
+  const totalCompleted = courses.reduce(
+    (acc, course) => acc + course.completed,
+    0
+  );
   const totalCourses = courses.reduce((acc, course) => acc + course.total, 0);
-  const overallProgress = ((totalCompleted / totalCourses) * 100).toFixed(1); 
+  const overallProgress = ((totalCompleted / totalCourses) * 100).toFixed(1);
 
   return (
     <div id="parent-container">
@@ -40,14 +43,28 @@ function Courses() {
         <span className="course-page-title">Courses</span>
         <div className="progress-container">
           <div className="progress-bar">
-            <div className="progress-indicator" style={{ width: `${overallProgress}%` }}>
+            <div
+              className="progress-indicator"
+              style={{ width: `${overallProgress}%` }}
+            >
               <span className="percentage">{`${overallProgress}%`}</span>
             </div>
           </div>
         </div>
-        <div className="d-flex align-items-center" style={{marginBottom: '10px'}}>
-          <ProgressBar className="flex-grow-1 custom-progress-bar" now={parseFloat(overallProgress)} />
-          <FontAwesomeIcon icon={faCheckCircle} color= 'green' size='lg' style={{ marginTop: '-20px', marginLeft: '5px' }}/>
+        <div
+          className="d-flex align-items-center"
+          style={{ marginBottom: "10px" }}
+        >
+          <ProgressBar
+            className="flex-grow-1 custom-progress-bar"
+            now={parseFloat(overallProgress)}
+          />
+          <FontAwesomeIcon
+            icon={faCheckCircle}
+            color="green"
+            size="lg"
+            style={{ marginTop: "-20px", marginLeft: "5px" }}
+          />
         </div>
         <Row xs={1} md={2} lg={3}>
           {courses.map((course, index) => (
@@ -70,6 +87,10 @@ function Courses() {
               </button>
             </div>
           ))}
+          <Card.Body className="cardtext">
+            <Card.Title>Untitled</Card.Title>
+            <Card.Text>0/0 completed</Card.Text>
+          </Card.Body>
         </Row>
       </div>
     </div>

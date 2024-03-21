@@ -1,6 +1,6 @@
 import { pushRotate as Menu } from "react-burger-menu";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 interface MenuState {
   isOpen: boolean;
@@ -8,6 +8,8 @@ interface MenuState {
 
 function BurgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const [isHome, setIsHome] = useState(location.pathname === "/");
 
   const handleMenuStateChange = (state: MenuState) => {
     setIsOpen(state.isOpen);
@@ -17,6 +19,10 @@ function BurgerMenu() {
     setIsOpen(false);
   };
 
+  useEffect(() => {
+    setIsHome(location.pathname === "/");
+  }, [location.pathname]);
+
   return (
     <Menu
       isOpen={isOpen}
@@ -25,6 +31,7 @@ function BurgerMenu() {
       pageWrapId={"page-wrap"}
       outerContainerId={"outer-container"}
       customCrossIcon={false}
+      burgerBarClassName={isHome ? "white-bg" : ""}
     >
       <div className="container">
         <div className="row">
