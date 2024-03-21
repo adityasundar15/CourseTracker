@@ -130,6 +130,10 @@ html, body, #root, #outer-container, #page-wrap, #parent-container, #profile-pag
   
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
+    background: #212529;
+}
+
+.white-bg {
     background: #ffffff;
 }
   
