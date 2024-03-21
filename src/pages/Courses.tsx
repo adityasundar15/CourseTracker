@@ -61,7 +61,6 @@ function Courses() {
           />
           <FontAwesomeIcon
             icon={faCheckCircle}
-            color="green"
             size="lg"
             style={{ marginTop: "-20px", marginLeft: "5px" }}
           />
