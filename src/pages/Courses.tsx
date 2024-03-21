@@ -47,7 +47,7 @@ function Courses() {
         </div>
         <div className="d-flex align-items-center" style={{marginBottom: '10px'}}>
           <ProgressBar className="flex-grow-1 custom-progress-bar" now={parseFloat(overallProgress)} />
-          <FontAwesomeIcon icon={faCheckCircle} color= 'green' size='lg' style={{ marginTop: '-20px', marginLeft: '5px' }}/>
+          <FontAwesomeIcon icon={faCheckCircle} size='lg' style={{ marginTop: '-20px', marginLeft: '5px' }}/>
         </div>
         <Row xs={1} md={2} lg={3}>
           {courses.map((course, index) => (
