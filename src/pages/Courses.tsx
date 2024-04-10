@@ -172,22 +172,25 @@ function Courses() {
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://via.placeholder.com/800x400?text=Image+1"
+            src="/src/assets/image1.png"
             alt="First slide"
+            style={{ width: '500px', height: '300px' }}
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://via.placeholder.com/800x400?text=Image+2"
+            src="/src/assets/image2.png"
             alt="Second slide"
+            style={{ width: '500px', height: '300px' }}
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://via.placeholder.com/800x400?text=Image+3"
+            src="/src/assets/image3.png"
             alt="Third slide"
+            style={{ width: '500px', height: '300px' }}
           />
         </Carousel.Item>
       </Carousel>
