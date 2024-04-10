@@ -1,6 +1,6 @@
-import { Link, useMatch, useResolvedPath } from "react-router-dom";
-import { ReactNode } from "react";
-import "../App.css";
+import { Link, useMatch, useResolvedPath } from 'react-router-dom';
+import { ReactNode } from 'react';
+import '../App.css';
 
 interface Props {
   to: string;
@@ -16,10 +16,10 @@ function Navbar() {
             <div
               className=""
               style={{
-                width: "30px",
-                height: "30px",
-                borderRadius: "50%",
-                background: "#ccc",
+                width: '30px',
+                height: '30px',
+                borderRadius: '50%',
+                background: '#ccc',
               }}
             ></div>
           </div>
@@ -41,6 +41,7 @@ function Navbar() {
             <CustomLink to="/">Home</CustomLink>
             <CustomLink to="/courses">Courses</CustomLink>
             <CustomLink to="/profile">Profile</CustomLink>
+            <CustomLink to="/profile">Test</CustomLink>
           </ul>
         </div>
       </div>
@@ -54,7 +55,7 @@ function CustomLink({ to, children }: Props) {
 
   return (
     <li className="nav-item me-3">
-      <Link to={to} className={`nav-link ${isActive ? "active" : ""}`}>
+      <Link to={to} className={`nav-link ${isActive ? 'active' : ''}`}>
         {children}
       </Link>
     </li>

@@ -1,26 +1,16 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-// import { getAnalytics } from 'firebase/analytics';
 import { getFirestore } from 'firebase/firestore';
+// import { getAnalytics } from 'firebase/analytics';
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-// const firebaseConfig = {
-//   apiKey: 'AIzaSyAM0oqryEw8bU483i3HloYDAlg3zJ6CoRo',
-//   authDomain: 'coursetracker-921a7.firebaseapp.com',
-//   projectId: 'coursetracker-921a7',
-//   storageBucket: 'coursetracker-921a7.appspot.com',
-//   messagingSenderId: '386203163997',
-//   appId: '1:386203163997:web:ca9597255a5da5a1c79cb4',
-//   measurementId: 'G-3BK8QKWQCG',
-// };
-
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  // databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
@@ -30,8 +20,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
 app;
 // const analytics = getAnalytics(app);
-
 export const db = getFirestore();
