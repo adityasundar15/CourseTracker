@@ -63,6 +63,18 @@ html, body, #root, #outer-container, #page-wrap, #parent-container, #profile-pag
     width: 50% !important; 
 }
 
+.modal-subtitle{
+    display: block;
+    opacity: 0.5;
+    margin-left: 1rem;
+    margin-top: 0.2rem;
+  }
+
+.modal-info{
+    display: block;
+    opacity: 0.5;
+}
+
 /* App Title */
 
 .app-title {
@@ -237,6 +249,16 @@ Note: Beware of modifying this element as it can break the animations - you shou
     border-radius: 30px !important;
 }
 
+.position-relative {
+    position: relative;
+  }
+  
+  .floating-button-container {
+    position: absolute;
+    bottom: -6rem;
+    right: 0rem;
+  }
+
 /* #endregion */
 
 /* ---------------- */
@@ -304,8 +326,44 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 .card-body {
     font-family: 'Outfit';
+    border-color: white;
+    border-width: 1px;
+    border-radius: 1%;
+    text-align: start;
+    background-color: white;
+
 }
 
+.cardtext {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px
+}
+
+.custom-progress-bar {
+    position: relative;
+  }
+  
+  .custom-progress-bar .progress-bar {
+    border-radius: 10px; /* Rounded corners */
+    background-color: black;
+  }
+
+  /*.custom-progress-bar::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    width: 10px; 
+    height: 10px; 
+    background-color: black; 
+    border-radius: 50%;
+    z-index: 2; 
+  }
+  */ /* This is for the circle at the end of the progress bar (no use)*/
+
+  
 /* #endregion Courses Page */
 
 /* ---------------- */
@@ -326,6 +384,10 @@ Note: Beware of modifying this element as it can break the animations - you shou
     font-family: "Outfit";
 }
 
+.flex-grow-1{
+    position: relative;
+  margin-bottom: 20px; 
+}
 /* #endregion */
 
 /* ---------------- */
