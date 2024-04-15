@@ -1,10 +1,19 @@
-import { Button, Card, ProgressBar, Row } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Carousel,
+  Modal,
+  ProgressBar,
+  Row,
+} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import placeHolderPic1 from "../assets/default_courses1.png";
 import placeHolderPic2 from "../assets/default_courses2.png";
 import placeHolderPic3 from "../assets/default_courses3.png";
 import { useEffect, useState } from "react";
 import SelectedCategory from "./Category";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 interface CourseCategory {
   name: string;
@@ -23,6 +32,15 @@ interface Course {
 
 function Courses() {
   const navigate = useNavigate();
+  const [showAddModal, setShowAddModal] = useState(false);
+
+  const handleShowAddModal = () => {
+    setShowAddModal(true);
+  };
+
+  const handleCloseAddModal = () => {
+    setShowAddModal(false);
+  };
 
   const navigateHome = () => {
     navigate("/");
@@ -296,6 +314,111 @@ function Courses() {
               ))}
             </Row>
           </div>
+          <div className="floating-button-container">
+            <Button
+              className="floating-button"
+              onClick={handleShowAddModal}
+              style={{
+                backgroundColor: "white",
+                color: "black",
+                borderColor: "black",
+                opacity: "0.5",
+                transition: "0.2s ease-in-out",
+                borderRadius: "15px",
+                width: "10rem",
+                height: "3.5rem",
+                position: "fixed",
+                bottom: "2rem",
+                right: "2rem",
+                zIndex: 1000,
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.opacity = "1";
+                e.currentTarget.style.boxShadow =
+                  "0 4px 8px 0 rgba(0, 0, 0, 0.2)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.opacity = "0.5";
+                e.currentTarget.style.boxShadow =
+                  "0 4px 8px 0 rgba(0, 0, 0, 0)";
+              }}
+            >
+              <FontAwesomeIcon icon={faPlus} size="lg" /> Add Category
+            </Button>
+          </div>
+          <Modal show={showAddModal} onHide={handleCloseAddModal}>
+            <Modal.Header closeButton>
+              <Modal.Title>Add Category</Modal.Title>
+              <span className="modal-subtitle">Add a new course category</span>
+            </Modal.Header>
+            <Modal.Body>
+              <div className="mb-3">
+                <h5>Course Group</h5>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter Course Group"
+                  id="courseGroupInput"
+                />
+                <span className="modal-info">e.g/Advanced</span>
+              </div>
+              <div className="mb-3" style={{ marginTop: "2rem" }}>
+                <h5>Required Credits</h5>
+                <select
+                  className="form-select"
+                  style={{ width: "12rem" }}
+                  id="requiredCreditsSelect"
+                >
+                  <option>Select Credit</option>
+                  <option value="1">1 Credit</option>
+                  <option value="2">2 Credits</option>
+                  <option value="3">3 Credits</option>
+                  <option value="4">4 Credits</option>
+                  <option value="5">5 Credits</option>
+                  <option value="6">6 Credits</option>
+                </select>
+                <span className="modal-info">e.g/15 credits</span>
+              </div>
+              <div className="mb-3" style={{ marginTop: "2rem" }}>
+                <h5>Background Image</h5>
+                <Carousel indicators={true}>
+                  <Carousel.Item>
+                    <img
+                      className="d-block w-100"
+                      src="/src/assets/default_courses1.png"
+                      alt="First slide"
+                      style={{ width: "500px", height: "300px" }}
+                    />
+                  </Carousel.Item>
+                  <Carousel.Item>
+                    <img
+                      className="d-block w-100"
+                      src="/src/assets/default_courses2.png"
+                      alt="Second slide"
+                      style={{ width: "500px", height: "300px" }}
+                    />
+                  </Carousel.Item>
+                  <Carousel.Item>
+                    <img
+                      className="d-block w-100"
+                      src="/src/assets/default_courses3.png"
+                      alt="Third slide"
+                      style={{ width: "500px", height: "300px" }}
+                    />
+                  </Carousel.Item>
+                </Carousel>
+              </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                variant="primary"
+                onClick={() => {}}
+                style={{ backgroundColor: "black", borderColor: "black" }}
+              >
+                Add
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </>
       )}
     </div>
