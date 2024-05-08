@@ -347,6 +347,82 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* ---------------- */
 
+/* #region AddCategoryModal */
+
+/* For PC screens, adjusting width a bit */
+@media (min-width: 576px) {
+    /* default: var(--bs-modal-width) <- 500px*/
+        .add-category-modal {
+            max-width: 55% !important;
+        }
+    }
+
+.add-category-modal-content {
+    margin: 5% 15%;
+}
+
+.add-category-modal .btn-close {
+    align-self: self-start;
+}
+
+.add-category-modal-header {
+    justify-content: center;
+    border-bottom: 1px solid black !important;
+}
+
+.add-category-modal .modal-title {
+    font-size: 2.5rem;
+}
+
+.add-category-modal .modal-body {
+    margin: 5% 5%;
+}
+
+.modal-sub-headers {
+    font-family: 'Outfit';
+    font-size: 1.5rem !important;
+}
+
+.selected {
+    border: 5px solid rgb(0, 0, 0);
+    transition: border 0.2s ease-in-out;
+    position: relative;
+}
+
+.modal-img-container {
+    position: relative;
+}
+
+.modal-img {
+    width: 100%;
+    height: 8rem;
+    object-fit: cover;
+    background-color: #000000;
+}
+
+.img-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1rem;
+    pointer-events: none; /* Ensures that the overlay doesn't intercept clicks */
+}
+
+.add-category-modal .modal-footer {
+    border-top: none;
+}
+
+/* #endregion */
+
+/* ---------------- */
+
 /* #region Animations  */
 
 .fade-slide-in {

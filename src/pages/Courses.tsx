@@ -1,21 +1,16 @@
-import {
-  Button,
-  Card,
-  Carousel,
-  Modal,
-  ProgressBar,
-  Row,
-} from "react-bootstrap";
+import { Button, Card, ProgressBar, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import placeHolderPic1 from "../assets/default_courses1.png";
 import placeHolderPic2 from "../assets/default_courses2.png";
 import placeHolderPic3 from "../assets/default_courses3.png";
 import { useEffect, useState } from "react";
 import SelectedCategory from "./Category";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import AddCategoryButton from "../components/AddCategoryButton";
+import AddCategoryModal from "../components/AddCategoryModal";
+import RemoveAllCategoriesButton from "../components/RemoveAllCategories";
 
 interface CourseCategory {
+  id: string;
   name: string;
   completed: number;
   total: number;
@@ -50,169 +45,174 @@ function Courses() {
     []
   );
 
-  const initialCourseCategories = (): CourseCategory[] => [
-    {
-      name: "Introductory",
-      completed: 8,
-      total: 12,
-      picture: 1,
-      courses: [
-        {
-          id: "000001",
-          name: "Introduction to AI",
-          credit: 2,
-          completed: true,
-        },
-        {
-          id: "000002",
-          name: "Introduction to Digital Humanities",
-          credit: 2,
-          completed: true,
-        },
-        {
-          id: "000003",
-          name: "Introduction to Statistics",
-          credit: 3,
-          completed: true,
-        },
-        {
-          id: "000004",
-          name: "Introduction to Media Studies",
-          credit: 2,
-          completed: false,
-        },
-      ],
-    },
-    {
-      name: "Intermediate",
-      completed: 7,
-      total: 12,
-      picture: 3,
-      courses: [
-        {
-          id: "000001",
-          name: "Intermediate to AI",
-          credit: 2,
-          completed: true,
-        },
-        {
-          id: "000002",
-          name: "Intermediate to Digital Humanities",
-          credit: 2,
-          completed: true,
-        },
-        {
-          id: "000003",
-          name: "Intermediate to Statistics",
-          credit: 3,
-          completed: true,
-        },
-        {
-          id: "000004",
-          name: "Intermediate to Media Studies",
-          credit: 2,
-          completed: false,
-        },
-      ],
-    },
-    {
-      name: "Advanced",
-      completed: 10,
-      total: 12,
-      picture: 3,
-      courses: [
-        {
-          id: "000001",
-          name: "Advanced to AI",
-          credit: 2,
-          completed: true,
-        },
-        {
-          id: "000002",
-          name: "Advanced to Digital Humanities",
-          credit: 2,
-          completed: true,
-        },
-        {
-          id: "000003",
-          name: "Advanced to Statistics",
-          credit: 3,
-          completed: true,
-        },
-        {
-          id: "000004",
-          name: "Advanced to Media Studies",
-          credit: 2,
-          completed: false,
-        },
-      ],
-    },
-    {
-      name: "Seminar",
-      completed: 4,
-      total: 8,
-      picture: 2,
-      courses: [
-        {
-          id: "000001",
-          name: "Seminar to AI",
-          credit: 2,
-          completed: true,
-        },
-        {
-          id: "000002",
-          name: "Seminar to Digital Humanities",
-          credit: 2,
-          completed: true,
-        },
-        {
-          id: "000003",
-          name: "Seminar to Statistics",
-          credit: 3,
-          completed: true,
-        },
-        {
-          id: "000004",
-          name: "Seminar to Media Studies",
-          credit: 2,
-          completed: false,
-        },
-      ],
-    },
-    {
-      name: "Language",
-      completed: 18,
-      total: 22,
-      picture: 3,
-      courses: [
-        {
-          id: "000001",
-          name: "Language to AI",
-          credit: 2,
-          completed: true,
-        },
-        {
-          id: "000002",
-          name: "Language to Digital Humanities",
-          credit: 2,
-          completed: true,
-        },
-        {
-          id: "000003",
-          name: "Language to Statistics",
-          credit: 3,
-          completed: true,
-        },
-        {
-          id: "000004",
-          name: "Language to Media Studies",
-          credit: 2,
-          completed: false,
-        },
-      ],
-    },
-    { name: "Untitled", picture: 1, completed: 0, total: 0, courses: [] },
-  ];
+  const handleAddCategory = (newCategory: CourseCategory) => {
+    // Update the state to include the new category
+    setCourseCategories([...courseCategories, newCategory]);
+  };
+
+  // const initialCourseCategories = (): CourseCategory[] => [
+  //   {
+  //     name: "Introductory",
+  //     completed: 8,
+  //     total: 12,
+  //     picture: 1,
+  //     courses: [
+  //       {
+  //         id: "000001",
+  //         name: "Introduction to AI",
+  //         credit: 2,
+  //         completed: true,
+  //       },
+  //       {
+  //         id: "000002",
+  //         name: "Introduction to Digital Humanities",
+  //         credit: 2,
+  //         completed: true,
+  //       },
+  //       {
+  //         id: "000003",
+  //         name: "Introduction to Statistics",
+  //         credit: 3,
+  //         completed: true,
+  //       },
+  //       {
+  //         id: "000004",
+  //         name: "Introduction to Media Studies",
+  //         credit: 2,
+  //         completed: false,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     name: "Intermediate",
+  //     completed: 7,
+  //     total: 12,
+  //     picture: 3,
+  //     courses: [
+  //       {
+  //         id: "000001",
+  //         name: "Intermediate to AI",
+  //         credit: 2,
+  //         completed: true,
+  //       },
+  //       {
+  //         id: "000002",
+  //         name: "Intermediate to Digital Humanities",
+  //         credit: 2,
+  //         completed: true,
+  //       },
+  //       {
+  //         id: "000003",
+  //         name: "Intermediate to Statistics",
+  //         credit: 3,
+  //         completed: true,
+  //       },
+  //       {
+  //         id: "000004",
+  //         name: "Intermediate to Media Studies",
+  //         credit: 2,
+  //         completed: false,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     name: "Advanced",
+  //     completed: 10,
+  //     total: 12,
+  //     picture: 3,
+  //     courses: [
+  //       {
+  //         id: "000001",
+  //         name: "Advanced to AI",
+  //         credit: 2,
+  //         completed: true,
+  //       },
+  //       {
+  //         id: "000002",
+  //         name: "Advanced to Digital Humanities",
+  //         credit: 2,
+  //         completed: true,
+  //       },
+  //       {
+  //         id: "000003",
+  //         name: "Advanced to Statistics",
+  //         credit: 3,
+  //         completed: true,
+  //       },
+  //       {
+  //         id: "000004",
+  //         name: "Advanced to Media Studies",
+  //         credit: 2,
+  //         completed: false,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     name: "Seminar",
+  //     completed: 4,
+  //     total: 8,
+  //     picture: 2,
+  //     courses: [
+  //       {
+  //         id: "000001",
+  //         name: "Seminar to AI",
+  //         credit: 2,
+  //         completed: true,
+  //       },
+  //       {
+  //         id: "000002",
+  //         name: "Seminar to Digital Humanities",
+  //         credit: 2,
+  //         completed: true,
+  //       },
+  //       {
+  //         id: "000003",
+  //         name: "Seminar to Statistics",
+  //         credit: 3,
+  //         completed: true,
+  //       },
+  //       {
+  //         id: "000004",
+  //         name: "Seminar to Media Studies",
+  //         credit: 2,
+  //         completed: false,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     name: "Language",
+  //     completed: 18,
+  //     total: 22,
+  //     picture: 3,
+  //     courses: [
+  //       {
+  //         id: "000001",
+  //         name: "Language to AI",
+  //         credit: 2,
+  //         completed: true,
+  //       },
+  //       {
+  //         id: "000002",
+  //         name: "Language to Digital Humanities",
+  //         credit: 2,
+  //         completed: true,
+  //       },
+  //       {
+  //         id: "000003",
+  //         name: "Language to Statistics",
+  //         credit: 3,
+  //         completed: true,
+  //       },
+  //       {
+  //         id: "000004",
+  //         name: "Language to Media Studies",
+  //         credit: 2,
+  //         completed: false,
+  //       },
+  //     ],
+  //   },
+  //   { name: "Untitled", picture: 1, completed: 0, total: 0, courses: [] },
+  // ];
 
   // Function to load course categories from local storage
   const loadCourseCategories = (): CourseCategory[] => {
@@ -224,18 +224,14 @@ function Courses() {
   useEffect(() => {
     const storedCategories = loadCourseCategories();
     console.log("storedCategories: ", storedCategories);
-    if (storedCategories.length === 0) {
-      setCourseCategories(initialCourseCategories);
-    } else {
-      setCourseCategories(storedCategories);
-    }
+    // if (storedCategories.length === 0) {
+    //   setCourseCategories(initialCourseCategories);
+    // } else {
+    //   setCourseCategories(storedCategories);
+    // }
+    setCourseCategories(storedCategories);
     console.log("Course categories updated: ", courseCategories);
   }, []); // Only runs on component mount
-
-  // Update localStorage whenever courseCategories changes
-  useEffect(() => {
-    localStorage.setItem("courseCategories", JSON.stringify(courseCategories));
-  }, [courseCategories]); // Runs whenever courseCategories changes
 
   // Calculate overall progress
   const totalCompleted = courseCategories.reduce(
@@ -246,7 +242,8 @@ function Courses() {
     (acc, course) => acc + course.total,
     0
   );
-  const overallProgress = ((totalCompleted / totalCourses) * 100).toFixed(1);
+  const overallProgress =
+    totalCourses === 0 ? 0 : ((totalCompleted / totalCourses) * 100).toFixed(0);
 
   const [selectedCategory, setSelectedCategory] =
     useState<CourseCategory | null>(null);
@@ -314,111 +311,12 @@ function Courses() {
               ))}
             </Row>
           </div>
-          <div className="floating-button-container">
-            <Button
-              className="floating-button"
-              onClick={handleShowAddModal}
-              style={{
-                backgroundColor: "white",
-                color: "black",
-                borderColor: "black",
-                opacity: "0.5",
-                transition: "0.2s ease-in-out",
-                borderRadius: "15px",
-                width: "10rem",
-                height: "3.5rem",
-                position: "fixed",
-                bottom: "2rem",
-                right: "2rem",
-                zIndex: 1000,
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.opacity = "1";
-                e.currentTarget.style.boxShadow =
-                  "0 4px 8px 0 rgba(0, 0, 0, 0.2)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.opacity = "0.5";
-                e.currentTarget.style.boxShadow =
-                  "0 4px 8px 0 rgba(0, 0, 0, 0)";
-              }}
-            >
-              <FontAwesomeIcon icon={faPlus} size="lg" /> Add Category
-            </Button>
-          </div>
-          <Modal show={showAddModal} onHide={handleCloseAddModal}>
-            <Modal.Header closeButton>
-              <Modal.Title>Add Category</Modal.Title>
-              <span className="modal-subtitle">Add a new course category</span>
-            </Modal.Header>
-            <Modal.Body>
-              <div className="mb-3">
-                <h5>Course Group</h5>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Enter Course Group"
-                  id="courseGroupInput"
-                />
-                <span className="modal-info">e.g/Advanced</span>
-              </div>
-              <div className="mb-3" style={{ marginTop: "2rem" }}>
-                <h5>Required Credits</h5>
-                <select
-                  className="form-select"
-                  style={{ width: "12rem" }}
-                  id="requiredCreditsSelect"
-                >
-                  <option>Select Credit</option>
-                  <option value="1">1 Credit</option>
-                  <option value="2">2 Credits</option>
-                  <option value="3">3 Credits</option>
-                  <option value="4">4 Credits</option>
-                  <option value="5">5 Credits</option>
-                  <option value="6">6 Credits</option>
-                </select>
-                <span className="modal-info">e.g/15 credits</span>
-              </div>
-              <div className="mb-3" style={{ marginTop: "2rem" }}>
-                <h5>Background Image</h5>
-                <Carousel indicators={true}>
-                  <Carousel.Item>
-                    <img
-                      className="d-block w-100"
-                      src="/src/assets/default_courses1.png"
-                      alt="First slide"
-                      style={{ width: "500px", height: "300px" }}
-                    />
-                  </Carousel.Item>
-                  <Carousel.Item>
-                    <img
-                      className="d-block w-100"
-                      src="/src/assets/default_courses2.png"
-                      alt="Second slide"
-                      style={{ width: "500px", height: "300px" }}
-                    />
-                  </Carousel.Item>
-                  <Carousel.Item>
-                    <img
-                      className="d-block w-100"
-                      src="/src/assets/default_courses3.png"
-                      alt="Third slide"
-                      style={{ width: "500px", height: "300px" }}
-                    />
-                  </Carousel.Item>
-                </Carousel>
-              </div>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button
-                variant="primary"
-                onClick={() => {}}
-                style={{ backgroundColor: "black", borderColor: "black" }}
-              >
-                Add
-              </Button>
-            </Modal.Footer>
-          </Modal>
+          <AddCategoryButton onClick={handleShowAddModal} />
+          <AddCategoryModal
+            show={showAddModal}
+            handleClose={handleCloseAddModal}
+            onAddCategory={handleAddCategory}
+          />
         </>
       )}
     </div>

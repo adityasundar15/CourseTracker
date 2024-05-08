@@ -14,13 +14,6 @@ import Courses from "./pages/Courses.tsx";
 import Profile from "./pages/Profile.tsx";
 import BurgerMenu from "./components/Hamburg.tsx";
 import Welcome from "./pages/welcome.tsx";
-import Introductory from "./pages/courses/Introductory.tsx";
-import Intermediate from "./pages/courses/Intermediate.tsx";
-import Advanced from "./pages/courses/Advanced.tsx";
-import Language from "./pages/courses/Language.tsx";
-import Seminar from "./pages/courses/Seminar.tsx";
-
-
 
 function App() {
   return (
@@ -31,13 +24,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/courses" element={<Courses />} />
+            {/* <Route path='/courses/:id' element={} /> */}
             <Route path="/profile" element={<Profile />} />
             <Route path="/welcome" element={<Welcome />} />
-            <Route path="/introductory" element={<Introductory />} />
-            <Route path="/intermediate" element={<Intermediate />} />
-            <Route path="/advanced" element={<Advanced />} />
-            <Route path="/language" element={<Language />} />
-            <Route path="/seminar" element={<Seminar />} />
           </Routes>
           {/* <PopUp /> */}
         </main>
