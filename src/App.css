@@ -1,19 +1,26 @@
 /* #region global */
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-html, body, #root, #outer-container, #page-wrap, #parent-container, #profile-page {
-    min-height: 100vh;
-    height: 100%;
+html,
+body,
+#root,
+#outer-container,
+#page-wrap,
+#parent-container,
+#profile-page {
+  min-height: 100vh;
+  height: 100%;
 }
 
 /* #endregion */
@@ -25,69 +32,69 @@ html, body, #root, #outer-container, #page-wrap, #parent-container, #profile-pag
 /* Thing on top-right */
 
 .top-right-element {
-    position: fixed;
-    right: 36px;
-    top: 36px;
+  position: fixed;
+  right: 36px;
+  top: 36px;
 }
 
 /* Button */
 
 .profile-button {
-    width: 176px;
-    height: 54px;
-    font-family: "ClashDisplay" !important;
-    font-size: 20px !important;
+  width: 176px;
+  height: 54px;
+  font-family: 'ClashDisplay' !important;
+  font-size: 20px !important;
 }
 
 /* Total wrapper */
 
 #parent-container {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}  
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .home-background {
-    background-image: url("/src/assets/background.png");
-    background-size: auto;
-    background-position: center; 
+  background-image: url('/src/assets/background.png');
+  background-size: auto;
+  background-position: center;
 }
 
 /* Popup modal */
 
-.modal-init{
-    max-height: none !important;
-    max-width: none !important;
-    width: 50% !important; 
+.modal-init {
+  max-height: none !important;
+  max-width: none !important;
+  width: 50% !important;
 }
 
 /* App Title */
 
 .app-title {
-    font-family: "ClashDisplay-Medium";
-    font-size: 7rem !important;
+  font-family: 'ClashDisplay-Medium';
+  font-size: 7rem !important;
 }
 
 .left-title {
-    margin-bottom: 4.5rem;
+  margin-bottom: 4.5rem;
 }
 
 .right-title {
-    margin-top:  4.5rem;
+  margin-top: 4.5rem;
 }
 
 .app-desc {
-    margin-top: -1.5rem;
-    font-family: "ClashDisplay";
-    font-size: 1.5rem;
-    letter-spacing: 1.5px;
+  margin-top: -1.5rem;
+  font-family: 'ClashDisplay';
+  font-size: 1.5rem;
+  letter-spacing: 1.5px;
 }
 
 .mini-title {
-    font-family: "ClashDisplay-Medium";
-    font-size: 2rem;
-    letter-spacing: 1px;
+  font-family: 'ClashDisplay-Medium';
+  font-size: 2rem;
+  letter-spacing: 1px;
 }
 
 /* #endregion */
@@ -97,60 +104,60 @@ html, body, #root, #outer-container, #page-wrap, #parent-container, #profile-pag
 /* #region Hamburg menu item */
 
 .menu-title {
-    font-family: "ClashDisplay-Medium";
-    font-size: 2.25em;
-    color: white;
+  font-family: 'ClashDisplay-Medium';
+  font-size: 2.25em;
+  color: white;
 }
 
 .menu-left-title {
-    margin-bottom: -1.5rem;
+  margin-bottom: -1.5rem;
 }
 
 .menu-item {
-    text-decoration: none;
-    color: white;
-    font-family: "Outfit";
-    font-size: 2rem;
+  text-decoration: none;
+  color: white;
+  font-family: 'Outfit';
+  font-size: 2rem;
 }
 
 .menu-item:hover {
-    color: rgb(89, 103, 100);
+  color: rgb(89, 103, 100);
 }
-  
+
 /* Hamburg CSS */
 
 /* Position and sizing of burger button */
 .bm-burger-button {
-    position: fixed;
-    width: 36px;
-    height: 30px;
-    left: 36px;
-    top: 36px;
+  position: fixed;
+  width: 36px;
+  height: 30px;
+  left: 36px;
+  top: 36px;
 }
-  
+
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-    background: #212529;
+  background: #212529;
 }
 
 .white-bg {
-    background: #ffffff;
+  background: #ffffff;
 }
-  
+
 /* Color/shape of burger icon bars on hover*/
 .bm-burger-bars-hover {
-    background: #5e5e5e;
+  background: #5e5e5e;
 }
-  
+
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
-    height: 24px;
-    width: 24px;
+  height: 24px;
+  width: 24px;
 }
 
 /* Color/shape of close button cross */
 .bm-cross {
-    background: #bdc3c7;
+  background: #bdc3c7;
 }
 
 /*
@@ -158,36 +165,36 @@ Sidebar wrapper styles
 Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
 */
 .bm-menu-wrap {
-    position: fixed;
-    height: 100%;
+  position: fixed;
+  height: 100%;
 }
 
 /* General sidebar styles */
 .bm-menu {
-    background: #373a47;
-    padding: 1em 1.5em 0;
-    font-size: 1.15em;
+  background: #373a47;
+  padding: 1em 1.5em 0;
+  font-size: 1.15em;
 }
 
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
-    fill: #373a47;
+  fill: #373a47;
 }
 
 /* Wrapper for item list */
 .bm-item-list {
-    color: #b8b7ad;
-    padding: 0.8em;
+  color: #b8b7ad;
+  padding: 0.8em;
 }
 
 /* Individual item */
 .bm-item {
-    display: inline-block;
+  display: inline-block;
 }
 
 /* Styling of overlay */
 .bm-overlay {
-    background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.3);
 }
 
 /* #endregion */
@@ -197,22 +204,24 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* #region Profile page */
 
 .prof-msg {
-    font-family: "Outfit";
-    font-size: 2.5rem;
-    letter-spacing: 0px;
+  font-family: 'Outfit';
+  font-size: 2.5rem;
+  letter-spacing: 0px;
 }
 
-.form-label, .form-control, .form-select {
-    font-family: "Outfit";
+.form-label,
+.form-control,
+.form-select {
+  font-family: 'Outfit';
 }
 
 .form-label {
-    font-size: 1.3rem;
+  font-size: 1.3rem;
 }
 
 .save-prof {
-    font-family: "Outfit" !important;
-    font-weight: 200;
+  font-family: 'Outfit' !important;
+  font-weight: 200;
 }
 
 /* #endregion */
@@ -222,18 +231,18 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* #region Welcome Page */
 
 .welcome-title {
-    font-family: "Outfit";
-    font-size: 3.4rem;
+  font-family: 'Outfit';
+  font-size: 3.4rem;
 }
 
 .get-started {
-    font-family: "Outfit" !important;
-    font-size: 1.5rem !important;
+  font-family: 'Outfit' !important;
+  font-size: 1.5rem !important;
 }
 
 .welcome-button {
-    background-color: #000000 !important;
-    border-radius: 30px !important;
+  background-color: #000000 !important;
+  border-radius: 30px !important;
 }
 
 /* #endregion */
@@ -243,13 +252,13 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* #region Courses Page */
 
 .course-page-title {
-    font-size: 3.43rem;
-    font-family: 'Outfit';
-    padding: 10% 0% 3rem;
+  font-size: 3.43rem;
+  font-family: 'Outfit';
+  padding: 10% 0% 3rem;
 }
 
 .course {
-    width: 100%;
+  width: 100%;
 }
 
 /* #endregion Courses Page */
@@ -259,17 +268,17 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* #region misc */
 
 .noselect {
-    -webkit-touch-callout: none; /* iOS Safari */
-      -webkit-user-select: none; /* Safari */
-       -khtml-user-select: none; /* Konqueror HTML */
-         -moz-user-select: none; /* Old versions of Firefox */
-          -ms-user-select: none; /* Internet Explorer/Edge */
-              user-select: none; /* Non-prefixed version, currently
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome, Edge, Opera and Firefox */
 }
 
 .outfit {
-    font-family: "Outfit";
+  font-family: 'Outfit';
 }
 
 /* #endregion */
@@ -279,40 +288,39 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* #region Animations  */
 
 .fade-slide-in {
+  opacity: 0;
+  transform: translateX(50%);
+  animation: fadeSlideIn 0.5s forwards ease-out;
+}
+
+@keyframes fadeSlideIn {
+  0% {
     opacity: 0;
     transform: translateX(50%);
-    animation: fadeSlideIn 0.5s forwards ease-out;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
 }
-  
-@keyframes fadeSlideIn {
-    0% {
-        opacity: 0;
-        transform: translateX(50%);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0%);
-    }
-}
-
 
 .fade-slide-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeSlideUp 0.5s forwards ease-out;
+}
+
+@keyframes fadeSlideUp {
+  0% {
     opacity: 0;
     transform: translateY(20px);
-    animation: fadeSlideUp 0.5s forwards ease-out;
   }
-  
-@keyframes fadeSlideUp {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-  
+
 /* #endregion */
 
 /* ---------------- */
