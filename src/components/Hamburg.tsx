@@ -80,6 +80,10 @@ function BurgerMenu() {
         Test
       </Link>
       <hr></hr>
+      <Link to="/test2" className="menu-item noselect" onClick={closeMenu}>
+        Test2
+      </Link>
+      <hr></hr>
     </Menu>
   );
 }

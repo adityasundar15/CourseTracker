@@ -15,6 +15,7 @@ import Profile from './pages/Profile.tsx';
 import BurgerMenu from './components/Hamburg.tsx';
 import Welcome from './pages/welcome.tsx';
 import Test from './pages/Test.tsx';
+import Test2 from './pages/Test2.tsx';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/welcome" element={<Welcome />} />
             <Route path="/test" element={<Test />} />
+            <Route path="/test2" element={<Test2 />} />
           </Routes>
           {/* <PopUp /> */}
         </main>
