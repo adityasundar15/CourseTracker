@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
+import { getDatabase } from 'firebase/database';
 // import { getAnalytics } from 'firebase/analytics';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -23,6 +24,8 @@ const firebaseConfig = {
   messagingSenderId: '475184291215',
   appId: '1:475184291215:web:6df2b6c4fdb8b183b6fffa',
   measurementId: 'G-ZL3L3MYVRC',
+  databaseURL:
+    'https://coursetracker-ec6c5-default-rtdb.asia-southeast1.firebasedatabase.app/',
 };
 
 // Initialize Firebase
@@ -30,3 +33,4 @@ const app = initializeApp(firebaseConfig);
 app;
 // const analytics = getAnalytics(app);
 export const db = getFirestore();
+export const database = getDatabase();

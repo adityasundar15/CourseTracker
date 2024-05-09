@@ -1,122 +1,127 @@
-import { useState, useEffect } from 'react';
-import { db } from '/Users/y.h.lien/Desktop/Github/CourseTracker/src/firebase-config.tsx';
-import {
-  collection,
-  // getDocs,
-  addDoc,
-  updateDoc,
-  deleteDoc,
-  doc,
-  onSnapshot,
-} from 'firebase/firestore';
+// import { useState } from 'react';
+// import { database } from '/Users/y.h.lien/Desktop/Github/CourseTracker/src/firebase-config.tsx';
 
-const Test2 = () => {
-  const [newName, setNewName] = useState('');
-  const [newAge, setNewAge] = useState(0);
+// import { ref, query, equalTo, get, onValue } from 'firebase/database';
 
-  const [users, setUsers] = useState([]);
-  const usersCollectionRef = collection(db, 'users');
+// function SearchApp() {
+//   const [queryText, setQueryText] = useState('');
+//   const [results, setResults] = useState([]);
 
-  const createUser = async () => {
-    await addDoc(usersCollectionRef, { name: newName, age: Number(newAge) });
-  };
+//   const handleSearch = async (event) => {
+//     event.preventDefault();
 
-  const increaseUserAge = async (id, age) => {
-    const userDoc = doc(db, 'users', id);
-    const newFields = { age: age + 1 };
-    await updateDoc(userDoc, newFields);
-  };
+//     const dbRef = ref(db, 'your_data_path'); // Replace 'your_data_path' with the path to your data in Firebase
+//     const q = query(dbRef, equalTo('title', queryText));
 
-  const decreaseUserAge = async (id, age) => {
-    const userDoc = doc(db, 'users', id);
-    const newFields = { age: age - 1 };
-    await updateDoc(userDoc, newFields);
-  };
+//     onValue(q, (snapshot) => {
+//       const data = snapshot.val();
+//       if (data) {
+//         const searchResults = Object.values(data);
+//         setResults(searchResults);
+//       } else {
+//         setResults([]);
+//       }
+//     });
+//   };
 
-  const deleteUser = async (id) => {
-    const userDoc = doc(db, 'users', id);
-    await deleteDoc(userDoc);
-  };
+//   const handleInputChange = (event) => {
+//     setQueryText(event.target.value);
+//   };
 
-  // useEffect(() => {
-  //   const getUsers = async () => {
-  //     const data = await getDocs(usersCollectionRef);
-  //     setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  //   };
+//   return (
+//     <div>
+//       <div>
+//         <form onSubmit={handleSearch}>
+//           <input
+//             type="search"
+//             value={queryText}
+//             onChange={handleInputChange}
+//             placeholder="Search..."
+//           />
+//           <button type="submit">Search</button>
+//         </form>
+//       </div>
+//       <div>
+//         {results.map((result, index) => (
+//           <div key={index}>{result.title}</div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
 
-  //   getUsers();
-  // }, []);
-
-  useEffect(() => {
-    const unsubscribe = onSnapshot(usersCollectionRef, (snapshot) => {
-      const updatedUsers = snapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      setUsers(updatedUsers);
-    });
-
-    return () => unsubscribe(); // Unsubscribe from the listener when the component unmounts
-  }, []);
-
+// export default SearchApp;
+function Test2() {
   return (
     <div
       style={{
         display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        flexDirection: 'column',
         height: '100vh',
       }}
     >
-      <div className="App">
-        <input
-          placeholder="Name..."
-          onChange={(event) => {
-            setNewName(event.target.value);
-          }}
-        />
-        <input
-          type="number"
-          placeholder="Age..."
-          onChange={(event) => {
-            // setNewAge(event.target.value);
-            setNewAge(parseFloat(event.target.value));
-          }}
-        />
-
-        <button onClick={createUser}> Create User</button>
-        {users.map((user) => {
-          return (
-            <div key={user.id}>
-              <h1>Name: {user.name}</h1>
-              <h1>Age: {user.age}</h1>
-              <button
-                onClick={() => {
-                  increaseUserAge(user.id, user.age);
-                }}
-              >
-                Increase Age
-              </button>
-              <button
-                onClick={() => {
-                  decreaseUserAge(user.id, user.age);
-                }}
-              >
-                Decrease Age
-              </button>
-              <button
-                onClick={() => {
-                  deleteUser(user.id);
-                }}
-              >
-                Delete User
-              </button>
+      <div
+        style={{
+          textAlign: 'center',
+          backgroundColor: 'lightblue',
+          padding: '20px',
+          margin: '10px',
+          overflowY: 'auto', // Enable scrolling if content exceeds space
+          flex: 1, // Expand to fill available space
+        }}
+      >
+        <div className="search-section">
+          <form>
+            <input type="text" placeholder="Search..." />
+            <button>Search</button>
+          </form>
+          <div className="query-outcome">
+            {/* Placeholder for query outcomes */}
+            <div>
+              <p>Query Outcome 1</p>
+              <button> Add course</button>
             </div>
-          );
-        })}
+            <div>
+              <p>Query Outcome 2</p>
+              <button> Add course</button>
+            </div>
+            <div>
+              <p>Query Outcome 3</p>
+              <button> Add course</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        style={{
+          textAlign: 'center',
+          backgroundColor: 'lightgreen',
+          padding: '20px',
+          margin: '10px',
+          overflowY: 'auto', // Enable scrolling if content exceeds space
+          flex: 1, // Expand to fill available space
+        }}
+      >
+        <div className="query-section">
+          <div className="query-outcome">
+            {/* Placeholder for query outcomes */}
+            <div>
+              <p>Query Outcome 1</p>
+              <button> Delete course</button>
+            </div>
+            <div>
+              <p>Query Outcome 2</p>
+              <button> Delete course</button>
+            </div>
+            <div>
+              <p>Query Outcome 3</p>
+              <button> Delete course</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
-};
+}
 
 export default Test2;
