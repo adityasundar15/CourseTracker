@@ -14,6 +14,7 @@ import Courses from "./pages/Courses.tsx";
 import Profile from "./pages/Profile.tsx";
 import BurgerMenu from "./components/Hamburg.tsx";
 import Welcome from "./pages/welcome.tsx";
+import SelectedCategory from "./pages/Category.tsx";
 
 function App() {
   return (
@@ -24,11 +25,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/courses" element={<Courses />} />
-            {/* <Route path='/courses/:id' element={} /> */}
+            <Route path="/courses/:id" element={<SelectedCategory />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/welcome" element={<Welcome />} />
           </Routes>
-          {/* <PopUp /> */}
         </main>
       </div>
     </>
