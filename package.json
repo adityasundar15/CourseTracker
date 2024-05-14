@@ -23,7 +23,8 @@
     "react-burger-menu": "^3.0.9",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
-    "react-router-dom": "^6.21.0"
+    "react-router-dom": "^6.21.0",
+    "uid": "^2.0.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

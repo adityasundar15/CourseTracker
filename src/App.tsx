@@ -15,7 +15,7 @@ import Profile from './pages/Profile.tsx';
 import BurgerMenu from './components/Hamburg.tsx';
 import Welcome from './pages/welcome.tsx';
 import Test from './pages/Test.tsx';
-import Test2 from './pages/Test2.tsx';
+import Test2 from './pages/Test2.jsx';
 
 function App() {
   return (
