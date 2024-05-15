@@ -43,6 +43,7 @@ function Navbar() {
             <CustomLink to="/profile">Profile</CustomLink>
             <CustomLink to="/profile">Test</CustomLink>
             <CustomLink to="/profile">Test2</CustomLink>
+            <CustomLink to="/profile">Test3</CustomLink>
           </ul>
         </div>
       </div>

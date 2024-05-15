@@ -16,6 +16,7 @@ import BurgerMenu from './components/Hamburg.tsx';
 import Welcome from './pages/welcome.tsx';
 import Test from './pages/Test.tsx';
 import Test2 from './pages/Test2.jsx';
+import Test3 from './pages/Test3.jsx';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/welcome" element={<Welcome />} />
             <Route path="/test" element={<Test />} />
             <Route path="/test2" element={<Test2 />} />
+            <Route path="/test3" element={<Test3 />} />
           </Routes>
           {/* <PopUp /> */}
         </main>

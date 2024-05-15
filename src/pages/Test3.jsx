@@ -21,9 +21,8 @@ import { onValue, ref } from 'firebase/database';
 //   p: 'subtitle',
 // };
 
-function Test2() {
+function Test3() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchStatus, setSearchStatus] = useState(false);
   const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [selectedCourses, setSelectedCourses] = useState([]);
@@ -31,7 +30,7 @@ function Test2() {
 
   useEffect(() => {
     // Fetch data from Firebase
-    const coursesRef = ref(database, schoolName); // Reference to the 'FSE' path in the Firebase database
+    const coursesRef = ref(database, schoolName); // Default reference is PSE, this hook will rerender the ui when ever the schoolName is
     onValue(coursesRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
@@ -43,20 +42,19 @@ function Test2() {
     });
   }, [schoolName]);
 
-  const changeSchool = (e) => {
-    setSchoolName(e.target.textContent);
-    setSearchTerm('');
-  };
-
-  const handleSearch = (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    // This hook rerender the ui when ever the input in search input field and the
     const filtered = courses.filter(
       (course) =>
         course.b.toLowerCase().includes(searchTerm.toLowerCase()) ||
         course.a.toLowerCase().includes(searchTerm.toLowerCase()),
     );
     setFilteredCourses(filtered);
-    setSearchStatus(true);
+  }, [searchTerm, courses]);
+
+  const changeSchool = (e) => {
+    setSchoolName(e.target.textContent);
+    setSearchTerm('');
   };
 
   const addCourse = (course) => {
@@ -98,35 +96,20 @@ function Test2() {
         <button onClick={changeSchool}>PSE</button>
         <div>Showing courses of {schoolName}</div>
         <div className="search-section">
-          <form onSubmit={handleSearch}>
-            <input
-              type="text"
-              placeholder="Search..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            <button type="submit">Search</button>
-          </form>
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
           <div className="query-outcome">
-            {searchStatus
-              ? filteredCourses.map((course) => (
-                  <div key={course.a}>
-                    <p>Course Title: {course.b}</p>
-                    <p>Course ID: {course.a}</p>
-                    <button onClick={() => addCourse(course)}>
-                      Add course
-                    </button>
-                  </div>
-                ))
-              : courses.map((course) => (
-                  <div key={course.a}>
-                    <p>Course Title: {course.b}</p>
-                    <p>Course ID: {course.a}</p>
-                    <button onClick={() => addCourse(course)}>
-                      Add course
-                    </button>
-                  </div>
-                ))}
+            {filteredCourses.map((course) => (
+              <div key={course.a}>
+                <p>Course Title: {course.b}</p>
+                <p>Course ID: {course.a}</p>
+                <button onClick={() => addCourse(course)}>Add course</button>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -158,4 +141,4 @@ function Test2() {
   );
 }
 
-export default Test2;
+export default Test3;
