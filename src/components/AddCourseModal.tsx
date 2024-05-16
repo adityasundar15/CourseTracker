@@ -24,8 +24,10 @@ function AddCourseModal({
     const newCourse: Course = {
       id: courseKey,
       name: courseName,
+      name_jp: "",
       credit: parseInt(requiredCredits),
       progress: courseCompleted ? 1 : 0,
+      school: "",
     };
 
     const storedCategories = localStorage.getItem("courseCategories");
