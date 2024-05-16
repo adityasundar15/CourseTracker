@@ -13,7 +13,6 @@ import placeHolderPic3 from "../assets/default_courses3.png";
 import { useEffect, useState } from "react";
 import AddCategoryButton from "../components/AddCategoryButton";
 import AddCategoryModal from "../components/AddCategoryModal";
-import {IconButton } from "@mui/material";
 
 interface CourseCategory {
   id: string;
@@ -119,10 +118,6 @@ function Courses() {
               List View
             </Button>
           </ButtonGroup>
-          <IconButton
-            onClick={() => setViewType("card")}
-            className="view-toggle-icon"
-            />
         </div>
         {viewType === "card" ? (
           <Row xs={1} md={2} lg={3}>
@@ -178,15 +173,15 @@ function Courses() {
                       ? 0
                       : (category.completed / category.total) * 100
                   }
-                  className="position-absolute w-100 h-100"
-                style={{ zIndex: 0 /*padding: "0.6rem*/}}
+                  className="position-absolute w-100 h-100 py-3"
+                style={{ zIndex: 0, padding: "0.6rem"}}
                   variant="SOME_NAME"
                 />
 
                 {/* Text Content */}
-                <Card.Body className="position-relative text-black my-2">
+                <Card.Body className="position-relative text-black" style={{marginTop: "0.7rem"}}>
                   <Row>
-                    <Col className="ml-3">
+                    <Col style={{marginLeft: "0.7rem"}}>
                       <Card.Title>{category.name}</Card.Title>
                     </Col>
                     <Col xs="auto" className="ml-auto">
