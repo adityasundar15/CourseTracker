@@ -84,15 +84,16 @@ function Courses() {
         <div className="w-75 h-100 d-flex flex-column">
           <span className="course-page-title">Courses</span>
           <span className="progress-container">
-            <div
+            {/* <div
               className="progress-marker"
               style={{ left: `calc(${overallProgress}% - 1.5rem)` }}
             >
               <div className="marker-label">{overallProgress + "%"}</div>
-            </div>
+            </div> */}
             <ProgressBar
               now={Number(overallProgress)}
               className="bar-progress"
+              label={overallProgress + "%"}
             />
           </span>
           <Row xs={1} md={2} lg={3}>

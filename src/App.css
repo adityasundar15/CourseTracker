@@ -247,7 +247,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .course-page-title {
     font-size: 3.43rem;
     font-family: 'Outfit';
-    padding: 10% 0% 3rem;
+    padding: 10% 0% 1rem;
 }
 
 .progress-container {
@@ -256,13 +256,13 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 .bar-progress {
-    height: 1.5rem !important;
+    height: 2rem !important;
     border-radius: 7px !important;
 }
 
 .progress-bar {
     background-color: #000000 !important;
-    border-radius: 7px !important;
+    border-radius: 9px !important;
 }
 
 .progress-marker {
@@ -343,7 +343,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .category-page-title {
     font-size: 2.75rem;
     font-family: 'Outfit';
-    padding: 15% 0% 4rem;
+    padding: 15% 0% 2rem;
 }
 
 .arrow-icon-container {
@@ -366,6 +366,10 @@ Note: Beware of modifying this element as it can break the animations - you shou
     background-color: #E9E9E9;
     font-weight: 300;
     border-radius: 3px;
+}
+
+.completed {
+    background-color: #B1B1B1;
 }
 
 .add-course {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Course, CourseCategory } from "./Courses";
 import placeHolderPic1 from "../assets/default_courses1.png";
@@ -9,6 +9,7 @@ import ErrorPage from "./ErrorPage";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
 import AddCourseModal from "../components/AddCourseModal";
 import { TiDelete } from "react-icons/ti";
+import { GiGraduateCap } from "react-icons/gi";
 
 const SelectedCategory: React.FC = () => {
   const navigate = useNavigate();
@@ -40,15 +41,15 @@ const SelectedCategory: React.FC = () => {
     ? JSON.parse(storedCategories)
     : [];
 
-  const selectedCategory: CourseCategory | undefined = courseCategories.find(
-    (category) => category.id === id
-  );
+  const selectedCategory: CourseCategory | undefined = useMemo(() => {
+    return courseCategories.find((category) => category.id === id);
+  }, [courseCategories, id]);
 
   useEffect(() => {
-    if (selectedCategory) {
+    if (selectedCategory && selectedCategory.courses !== courseList) {
       setCourseList(selectedCategory.courses);
     }
-  }, [selectedCategory]);
+  }, []);
 
   if (!selectedCategory) {
     return <ErrorPage />;
@@ -124,15 +125,16 @@ const SelectedCategory: React.FC = () => {
               </div>
               <div className="d-flex flex-column mb-3">
                 <span className="progress-container">
-                  <div
+                  {/* <div
                     className="progress-marker"
                     style={{ left: `calc(${overallProgress}% - 1rem)` }}
                   >
                     <div className="marker-label">{overallProgress + "%"}</div>
-                  </div>
+                  </div> */}
                   <ProgressBar
                     now={Number(overallProgress)}
                     className="bar-progress"
+                    label={overallProgress + "%"}
                   />
                 </span>
               </div>
@@ -183,6 +185,7 @@ const CourseItem = ({
   id,
   name,
   credit,
+  progress,
   removeCourse,
 }: Course & { removeCourse: (id: string) => void }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -197,10 +200,15 @@ const CourseItem = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="course-item row p-3">
-        <div className="course-name col align-self-start">{name}</div>
+      <div
+        className={`course-item row p-3 ${progress === 1 ? "completed" : ""}`}
+      >
+        <div className="course-name col-9 align-self-start">{name}</div>
         <div className="course-credit col align-self-end d-flex justify-content-end">
-          {credit} credits
+          <div className="col-9 align-self-end d-flex justify-content-end">
+            <GiGraduateCap size={25} />
+          </div>
+          <div className="col px-4">{credit}</div>
         </div>
       </div>
       {isHovered && (
