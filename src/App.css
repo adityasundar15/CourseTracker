@@ -495,6 +495,22 @@ Note: Beware of modifying this element as it can break the animations - you shou
       transform: translateY(0);
     }
 }
+
+.view-toggle{
+    bottom: 1rem;
+}
+
+.bg-SOME_NAME{
+    background-color: #CCCEE1!important;
+  }
+
+.categorydelete{
+    color: black;
+}
+
+.categorydelete:hover{
+    opacity: 1.0;
+}
   
 /* #endregion */
 

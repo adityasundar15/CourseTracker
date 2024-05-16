@@ -9,6 +9,7 @@ import ErrorPage from "./ErrorPage";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
 import AddCourseModal from "../components/AddCourseModal";
 import { TiDelete } from "react-icons/ti";
+import { Divider } from "@mui/material";
 
 const SelectedCategory: React.FC = () => {
   const navigate = useNavigate();
@@ -135,6 +136,9 @@ const SelectedCategory: React.FC = () => {
                     className="bar-progress"
                   />
                 </span>
+                <Divider>
+                  {completedCredits} / {totalCredits} credits completed
+                </Divider>
               </div>
             </div>
           </div>
@@ -166,6 +170,18 @@ const SelectedCategory: React.FC = () => {
                 <div>+ Add Course</div>
               </div>
             </div>
+            <Button className = "categorydelete" 
+            style={{
+              backgroundColor: "transparent",
+              borderColor: "red",
+              color: "red",
+              opacity: "0.8",
+              width: "15rem",
+              marginLeft: "auto",
+              marginRight: "auto",
+              }}>
+              Delete category
+            </Button>
           </div>
         </div>
       </div>
