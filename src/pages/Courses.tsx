@@ -6,6 +6,7 @@ import placeHolderPic3 from "../assets/default_courses3.png";
 import { useEffect, useState } from "react";
 import AddCategoryButton from "../components/AddCategoryButton";
 import AddCategoryModal from "../components/AddCategoryModal";
+import RemoveAllCategoriesButton from "../components/RemoveAllCategories";
 
 interface CourseCategory {
   id: string;
@@ -19,8 +20,10 @@ interface CourseCategory {
 interface Course {
   id: string;
   name: string;
+  name_jp: string;
   credit: number;
   progress: number;
+  school: string;
 }
 
 function Courses() {
@@ -138,7 +141,7 @@ function Courses() {
           handleClose={handleCloseAddModal}
           onAddCategory={handleAddCategory}
         />
-        {/* <RemoveAllCategoriesButton></RemoveAllCategoriesButton> */}
+        <RemoveAllCategoriesButton></RemoveAllCategoriesButton>
       </>
     </div>
   );

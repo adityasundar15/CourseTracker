@@ -158,9 +158,11 @@ const SelectedCategory: React.FC = () => {
               <CourseItem
                 id={course.id}
                 name={course.name}
+                name_jp={course.name_jp}
                 credit={course.credit}
                 progress={course.progress}
                 removeCourse={removeCourse}
+                school={course.school}
               />
             ))}
             <div className="course-item-wrapper my-2">
