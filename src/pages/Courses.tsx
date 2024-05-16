@@ -82,7 +82,7 @@ function Courses() {
       </div>
       <>
         <div className="w-75 h-100 d-flex flex-column">
-          <span className="course-page-title">Courses</span>
+          <span className="course-page-title"> Categories</span>
           <span className="progress-container">
             {/* <div
               className="progress-marker"
@@ -119,12 +119,11 @@ function Courses() {
                   />
                   <Card.Body>
                     <Card.Title>{category.name}</Card.Title>
-                    {/* <Card.Text>{`${category.completed}/${category.total} completed`}</Card.Text> */}
+                    <Card.Text>{`${category.completed}/${category.total} completed`}</Card.Text>
                     <ProgressBar
                       now={Number(category.completed)}
                       max={category.total}
                       className="overflow-visible"
-                      label={`${category.completed}/${category.total} completed`}
                       style={{ height: "1.5rem" }}
                     />
                   </Card.Body>
