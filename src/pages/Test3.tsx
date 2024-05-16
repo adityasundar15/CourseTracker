@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
-import { database } from '../firebase-config.tsx';
-import { onValue, ref } from 'firebase/database';
+import { useEffect, useState } from "react";
+import { database } from "../firebase-config.tsx";
+import { onValue, ref } from "firebase/database";
+import { Course } from "./Courses.tsx";
 
 // const syllabusIndex = {
-//   a: 'id',
-//   b: 'title',
-//   c: 'title_jp',
+//   a: 'id', !
+//   b: 'title', !
+//   c: 'title_jp', !
 //   d: 'instructor',
 //   e: 'instructor_jp',
 //   f: 'lang',
@@ -14,19 +15,40 @@ import { onValue, ref } from 'firebase/database';
 //   i: 'occurrences',
 //   j: 'min_year',
 //   k: 'category',
-//   l: 'credit',
+//   l: 'credit', !
 //   m: 'level',
 //   n: 'eval',
 //   o: 'code',
 //   p: 'subtitle',
 // };
+// ADD A SEPARATE SCHOOL ATTRIBUTE
+
+// FirebaseCourse interface matching the structure
+interface FirebaseCourse {
+  a: string; // id
+  b: string; // title
+  c: string; // title_jp
+  d: string; // instructor
+  e: string; // instructor_jp
+  f: string; // lang
+  g: string; // type
+  h: string; // term
+  i: string; // occurrences
+  j: string; // min_year
+  k: string; // category
+  l: number; // credit
+  m: string; // level
+  n: string; // eval
+  o: string; // code
+  p: string; // subtitle
+}
 
 function Test3() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [courses, setCourses] = useState([]);
-  const [filteredCourses, setFilteredCourses] = useState([]);
-  const [selectedCourses, setSelectedCourses] = useState([]);
-  const [schoolName, setSchoolName] = useState('PSE');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [courses, setCourses] = useState<FirebaseCourse[]>([]);
+  const [filteredCourses, setFilteredCourses] = useState<FirebaseCourse[]>([]);
+  const [selectedCourses, setSelectedCourses] = useState<Course[]>([]);
+  const [schoolName, setSchoolName] = useState("PSE");
 
   useEffect(() => {
     // Fetch data from Firebase
@@ -34,10 +56,8 @@ function Test3() {
     onValue(coursesRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
-        const fullCoursesArray = Object.values(data);
-        // const topFiveCourses = fullCoursesArray.slice(0, 5);
+        const fullCoursesArray: FirebaseCourse[] = Object.values(data);
         setCourses(fullCoursesArray);
-        // setFilteredCourses(topFiveCourses);
       }
     });
   }, [schoolName]);
@@ -47,48 +67,57 @@ function Test3() {
     const filtered = courses.filter(
       (course) =>
         course.b.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        course.a.toLowerCase().includes(searchTerm.toLowerCase()),
+        course.a.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredCourses(filtered);
   }, [searchTerm, courses]);
 
-  const changeSchool = (e) => {
-    setSchoolName(e.target.textContent);
-    setSearchTerm('');
+  const changeSchool = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setSchoolName(e.currentTarget.textContent || " ");
+    setSearchTerm("");
   };
 
-  const addCourse = (course) => {
-    setSelectedCourses((prevSelectedCourses) => {
-      // Check if the course is already in the selectedCourses array
-      if (prevSelectedCourses.find((c) => c.a === course.a)) {
-        return prevSelectedCourses; // Course is already selected, return the current state
-      }
-      // Return a new array with the added course
-      return [...prevSelectedCourses, course];
-    });
+  const addCourse = (course: FirebaseCourse) => {
+    // Convert FirebaseCourse to Course
+    const newCourse: Course = {
+      id: course.a,
+      name: course.b,
+      name_jp: course.c,
+      credit: course.l,
+      progress: 0, // Default progress value, incomplete
+      school: schoolName,
+    };
+
+    if (!selectedCourses.find((c) => c.id === course.a)) {
+      // Course is not already selected, add it to the state
+      setSelectedCourses((prevSelectedCourses) => [
+        ...prevSelectedCourses,
+        newCourse,
+      ]);
+    }
   };
 
-  const deleteCourse = (course) => {
+  const deleteCourse = (courseToDelete: Course) => {
     setSelectedCourses((prevSelectedCourses) =>
-      prevSelectedCourses.filter((c) => c.a !== course.a),
+      prevSelectedCourses.filter((c) => c.id !== courseToDelete.id)
     );
   };
 
   return (
     <div
       style={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100vh',
+        display: "flex",
+        flexDirection: "column",
+        height: "100vh",
       }}
     >
       <div
         style={{
-          textAlign: 'center',
-          backgroundColor: 'lightblue',
-          padding: '20px',
-          margin: '10px',
-          overflowY: 'auto', // Enable scrolling if content exceeds space
+          textAlign: "center",
+          backgroundColor: "lightblue",
+          padding: "20px",
+          margin: "10px",
+          overflowY: "auto", // Enable scrolling if content exceeds space
           flex: 1, // Expand to fill available space
         }}
       >
@@ -115,20 +144,20 @@ function Test3() {
       </div>
       <div
         style={{
-          textAlign: 'center',
-          backgroundColor: 'lightgreen',
-          padding: '20px',
-          margin: '10px',
-          overflowY: 'auto', // Enable scrolling if content exceeds space
+          textAlign: "center",
+          backgroundColor: "lightgreen",
+          padding: "20px",
+          margin: "10px",
+          overflowY: "auto", // Enable scrolling if content exceeds space
           flex: 1, // Expand to fill available space
         }}
       >
         <div className="query-section">
           <div className="query-outcome">
             {selectedCourses.map((course) => (
-              <div key={course.a}>
-                <p>Course Title: {course.b}</p>
-                <p>Course ID: {course.a}</p>
+              <div key={course.id}>
+                <p>Course Title: {course.name}</p>
+                <p>Course ID: {course.id}</p>
                 <button onClick={() => deleteCourse(course)}>
                   Delete course
                 </button>
