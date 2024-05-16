@@ -1,0 +1,37 @@
+/* FONTS */
+
+/* Clash Display Bold */
+@font-face {
+    font-family: "ClashDisplay-Bold";
+    src: url("./ClashDisplay/ClashDisplay-Bold.otf") format("opentype");
+}
+
+/* Clash Display ExtraLight */
+@font-face {
+    font-family: "ClashDisplay-ExtraLight";
+    src: url("./ClashDisplay/ClashDisplay-Extralight.otf") format("opentype");
+}
+
+/* Clash Display Light */
+@font-face {
+    font-family: "ClashDisplay-Light";
+    src: url("./ClashDisplay/ClashDisplay-Light.otf") format("opentype");
+}
+
+/* Clash Display Medium */
+@font-face {
+    font-family: "ClashDisplay-Medium";
+    src: url("./ClashDisplay/ClashDisplay-Medium.otf") format("opentype");
+}
+
+/* Clash Display Regular */
+@font-face {
+    font-family: "ClashDisplay";
+    src: url("./ClashDisplay/ClashDisplay-Regular.otf") format("opentype");
+}
+
+/* Clash Display SemiBold */
+@font-face {
+    font-family: "ClashDisplay-SemiBold";
+    src: url("./ClashDisplay/ClashDisplay-Semibold.otf") format("opentype");
+}

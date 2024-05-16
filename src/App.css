@@ -1,18 +1,505 @@
+/* #region global */
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Ensure full viewport height */
+    height: 100%;
+    font-family: 'Outfit' !important;
 }
-  
+
+html, body, #root, #outer-container, #page-wrap, #parent-container, #profile-page {
+    min-height: 100vh;
+    height: 100%;
+}
+
+/* #endregion */
+
+/* ---------------- */
+
+/* #region Home page  */
+
+/* Thing on top-right */
+
+.top-right-element {
+    position: fixed;
+    right: 36px;
+    top: 36px;
+}
+
+/* Button */
+
+.profile-button {
+    width: 176px;
+    height: 54px;
+    font-family: "ClashDisplay" !important;
+    font-size: 20px !important;
+}
+
+/* Total wrapper */
+
+#parent-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}  
+
+.home-background {
+    background-image: url("/src/assets/background.png");
+    background-size: auto;
+    background-position: center; 
+}
+
+/* Popup modal */
 
 .modal-init{
     max-height: none !important;
     max-width: none !important;
     width: 50% !important; 
 }
+
+/* App Title */
+
+.app-title {
+    font-family: "ClashDisplay-Medium";
+    font-size: 7rem !important;
+}
+
+.left-title {
+    margin-bottom: 4.5rem;
+}
+
+.right-title {
+    margin-top:  4.5rem;
+}
+
+.app-desc {
+    margin-top: -1.5rem;
+    font-family: "ClashDisplay";
+    font-size: 1.5rem;
+    letter-spacing: 1.5px;
+}
+
+.mini-title {
+    font-family: "ClashDisplay-Medium";
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+
+/* #endregion */
+
+/* ---------------- */
+
+/* #region Hamburg menu item */
+
+.menu-title {
+    font-family: "ClashDisplay-Medium";
+    font-size: 2.25em;
+    color: white;
+}
+
+.menu-left-title {
+    margin-bottom: -1.5rem;
+}
+
+.menu-item {
+    text-decoration: none;
+    color: white;
+    font-family: "Outfit";
+    font-size: 2rem;
+}
+
+.menu-item:hover {
+    color: rgb(89, 103, 100);
+}
+  
+/* Hamburg CSS */
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+    position: fixed;
+    width: 36px;
+    height: 30px;
+    left: 36px;
+    top: 36px;
+}
+  
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+    background: #212529;
+    
+}
+
+.white-bg {
+    background: #ffffff;
+}
+  
+/* Color/shape of burger icon bars on hover*/
+.bm-burger-bars-hover {
+    background: #5e5e5e;
+}
+  
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+    height: 24px;
+    width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+    background: #bdc3c7;
+}
+
+/*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+.bm-menu-wrap {
+    position: fixed;
+    height: 100%;
+}
+
+/* General sidebar styles */
+.bm-menu {
+    background: #373a47;
+    padding: 1em 1.5em 0;
+    font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+    fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+    color: #b8b7ad;
+    padding: 0.8em;
+}
+
+/* Individual item */
+.bm-item {
+    display: inline-block;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* #endregion */
+
+/* ---------------- */
+
+/* #region Profile page */
+
+.prof-msg {
+    font-family: "Outfit";
+    font-size: 2.5rem;
+    letter-spacing: 0px;
+}
+
+.form-label, .form-control, .form-select {
+    font-family: "Outfit";
+}
+
+.form-label {
+    font-size: 1.3rem;
+}
+
+.save-prof {
+    font-family: "Outfit" !important;
+    font-weight: 200;
+}
+
+/* #endregion */
+
+/* ---------------- */
+
+/* #region Welcome Page */
+
+.welcome-title {
+    font-family: "Outfit";
+    font-size: 3.4rem;
+}
+
+.get-started {
+    font-family: "Outfit" !important;
+    font-size: 1.5rem !important;
+}
+
+.welcome-button {
+    background-color: #000000 !important;
+    border-radius: 30px !important;
+}
+
+/* #endregion */
+
+/* ---------------- */
+
+/* #region Categories Page */
+
+.course-page-title {
+    font-size: 3.43rem;
+    font-family: 'Outfit';
+    padding: 10% 0% 1rem;
+}
+
+.progress-container {
+    padding: 0 0 2rem;
+    position: relative;
+}
+
+.bar-progress {
+    height: 2rem !important;
+    border-radius: 7px !important;
+}
+
+.progress-bar {
+    background-color: #000000 !important;
+    border-radius: 9px !important;
+}
+
+.progress-marker {
+    z-index: 1;
+    position: absolute;
+    width: 2rem; 
+    height: 2rem; 
+    border: 0.5rem solid #000000; 
+    background-color: #E4E4E4;
+    border-radius: 50%; 
+    bottom: calc(1.75rem);
+}
+
+.marker-label {
+    font-family: 'Outfit';
+    position: absolute;
+    bottom: 2rem;
+    background-color: #000000;
+    color: #ffffff;
+    width: 5rem;
+    height: 2.5rem;
+    text-align: center;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: calc(50% - 2.5rem);
+}
+
+.course {
+    width: 100%;
+    border-radius: 0 !important;
+    border: 0 !important;
+    background-color: #E5E5E5 !important;
+}
+
+.card-image {
+    border-radius: 0 !important;
+}
+
+.card-body {
+    font-family: 'Outfit';
+}
+
+/* #endregion Courses Page */
+
+/* ---------------- */
+
+/* #region misc */
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+}
+
+.outfit {
+    font-family: "Outfit";
+}
+
+/* #endregion */
+
+/* ---------------- */
+
+/* #region Course List Page */
+
+.course-list-header {
+    width: 100%;
+    height: fit-content;
+    background-position: center;
+    background-size: cover;
+}
+
+.category-page-title {
+    font-size: 2.75rem;
+    font-family: 'Outfit';
+    padding: 15% 0% 2rem;
+}
+
+.arrow-icon-container {
+    position: relative;
+    bottom: 30px;
+    left: 30px;
+}
+
+.arrow-icon {
+    padding: auto;
+    margin: auto;
+    transition: color 0.3s ease;
+}
+
+.arrow-icon:hover{
+    color: #eaeaea;
+}
+
+.course-item {
+    background-color: #E9E9E9;
+    font-weight: 300;
+    border-radius: 3px;
+}
+
+.completed {
+    background-color: #B1B1B1;
+}
+
+.add-course {
+    background-color: #ffffff;
+    border: 1px solid #E9E9E9;
+    transition: background-color 0.3s ease;
+}
+
+.add-course:hover {
+    background-color: #E9E9E9;
+    border: 1px solid #ffffff;
+}
+
+/* #endregion */
+
+/* ---------------- */
+
+/* #region AddCategoryModal */
+
+/* For PC screens, adjusting width a bit */
+@media (min-width: 576px) {
+    /* default: var(--bs-modal-width) <- 500px*/
+        .add-category-modal {
+            max-width: 55% !important;
+        }
+    }
+
+.add-category-modal-content {
+    margin: 5% 15%;
+}
+
+.add-category-modal .btn-close {
+    align-self: self-start;
+}
+
+.add-category-modal-header {
+    justify-content: center;
+    border-bottom: 1px solid black !important;
+}
+
+.add-category-modal .modal-title {
+    font-size: 2.5rem;
+}
+
+.add-category-modal .modal-body {
+    margin: 5% 5%;
+}
+
+.modal-sub-headers {
+    font-family: 'Outfit';
+    font-size: 1.5rem !important;
+}
+
+.selected {
+    border: 5px solid rgb(0, 0, 0);
+    transition: border 0.2s ease-in-out;
+    position: relative;
+}
+
+.modal-img-container {
+    position: relative;
+}
+
+.modal-img {
+    width: 100%;
+    height: 8rem;
+    object-fit: cover;
+    background-color: #000000;
+}
+
+.img-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1rem;
+    pointer-events: none; /* Ensures that the overlay doesn't intercept clicks */
+}
+
+.add-category-modal .modal-footer {
+    border-top: none;
+}
+
+/* #endregion */
+
+/* ---------------- */
+
+/* #region Animations  */
+
+.fade-slide-in {
+    opacity: 0;
+    transform: translateX(50%);
+    animation: fadeSlideIn 0.5s forwards ease-out;
+}
+  
+@keyframes fadeSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(50%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+
+
+.fade-slide-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeSlideUp 0.5s forwards ease-out;
+  }
+  
+@keyframes fadeSlideUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+}
+  
+/* #endregion */
+
+/* ---------------- */

@@ -1,122 +1,148 @@
-import React, { useState } from "react";
+import { Button, Card, ProgressBar, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import placeHolderPic1 from "../assets/default_courses1.png";
+import placeHolderPic2 from "../assets/default_courses2.png";
+import placeHolderPic3 from "../assets/default_courses3.png";
+import { useEffect, useState } from "react";
+import AddCategoryButton from "../components/AddCategoryButton";
+import AddCategoryModal from "../components/AddCategoryModal";
 
-const Courses = () => {
-  const [id, setId] = useState("");
-  const [courseName, setCourseName] = useState("");
-  const [courseCredit, setCourseCredit] = useState("");
-  const [courseGroup, setCourseGroup] = useState("");
+interface CourseCategory {
+  id: string;
+  name: string;
+  completed: number;
+  total: number;
+  picture: number;
+  courses: Course[];
+}
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    switch (name) {
-      case "id":
-        setId(value);
-        break;
-      case "courseName":
-        setCourseName(value);
-        break;
-      case "courseCredit":
-        setCourseCredit(value);
-        break;
-      case "courseGroup":
-        setCourseGroup(value);
-        break;
-      default:
-        break;
-    }
+interface Course {
+  id: string;
+  name: string;
+  credit: number;
+  progress: number;
+}
+
+function Courses() {
+  const navigate = useNavigate();
+  const [showAddModal, setShowAddModal] = useState(false);
+
+  const handleShowAddModal = () => {
+    setShowAddModal(true);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // Prevent default form submission behavior
-    // Here you can implement your form submission logic
-    console.log("ID:", id);
-    console.log("Course Name:", courseName);
-    console.log("Course Credit:", courseCredit);
-    console.log("Course Group:", courseGroup);
+  const handleCloseAddModal = () => {
+    setShowAddModal(false);
+  };
 
-    // Clear input fields after submission
-    setId("");
-    setCourseName("");
-    setCourseCredit("");
-    setCourseGroup("");
+  const navigateHome = () => {
+    navigate("/");
+  };
+
+  const [courseCategories, setCourseCategories] = useState<CourseCategory[]>(
+    []
+  );
+
+  const handleAddCategory = (newCategory: CourseCategory) => {
+    setCourseCategories([...courseCategories, newCategory]);
+  };
+
+  const loadCourseCategories = (): CourseCategory[] => {
+    const storedCategories = localStorage.getItem("courseCategories");
+    console.log(storedCategories);
+    return storedCategories ? JSON.parse(storedCategories) : [];
+  };
+
+  useEffect(() => {
+    const storedCategories = loadCourseCategories();
+    setCourseCategories(storedCategories);
+  }, []);
+
+  const totalCompleted = courseCategories.reduce(
+    (acc, course) => acc + course.completed,
+    0
+  );
+  const totalCourses = courseCategories.reduce(
+    (acc, course) => acc + course.total,
+    0
+  );
+  const overallProgress =
+    totalCourses === 0 ? 0 : ((totalCompleted / totalCourses) * 100).toFixed(0);
+
+  const handleCategorySelect = (category: CourseCategory) => {
+    navigate(`/courses/${category.id}`);
   };
 
   return (
-    <div className="container mt-5">
-      <div className="row justify-content-center">
-        <div className="col-md-6">
-          <h1 className="text-center">Add New Course</h1>
-          <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label htmlFor="id" className="form-label fw-semibold">
-                Course ID
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="id"
-                name="id"
-                value={id}
-                onChange={handleChange}
-                placeholder="Enter course ID..."
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="courseName" className="form-label fw-semibold">
-                Course Name
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="courseName"
-                name="courseName"
-                value={courseName}
-                onChange={handleChange}
-                placeholder="Enter course name..."
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="courseCredit" className="form-label fw-semibold">
-                Course Credit
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="courseCredit"
-                name="courseCredit"
-                value={courseCredit}
-                onChange={handleChange}
-                placeholder="Enter course credit..."
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="courseGroup" className="form-label fw-semibold">
-                Course Group
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="courseGroup"
-                name="courseGroup"
-                value={courseGroup}
-                onChange={handleChange}
-                placeholder="Enter course group..."
-                required
-              />
-            </div>
-            <div className="d-flex justify-content-center">
-              <button type="submit" className="btn btn-dark">
-                Add Course
-              </button>
-            </div>
-          </form>
-        </div>
+    <div id="parent-container">
+      <div className="top-right-element">
+        <Button className="" variant="" onClick={navigateHome} size="lg">
+          <span className="mini-title text-center">Credit Ledger</span>
+        </Button>
       </div>
+      <>
+        <div className="w-75 h-100 d-flex flex-column">
+          <span className="course-page-title"> Categories</span>
+          <span className="progress-container">
+            {/* <div
+              className="progress-marker"
+              style={{ left: `calc(${overallProgress}% - 1.5rem)` }}
+            >
+              <div className="marker-label">{overallProgress + "%"}</div>
+            </div> */}
+            <ProgressBar
+              now={Number(overallProgress)}
+              className="bar-progress"
+              label={overallProgress + "%"}
+            />
+          </span>
+          <Row xs={1} md={2} lg={3}>
+            {courseCategories.map((category, index) => (
+              <div key={index} className="g-col-6 g-col-md-4 mb-4">
+                <Card
+                  className="course"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleCategorySelect(category)}
+                >
+                  <Card.Img
+                    variant="top"
+                    src={
+                      category.picture === 1
+                        ? placeHolderPic1
+                        : category.picture === 2
+                        ? placeHolderPic2
+                        : category.picture === 3
+                        ? placeHolderPic3
+                        : placeHolderPic1 // Default picture
+                    }
+                    className="card-image"
+                  />
+                  <Card.Body>
+                    <Card.Title>{category.name}</Card.Title>
+                    <Card.Text>{`${category.completed}/${category.total} completed`}</Card.Text>
+                    <ProgressBar
+                      now={Number(category.completed)}
+                      max={category.total}
+                      className="overflow-visible"
+                      style={{ height: "1.5rem" }}
+                    />
+                  </Card.Body>
+                </Card>
+              </div>
+            ))}
+          </Row>
+        </div>
+        <AddCategoryButton onClick={handleShowAddModal} />
+        <AddCategoryModal
+          show={showAddModal}
+          handleClose={handleCloseAddModal}
+          onAddCategory={handleAddCategory}
+        />
+        {/* <RemoveAllCategoriesButton></RemoveAllCategoriesButton> */}
+      </>
     </div>
   );
-};
+}
 
 export default Courses;
+export type { CourseCategory, Course };

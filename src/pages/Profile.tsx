@@ -1,7 +1,18 @@
-import React, { useEffect, useState } from "react";
-import "../App.css";
+import { useEffect, useState } from "react";
+import { Button, Stack } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
-const Profile = () => {
+function Profile() {
+  const navigate = useNavigate();
+
+  const navigateHome = () => {
+    navigate("/");
+  };
+
+  const navigateWelcome = () => {
+    navigate("/welcome");
+  };
+
   const [name, setName] = useState("");
   const [school, setSchool] = useState("");
   const [grade, setGrade] = useState("");
@@ -56,6 +67,7 @@ const Profile = () => {
     console.log("Grade:", grade);
 
     setGreetingName(name);
+    navigateWelcome();
   };
 
   const message = userDataExists
@@ -72,12 +84,19 @@ const Profile = () => {
   ];
 
   return (
-    <div className="profile-container">
-      <div className="container mt-5">
-        <div className="row justify-content-center align-items-center">
-          <div className="col-md-5 flex-column align-items-center">
-            <h1 className="text-center">{message}</h1>
-            <form onSubmit={handleSubmit} className="mt-3">
+    <div id="parent-container">
+      <div className="top-right-element">
+        <Button className="" variant="" onClick={navigateHome} size="lg">
+          <span className="mini-title text-center">Credit Ledger</span>
+        </Button>
+      </div>
+      <div className="d-flex justify-content-center align-items-center">
+        <Stack>
+          <div>
+            <h1 className="text-center prof-msg noselect">{message}</h1>
+          </div>
+          <div className="mt-3">
+            <form onSubmit={handleSubmit} className="" autoComplete="off">
               <div className="mb-3">
                 <label htmlFor="name" className="form-label fw-semibold">
                   Name
@@ -127,17 +146,21 @@ const Profile = () => {
                   ))}
                 </select>
               </div>
-              <div className="d-flex justify-content-center">
-                <button type="submit" className="btn btn-dark">
+              <div className="justify-content-center d-grid">
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="btn btn-dark save-prof"
+                >
                   Save Changes
-                </button>
+                </Button>
               </div>
             </form>
           </div>
-        </div>
+        </Stack>
       </div>
     </div>
   );
-};
+}
 
 export default Profile;
