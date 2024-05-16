@@ -10,6 +10,7 @@ import { IoIosArrowDropleftCircle } from "react-icons/io";
 import AddCourseModal from "../components/AddCourseModal";
 import { TiDelete } from "react-icons/ti";
 import { GiGraduateCap } from "react-icons/gi";
+import { Divider } from "@mui/material";
 
 const SelectedCategory: React.FC = () => {
   const navigate = useNavigate();
@@ -137,6 +138,9 @@ const SelectedCategory: React.FC = () => {
                     label={overallProgress + "%"}
                   />
                 </span>
+                <Divider>
+                  {completedCredits} / {totalCredits} credits completed
+                </Divider>
               </div>
             </div>
           </div>
