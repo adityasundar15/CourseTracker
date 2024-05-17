@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { database } from "../firebase-config.tsx";
-import { onValue, ref } from "firebase/database";
-import { Course } from "./Courses.tsx";
+import { useEffect, useState } from 'react';
+import { database } from '../firebase-config.tsx';
+import { onValue, ref } from 'firebase/database';
+import { Course } from './Courses.tsx';
 
 // const syllabusIndex = {
 //   a: 'id', !
@@ -44,11 +44,11 @@ interface FirebaseCourse {
 }
 
 function Test3() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [courses, setCourses] = useState<FirebaseCourse[]>([]);
   const [filteredCourses, setFilteredCourses] = useState<FirebaseCourse[]>([]);
   const [selectedCourses, setSelectedCourses] = useState<Course[]>([]);
-  const [schoolName, setSchoolName] = useState("PSE");
+  const [schoolName, setSchoolName] = useState('PSE');
 
   useEffect(() => {
     // Fetch data from Firebase
@@ -67,14 +67,14 @@ function Test3() {
     const filtered = courses.filter(
       (course) =>
         course.b.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        course.a.toLowerCase().includes(searchTerm.toLowerCase())
+        course.a.toLowerCase().includes(searchTerm.toLowerCase()),
     );
     setFilteredCourses(filtered);
   }, [searchTerm, courses]);
 
   const changeSchool = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setSchoolName(e.currentTarget.textContent || " ");
-    setSearchTerm("");
+    setSchoolName(e.currentTarget.textContent || ' ');
+    setSearchTerm('');
   };
 
   const addCourse = (course: FirebaseCourse) => {
@@ -99,25 +99,25 @@ function Test3() {
 
   const deleteCourse = (courseToDelete: Course) => {
     setSelectedCourses((prevSelectedCourses) =>
-      prevSelectedCourses.filter((c) => c.id !== courseToDelete.id)
+      prevSelectedCourses.filter((c) => c.id !== courseToDelete.id),
     );
   };
 
   return (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100vh",
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100vh',
       }}
     >
       <div
         style={{
-          textAlign: "center",
-          backgroundColor: "lightblue",
-          padding: "20px",
-          margin: "10px",
-          overflowY: "auto", // Enable scrolling if content exceeds space
+          textAlign: 'center',
+          backgroundColor: 'lightblue',
+          padding: '20px',
+          margin: '10px',
+          overflowY: 'auto', // Enable scrolling if content exceeds space
           flex: 1, // Expand to fill available space
         }}
       >
@@ -144,11 +144,11 @@ function Test3() {
       </div>
       <div
         style={{
-          textAlign: "center",
-          backgroundColor: "lightgreen",
-          padding: "20px",
-          margin: "10px",
-          overflowY: "auto", // Enable scrolling if content exceeds space
+          textAlign: 'center',
+          backgroundColor: 'lightgreen',
+          padding: '20px',
+          margin: '10px',
+          overflowY: 'auto', // Enable scrolling if content exceeds space
           flex: 1, // Expand to fill available space
         }}
       >
