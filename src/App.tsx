@@ -29,8 +29,6 @@ function App() {
             <Route path="/courses/:id" element={<SelectedCategory />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/welcome" element={<Welcome />} />
-            {/* <Route path="/test" element={<Test />} />
-            <Route path="/test2" element={<Test2 />} /> */}
             <Route path="/test3" element={<Test3 />} />
           </Routes>
         </main>

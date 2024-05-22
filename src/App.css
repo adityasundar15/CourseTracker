@@ -398,7 +398,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
     }
 
 .add-category-modal-content {
-    margin: 5% 15%;
+    margin: 3% 15%;
 }
 
 .add-category-modal .btn-close {
@@ -415,7 +415,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 .add-category-modal .modal-body {
-    margin: 5% 5%;
+    margin: 1% 0%;
 }
 
 .modal-sub-headers {
@@ -458,6 +458,30 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .add-category-modal .modal-footer {
     border-top: none;
 }
+
+.scrollable-query-outcome {
+    max-height: 20rem; /* Adjust the height as needed */
+    overflow-y: auto;
+}
+
+.query-item {
+    min-height: 6rem;
+    /* background-color: #fafafa;
+    border: 1px solid #fafafa;
+    border-radius: 15px;
+    box-shadow: 1px 2px 1px rgba(83, 83, 83, 0.46); */
+    align-items: center;
+}
+
+.query-item:hover {
+    background-color: #eeeeee;
+}
+
+.query-item-title {
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+  
 
 /* #endregion */
 
