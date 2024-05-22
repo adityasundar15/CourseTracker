@@ -223,13 +223,13 @@ function AddCourseModal({
                 {filteredCourses.map((course) => (
                   <div
                     key={course.a}
-                    className="query-item my-0 p-2 row d-flex border-top"
+                    className="query-item my-0 p-2 row border-top"
                     onClick={() => handleAddManually()}
                     role="button"
                   >
-                    <div className="col-10 flex-grow-1">
+                    <div className="col-10 flex-grow-1 d-flex flex-column h-100">
                       <div className="query-item-title">{course.b}</div>
-                      <div className="query-item-id">Course ID: {course.a}</div>
+                      <div className="query-item-id">{course.a}</div>
                     </div>
                     <div className="col align-self-center d-flex justify-content-end">
                       <IoIosAddCircle

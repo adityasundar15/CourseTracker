@@ -352,6 +352,12 @@ Note: Beware of modifying this element as it can break the animations - you shou
     left: 30px;
 }
 
+.delete-icon-container {
+    position: relative;
+    bottom: 30px;
+    right: 30px;
+}
+
 .arrow-icon {
     padding: auto;
     margin: auto;
@@ -360,6 +366,14 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 .arrow-icon:hover{
     color: #eaeaea;
+}
+
+.delete-icon {
+    transition: color 0.3s ease;
+}
+
+.delete-icon:hover{
+    color: #e45c5c;
 }
 
 .course-item {
@@ -466,11 +480,8 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 .query-item {
     min-height: 6rem;
-    /* background-color: #fafafa;
-    border: 1px solid #fafafa;
-    border-radius: 15px;
-    box-shadow: 1px 2px 1px rgba(83, 83, 83, 0.46); */
     align-items: center;
+    position: relative;
 }
 
 .query-item:hover {
@@ -481,7 +492,23 @@ Note: Beware of modifying this element as it can break the animations - you shou
     font-size: 1.3rem;
     font-weight: 400;
 }
+
+.query-item-id {
+    font-size: 0.7rem;
+    color: #B1B1B1;
+    font-style: italic;
+}
   
+
+/* #endregion */
+
+/* ---------------- */
+
+/* #region DeleteConfirmationDialog */
+
+.delete-dialog {
+    font-family: 'Outfit' !important;
+}
 
 /* #endregion */
 
