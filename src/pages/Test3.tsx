@@ -2,16 +2,7 @@ import { useEffect, useState } from 'react';
 import { database, signinWithGoogle, auth, db } from '../firebase-config.tsx';
 import { onValue, ref } from 'firebase/database';
 import { Course } from './Courses.tsx';
-import {
-  collection,
-  setDoc,
-  // getDocs,
-  addDoc,
-  updateDoc,
-  deleteDoc,
-  doc,
-  onSnapshot,
-} from 'firebase/firestore';
+import { collection, setDoc, getDoc, updateDoc, doc } from 'firebase/firestore';
 
 // FirebaseCourse interface matching the structure
 interface FirebaseCourse {
@@ -72,7 +63,7 @@ function Test3() {
 
   useEffect(() => {
     // Listen for authentication state changes
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
         const currentUser: UserInfo = {
           displayName: user.displayName!,
@@ -80,25 +71,35 @@ function Test3() {
           uid: user.uid,
         };
         setCurrentUser(currentUser);
-        createUser();
+        // Create user document in Firestore
+        await setDoc(
+          doc(usersCollectionRef, currentUser.uid),
+          {
+            uid: currentUser.uid,
+          },
+          { merge: true },
+        );
+        await fetchSelectedCourses(currentUser.uid); // Fetch selected courses for the authenticated user
       } else {
         setCurrentUser(null);
+        setSelectedCourses([]); // Reset selected courses on logout
       }
     });
     return () => unsubscribe();
   }, []);
 
-  const createUser = async () => {
-    if (currentUser) {
-      await setDoc(
-        doc(usersCollectionRef, currentUser.uid),
-        {
-          displayName: currentUser.displayName,
-          email: currentUser.email,
-          uid: currentUser.uid,
-        },
-        { merge: true },
-      );
+  const fetchSelectedCourses = async (uid: string) => {
+    try {
+      const userDocRef = doc(db, 'users', uid);
+      const userDoc = await getDoc(userDocRef);
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        setSelectedCourses(userData?.Advance || []);
+      } else {
+        setSelectedCourses([]); // Reset if no data exists
+      }
+    } catch (error) {
+      console.error('Error fetching selected courses: ', error);
     }
   };
 
@@ -115,7 +116,12 @@ function Test3() {
     setSearchTerm('');
   };
 
-  const addCourse = (course: FirebaseCourse) => {
+  const addCourse = async (course: FirebaseCourse) => {
+    if (!currentUser) {
+      console.error('User is not authenticated');
+      alert('Please login first!!!');
+      return;
+    }
     // Convert FirebaseCourse to Course
     const newCourse: Course = {
       id: course.a,
@@ -126,19 +132,56 @@ function Test3() {
       school: schoolName,
     };
 
-    if (!selectedCourses.find((c) => c.id === course.a)) {
-      // Course is not already selected, add it to the state
-      setSelectedCourses((prevSelectedCourses) => [
-        ...prevSelectedCourses,
-        newCourse,
-      ]);
+    try {
+      const userDocRef = doc(db, 'users', currentUser?.uid);
+      const userDocSnap = await getDoc(userDocRef);
+      const userData = userDocSnap.data();
+      const currentSelectedCourses = userData?.Advance || [];
+
+      if (!currentSelectedCourses.find((c: Course) => c.id === newCourse.id)) {
+        // Update Firestore with the new course
+        await updateDoc(userDocRef, {
+          Advance: [...currentSelectedCourses, newCourse],
+        });
+
+        // Update the state to reflect the new selected course
+        setSelectedCourses([...currentSelectedCourses, newCourse]);
+      } else {
+        console.log('Course already selected');
+        alert('Course already selected');
+      }
+    } catch (e) {
+      console.log(e);
     }
   };
 
-  const deleteCourse = (courseToDelete: Course) => {
-    setSelectedCourses((prevSelectedCourses) =>
-      prevSelectedCourses.filter((c) => c.id !== courseToDelete.id),
-    );
+  const deleteCourse = async (courseToDelete: Course) => {
+    try {
+      if (!currentUser?.uid) {
+        throw new Error('User is not authenticated');
+      }
+
+      // Fetch the latest selected courses from Firestore
+      const userDocRef = doc(db, 'users', currentUser?.uid);
+      const userDoc = await getDoc(userDocRef);
+      const userData = userDoc.data();
+      const currentSelectedCourses = userData?.Advance || [];
+
+      // Filter out the course to be deleted
+      const updatedCourses = currentSelectedCourses.filter(
+        (c: Course) => c.id !== courseToDelete.id,
+      );
+
+      // Update Firestore with the updated course list
+      await updateDoc(userDocRef, {
+        Advance: updatedCourses,
+      });
+
+      // Update the state to reflect the deletion
+      setSelectedCourses(updatedCourses);
+    } catch (error) {
+      console.error('Error deleting course from Firestore: ', error);
+    }
   };
 
   return (
@@ -228,7 +271,6 @@ function Test3() {
               <p>Email: {currentUser.email}</p>
               <p>UID: {currentUser.uid}</p>
               <button onClick={handleSignOut}>Sign Out</button>
-              <button onClick={createUser}>Create User</button>
             </div>
           ) : (
             <button onClick={handleSigninWithGoogle}>
