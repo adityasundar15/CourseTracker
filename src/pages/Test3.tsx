@@ -119,7 +119,7 @@ function Test3() {
   const addCourse = async (course: FirebaseCourse) => {
     if (!currentUser) {
       console.error('User is not authenticated');
-      alert('Please login first!!!');
+      window.alert('Please login first!!!');
       return;
     }
     // Convert FirebaseCourse to Course
