@@ -13,6 +13,9 @@ import placeHolderPic3 from "../assets/default_courses3.png";
 import { useEffect, useState } from "react";
 import AddCategoryButton from "../components/AddCategoryButton";
 import AddCategoryModal from "../components/AddCategoryModal";
+import { PiCardsThreeFill } from "react-icons/pi";
+import { FaListUl } from "react-icons/fa6";
+import { Grow } from "@mui/material";
 
 interface CourseCategory {
   id: string;
@@ -84,7 +87,7 @@ function Courses() {
 
   return (
     <div id="parent-container">
-      <div className="top-right-element">
+      <div className="top-right-element position-absolute">
         <Button
           className="home-button"
           variant=""
@@ -94,108 +97,119 @@ function Courses() {
           <span className="mini-title text-center">Credit Ledger</span>
         </Button>
       </div>
-      <div className="w-75 h-100 d-flex flex-column mx-auto">
-        <span className="course-page-title">Courses</span>
-        <span className="progress-container">
-            {/* <div
+      <div className="w-75 h-100 d-flex flex-column mx-auto course-categories-body">
+        <Row>
+          <span className="course-page-title col">Course Categories</span>
+          <div className="view-toggle-container d-flex justify-content-end col">
+            <ButtonGroup className="view-toggle py-4">
+              <Button
+                variant={viewType === "card" ? "dark" : "light"}
+                onClick={() => setViewType("card")}
+              >
+                <PiCardsThreeFill size={25} />
+              </Button>
+              <Button
+                variant={viewType === "list" ? "dark" : "light"}
+                onClick={() => setViewType("list")}
+              >
+                <FaListUl size={25} />
+              </Button>
+            </ButtonGroup>
+          </div>
+        </Row>
+        <div className="progress-container">
+          {/* <div
               className="progress-marker"
               style={{ left: `calc(${overallProgress}% - 1.5rem)` }}
             >
               <div className="marker-label">{overallProgress + "%"}</div>
             </div> */}
+          <Col>
+            <span className="row d-flex justify-content-end text-body-tertiary">
+              {totalCompleted} / {totalCourses} credits completed
+            </span>
             <ProgressBar
               now={Number(overallProgress)}
-              className="bar-progress"
+              className="bar-progress row"
               label={overallProgress + "%"}
             />
-          </span>
-        <div className="view-toggle-container d-flex justify-content-end my-3">
-          <ButtonGroup className="view-toggle">
-            <Button
-              variant={viewType === "card" ? "dark" : "light"}
-              onClick={() => setViewType("card")}
-            >
-              Card View
-            </Button>
-            <Button
-              variant={viewType === "list" ? "dark" : "light"}
-              onClick={() => setViewType("list")}
-            >
-              List View
-            </Button>
-          </ButtonGroup>
+          </Col>
         </div>
         {viewType === "card" ? (
           <Row xs={1} md={2} lg={3}>
             {courseCategories.map((category, index) => (
-              <div key={index} className="g-col-6 g-col-md-4 mb-4">
+              <Grow in={true} timeout={index * 500}>
+                <div key={index} className="g-col-6 g-col-md-4 mb-4">
+                  <Card
+                    className="category-list"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => handleCategorySelect(category)}
+                  >
+                    <Card.Img
+                      variant="top"
+                      src={
+                        category.picture === 1
+                          ? placeHolderPic1
+                          : category.picture === 2
+                          ? placeHolderPic2
+                          : category.picture === 3
+                          ? placeHolderPic3
+                          : placeHolderPic1 // Default picture
+                      }
+                      className="card-image"
+                    />
+                    <Card.Body>
+                      <Card.Title>{category.name}</Card.Title>
+                      <Card.Text>{`${category.completed}/${category.total} completed`}</Card.Text>
+                      <ProgressBar
+                        now={Number(category.completed)}
+                        max={category.total}
+                        className="overflow-visible card-progress"
+                        style={{ height: "1.5rem" }}
+                      />
+                    </Card.Body>
+                  </Card>
+                </div>
+              </Grow>
+            ))}
+          </Row>
+        ) : (
+          <div className="categories-list-view">
+            {courseCategories.map((category, index) => (
+              <div className="py-2">
                 <Card
-                  className="course"
-                  style={{ cursor: "pointer" }}
+                  key={index}
+                  className="category-list-view position-relative border border-0"
+                  style={{ cursor: "pointer", height: "5rem" }}
                   onClick={() => handleCategorySelect(category)}
                 >
-                  <Card.Img
-                    variant="top"
-                    src={
-                      category.picture === 1
-                        ? placeHolderPic1
-                        : category.picture === 2
-                        ? placeHolderPic2
-                        : category.picture === 3
-                        ? placeHolderPic3
-                        : placeHolderPic1 // Default picture
+                  {/* Progress Bar as Card Background */}
+                  <ProgressBar
+                    now={
+                      category.total === 0
+                        ? 0
+                        : (category.completed / category.total) * 100
                     }
-                    className="card-image"
+                    className="position-absolute w-100 h-100 p-3"
+                    style={{ zIndex: 0 }}
+                    variant="gray"
                   />
-                  <Card.Body>
-                    <Card.Title>{category.name}</Card.Title>
-                    <Card.Text>{`${category.completed}/${category.total} completed`}</Card.Text>
-                    <ProgressBar
-                      now={Number(category.completed)}
-                      max={category.total}
-                      className="overflow-visible"
-                      style={{ height: "1.5rem" }}
-                    />
+                  {/* Text Content */}
+                  <Card.Body className="position-relative text-black h-100">
+                    <Row className="m-auto d-flex align-items-center h-100">
+                      <Col className="d-flex align-items-center">
+                        <Card.Text className="category-title-listview">
+                          {category.name}
+                        </Card.Text>
+                      </Col>
+                      <Col xs="auto" className="">
+                        <Card.Text>{`${category.completed}/${category.total} completed`}</Card.Text>
+                      </Col>
+                    </Row>
                   </Card.Body>
                 </Card>
               </div>
             ))}
-          </Row>
-        ) : (
-          <div className="course-list">
-            {courseCategories.map((category, index) => (
-              <Card
-                key={index}
-                className="mb-3 course rounded position-relative"
-                style={{ cursor: "pointer", height: "5rem"}}
-                onClick={() => handleCategorySelect(category)}
-              >
-                {/* Progress Bar as Card Background */}
-                <ProgressBar
-                  now={
-                    category.total === 0
-                      ? 0
-                      : (category.completed / category.total) * 100
-                  }
-                  className="position-absolute w-100 h-100 py-3"
-                style={{ zIndex: 0, padding: "0.6rem"}}
-                  variant="SOME_NAME"
-                />
-
-                {/* Text Content */}
-                <Card.Body className="position-relative text-black" style={{marginTop: "0.7rem"}}>
-                  <Row>
-                    <Col style={{marginLeft: "0.7rem"}}>
-                      <Card.Title>{category.name}</Card.Title>
-                    </Col>
-                    <Col xs="auto" className="ml-auto">
-                      <Card.Text>{`${category.completed}/${category.total} completed`}</Card.Text>
-                    </Col>
-                  </Row>
-                </Card.Body>
-              </Card>
-            ))}
-
           </div>
         )}
         <AddCategoryButton onClick={handleShowAddModal} />

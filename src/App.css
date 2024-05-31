@@ -244,10 +244,14 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* #region Categories Page */
 
+.course-categories-body {
+    padding: 10% 0 0;
+}
+
 .course-page-title {
     font-size: 3.43rem;
     font-family: 'Outfit';
-    padding: 10% 0% 1rem;
+    padding: 0% 0% 1rem;
 }
 
 .progress-container {
@@ -263,6 +267,10 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .progress-bar {
     background-color: #000000 !important;
     border-radius: 9px !important;
+}
+
+.card-progress {
+    background-color: #f7fefe !important;
 }
 
 .progress-marker {
@@ -292,7 +300,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
     left: calc(50% - 2.5rem);
 }
 
-.course {
+.category-list {
     width: 100%;
     border-radius: 0 !important;
     border: 0 !important;
@@ -305,6 +313,24 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 .card-body {
     font-family: 'Outfit';
+}
+
+/* List view */
+
+.bg-gray {
+    background-color: #c8c8c7!important;
+  }
+
+.categorydelete {
+    color: black;
+}
+
+.categorydelete:hover {
+    opacity: 1.0;
+}
+
+.category-title-listview {
+    font-size: 1.3rem;
 }
 
 /* #endregion Courses Page */
@@ -551,21 +577,26 @@ Note: Beware of modifying this element as it can break the animations - you shou
     }
 }
 
-.view-toggle{
-    bottom: 1rem;
+.parent-container {
+    animation: fadeInAnimation ease 3s;
 }
 
-.bg-SOME_NAME{
-    background-color: #929292!important;
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.card {
+    transition: all ease 200ms;
+}
+
+.card:hover {
+    transform: scale(1.03);
   }
-
-.categorydelete{
-    color: black;
-}
-
-.categorydelete:hover{
-    opacity: 1.0;
-}
   
 /* #endregion */
 

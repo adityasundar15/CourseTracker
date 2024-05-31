@@ -10,7 +10,7 @@ import { IoIosArrowDropleftCircle } from "react-icons/io";
 import AddCourseModal from "../components/AddCourseModal";
 import { TiDelete } from "react-icons/ti";
 import { GiGraduateCap } from "react-icons/gi";
-import { Divider } from "@mui/material";
+import { Box, Divider, Slide } from "@mui/material";
 import DeleteConfirmationDialog from "../components/DeleteConfirmationDialog";
 
 const SelectedCategory: React.FC = () => {
@@ -119,9 +119,11 @@ const SelectedCategory: React.FC = () => {
     navigate("/courses");
   };
 
+  const containerRef = React.useRef<HTMLElement>(null);
+
   return (
     <div id="parent-container">
-      <div className="top-right-element">
+      <div className="top-right-element position-absolute">
         <Button className="" variant="" onClick={navigateHome} size="lg">
           <span className="mini-title text-center">Credit Ledger</span>
         </Button>
@@ -162,40 +164,38 @@ const SelectedCategory: React.FC = () => {
         </div>
         <div className="course-list-wrapper d-flex justify-content-center">
           <div className="course-list w-75 d-flex flex-column my-5">
-            {courseList.map((course) => (
-              <CourseItem
-                id={course.id}
-                name={course.name}
-                name_jp={course.name_jp}
-                credit={course.credit}
-                progress={course.progress}
-                removeCourse={removeCourse}
-                school={course.school}
-              />
-            ))}
-            <div className="course-item-wrapper my-2">
-              <div
-                className="add-course course-item p-3 row"
-                onClick={handleShowAddModal}
-                style={{ cursor: "pointer" }}
-              >
-                <div>+ Add Course</div>
+            <Box ref={containerRef}>
+              {courseList.map((course, index) => (
+                <Slide
+                  direction="up"
+                  in={true}
+                  container={containerRef.current}
+                  timeout={index * 200}
+                >
+                  <div>
+                    <CourseItem
+                      key={index}
+                      id={course.id}
+                      name={course.name}
+                      name_jp={course.name_jp}
+                      credit={course.credit}
+                      progress={course.progress}
+                      removeCourse={removeCourse}
+                      school={course.school}
+                    />
+                  </div>
+                </Slide>
+              ))}
+              <div className="course-item-wrapper my-2">
+                <div
+                  className="add-course course-item p-3 row"
+                  onClick={handleShowAddModal}
+                  style={{ cursor: "pointer" }}
+                >
+                  <div>+ Add Course</div>
+                </div>
               </div>
-            </div>
-            <Button
-              className="categorydelete"
-              style={{
-                backgroundColor: "transparent",
-                borderColor: "red",
-                color: "red",
-                opacity: "0.8",
-                width: "15rem",
-                marginLeft: "auto",
-                marginRight: "auto",
-              }}
-            >
-              Delete category
-            </Button>
+            </Box>
           </div>
         </div>
       </div>
