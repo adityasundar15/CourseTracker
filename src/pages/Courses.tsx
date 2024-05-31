@@ -1,4 +1,11 @@
-import { Button, Card, ProgressBar, Row } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  ProgressBar,
+  Row,
+  Col,
+  ButtonGroup,
+} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import placeHolderPic1 from "../assets/default_courses1.png";
 import placeHolderPic2 from "../assets/default_courses2.png";
@@ -28,6 +35,7 @@ interface Course {
 function Courses() {
   const navigate = useNavigate();
   const [showAddModal, setShowAddModal] = useState(false);
+  const [viewType, setViewType] = useState<"list" | "card">("card");
 
   const handleShowAddModal = () => {
     setShowAddModal(true);
@@ -51,7 +59,6 @@ function Courses() {
 
   const loadCourseCategories = (): CourseCategory[] => {
     const storedCategories = localStorage.getItem("courseCategories");
-    console.log(storedCategories);
     return storedCategories ? JSON.parse(storedCategories) : [];
   };
 
@@ -78,14 +85,18 @@ function Courses() {
   return (
     <div id="parent-container">
       <div className="top-right-element">
-        <Button className="" variant="" onClick={navigateHome} size="lg">
+        <Button
+          className="home-button"
+          variant=""
+          onClick={navigateHome}
+          size="lg"
+        >
           <span className="mini-title text-center">Credit Ledger</span>
         </Button>
       </div>
-      <>
-        <div className="w-75 h-100 d-flex flex-column">
-          <span className="course-page-title"> Categories</span>
-          <span className="progress-container">
+      <div className="w-75 h-100 d-flex flex-column mx-auto">
+        <span className="course-page-title">Courses</span>
+        <span className="progress-container">
             {/* <div
               className="progress-marker"
               style={{ left: `calc(${overallProgress}% - 1.5rem)` }}
@@ -98,6 +109,23 @@ function Courses() {
               label={overallProgress + "%"}
             />
           </span>
+        <div className="view-toggle-container d-flex justify-content-end my-3">
+          <ButtonGroup className="view-toggle">
+            <Button
+              variant={viewType === "card" ? "dark" : "light"}
+              onClick={() => setViewType("card")}
+            >
+              Card View
+            </Button>
+            <Button
+              variant={viewType === "list" ? "dark" : "light"}
+              onClick={() => setViewType("list")}
+            >
+              List View
+            </Button>
+          </ButtonGroup>
+        </div>
+        {viewType === "card" ? (
           <Row xs={1} md={2} lg={3}>
             {courseCategories.map((category, index) => (
               <div key={index} className="g-col-6 g-col-md-4 mb-4">
@@ -133,18 +161,93 @@ function Courses() {
               </div>
             ))}
           </Row>
-        </div>
+        ) : (
+          <div className="course-list">
+            {courseCategories.map((category, index) => (
+              <Card
+                key={index}
+                className="mb-3 course rounded position-relative"
+                style={{ cursor: "pointer", height: "5rem"}}
+                onClick={() => handleCategorySelect(category)}
+              >
+                {/* Progress Bar as Card Background */}
+                <ProgressBar
+                  now={
+                    category.total === 0
+                      ? 0
+                      : (category.completed / category.total) * 100
+                  }
+                  className="position-absolute w-100 h-100 py-3"
+                style={{ zIndex: 0, padding: "0.6rem"}}
+                  variant="SOME_NAME"
+                />
+
+                {/* Text Content */}
+                <Card.Body className="position-relative text-black" style={{marginTop: "0.7rem"}}>
+                  <Row>
+                    <Col style={{marginLeft: "0.7rem"}}>
+                      <Card.Title>{category.name}</Card.Title>
+                    </Col>
+                    <Col xs="auto" className="ml-auto">
+                      <Card.Text>{`${category.completed}/${category.total} completed`}</Card.Text>
+                    </Col>
+                  </Row>
+                </Card.Body>
+              </Card>
+            ))}
+
+          </div>
+        )}
         <AddCategoryButton onClick={handleShowAddModal} />
         <AddCategoryModal
           show={showAddModal}
           handleClose={handleCloseAddModal}
           onAddCategory={handleAddCategory}
         />
-        {/* <RemoveAllCategoriesButton></RemoveAllCategoriesButton> */}
-      </>
+      </div>
     </div>
   );
 }
 
 export default Courses;
 export type { CourseCategory, Course };
+
+/*
+<div className="course-list">
+            {courseCategories.map((category, index) => (
+              <Card
+                key={index}
+                className="mb-3 course rounded"
+                style={{ cursor: "pointer" }}
+                onClick={() => handleCategorySelect(category)}
+              >
+                <Row noGutters>
+                  <Col md={4}>
+                    <Card.Img
+                      src={
+                        category.picture === 1
+                          ? placeHolderPic1
+                          : category.picture === 2
+                          ? placeHolderPic2
+                          : category.picture === 3
+                          ? placeHolderPic3
+                          : placeHolderPic1 // Default picture
+                      }
+                      className="card-image"
+                    />
+                  </Col>
+                  <Col md={8}>
+                    <Card.Body>
+                      <Card.Title>{category.name}</Card.Title>
+                      <Card.Text>{`${category.completed}/${category.total} completed`}</Card.Text>
+                      <ProgressBar
+                        now={category.total === 0 ? 0 : (category.completed / category.total) * 100}
+                        className="mt-2"
+                      />
+                    </Card.Body>
+                  </Col>
+                </Row>
+              </Card>
+            ))}
+          </div>
+*/
