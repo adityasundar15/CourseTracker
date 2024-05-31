@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Course, CourseCategory } from "./Courses";
 import placeHolderPic1 from "../assets/default_courses1.png";
@@ -10,6 +10,9 @@ import { IoIosArrowDropleftCircle } from "react-icons/io";
 import AddCourseModal from "../components/AddCourseModal";
 import { TiDelete } from "react-icons/ti";
 import { Divider } from "@mui/material";
+import { GiGraduateCap } from "react-icons/gi";
+import { Divider } from "@mui/material";
+import DeleteConfirmationDialog from "../components/DeleteConfirmationDialog";
 
 const SelectedCategory: React.FC = () => {
   const navigate = useNavigate();
@@ -41,15 +44,15 @@ const SelectedCategory: React.FC = () => {
     ? JSON.parse(storedCategories)
     : [];
 
-  const selectedCategory: CourseCategory | undefined = courseCategories.find(
-    (category) => category.id === id
-  );
+  const selectedCategory: CourseCategory | undefined = useMemo(() => {
+    return courseCategories.find((category) => category.id === id);
+  }, [courseCategories, id]);
 
   useEffect(() => {
-    if (selectedCategory) {
+    if (selectedCategory && selectedCategory.courses !== courseList) {
       setCourseList(selectedCategory.courses);
     }
-  }, [selectedCategory]);
+  }, []);
 
   if (!selectedCategory) {
     return <ErrorPage />;
@@ -109,6 +112,14 @@ const SelectedCategory: React.FC = () => {
     localStorage.setItem("courseCategories", JSON.stringify(updatedCategories));
   };
 
+  const handleDeleteConfirmation = () => {
+    const updatedCategories = courseCategories.filter(
+      (category) => category.id !== id
+    );
+    localStorage.setItem("courseCategories", JSON.stringify(updatedCategories));
+    navigate("/courses");
+  };
+
   return (
     <div id="parent-container">
       <div className="top-right-element">
@@ -125,15 +136,10 @@ const SelectedCategory: React.FC = () => {
               </div>
               <div className="d-flex flex-column mb-3">
                 <span className="progress-container">
-                  <div
-                    className="progress-marker"
-                    style={{ left: `calc(${overallProgress}% - 1rem)` }}
-                  >
-                    <div className="marker-label">{overallProgress + "%"}</div>
-                  </div>
                   <ProgressBar
                     now={Number(overallProgress)}
                     className="bar-progress"
+                    label={overallProgress + "%"}
                   />
                 </span>
                 <Divider>
@@ -142,12 +148,17 @@ const SelectedCategory: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="arrow-icon-container">
-            <IoIosArrowDropleftCircle
-              onClick={handleGoBack}
-              className="arrow-icon"
-              size={50}
-            />
+          <div className="row">
+            <div className="arrow-icon-container col">
+              <IoIosArrowDropleftCircle
+                onClick={handleGoBack}
+                className="arrow-icon"
+                size={50}
+              />
+            </div>
+            <div className="delete-icon-container col d-flex justify-content-end">
+              <DeleteConfirmationDialog onDelete={handleDeleteConfirmation} />
+            </div>
           </div>
         </div>
         <div className="course-list-wrapper d-flex justify-content-center">
@@ -156,9 +167,11 @@ const SelectedCategory: React.FC = () => {
               <CourseItem
                 id={course.id}
                 name={course.name}
+                name_jp={course.name_jp}
                 credit={course.credit}
                 progress={course.progress}
                 removeCourse={removeCourse}
+                school={course.school}
               />
             ))}
             <div className="course-item-wrapper my-2">
@@ -199,6 +212,7 @@ const CourseItem = ({
   id,
   name,
   credit,
+  progress,
   removeCourse,
 }: Course & { removeCourse: (id: string) => void }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -213,10 +227,15 @@ const CourseItem = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="course-item row p-3">
-        <div className="course-name col align-self-start">{name}</div>
+      <div
+        className={`course-item row p-3 ${progress === 1 ? "completed" : ""}`}
+      >
+        <div className="course-name col-9 align-self-start">{name}</div>
         <div className="course-credit col align-self-end d-flex justify-content-end">
-          {credit} credits
+          <div className="col-9 align-self-end d-flex justify-content-end">
+            <GiGraduateCap size={25} />
+          </div>
+          <div className="col px-4">{credit}</div>
         </div>
       </div>
       {isHovered && (

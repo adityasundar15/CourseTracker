@@ -26,8 +26,10 @@ interface CourseCategory {
 interface Course {
   id: string;
   name: string;
+  name_jp: string;
   credit: number;
   progress: number;
+  school: string;
 }
 
 function Courses() {
@@ -95,14 +97,18 @@ function Courses() {
       <div className="w-75 h-100 d-flex flex-column mx-auto">
         <span className="course-page-title">Courses</span>
         <span className="progress-container">
-          <div
-            className="progress-marker"
-            style={{ left: `calc(${overallProgress}% - 1.5rem)` }}
-          >
-            <div className="marker-label">{overallProgress + "%"}</div>
-          </div>
-          <ProgressBar now={Number(overallProgress)} className="bar-progress" />
-        </span>
+            {/* <div
+              className="progress-marker"
+              style={{ left: `calc(${overallProgress}% - 1.5rem)` }}
+            >
+              <div className="marker-label">{overallProgress + "%"}</div>
+            </div> */}
+            <ProgressBar
+              now={Number(overallProgress)}
+              className="bar-progress"
+              label={overallProgress + "%"}
+            />
+          </span>
         <div className="view-toggle-container d-flex justify-content-end my-3">
           <ButtonGroup className="view-toggle">
             <Button
@@ -145,12 +151,10 @@ function Courses() {
                     <Card.Title>{category.name}</Card.Title>
                     <Card.Text>{`${category.completed}/${category.total} completed`}</Card.Text>
                     <ProgressBar
-                      now={
-                        category.total === 0
-                          ? 0
-                          : (category.completed / category.total) * 100
-                      }
-                      className="mt-2"
+                      now={Number(category.completed)}
+                      max={category.total}
+                      className="overflow-visible"
+                      style={{ height: "1.5rem" }}
                     />
                   </Card.Body>
                 </Card>

@@ -1,6 +1,6 @@
-import { pushRotate as Menu } from "react-burger-menu";
-import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { pushRotate as Menu } from 'react-burger-menu';
+import { Link, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 interface MenuState {
   isOpen: boolean;
@@ -9,7 +9,7 @@ interface MenuState {
 function BurgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const [isHome, setIsHome] = useState(location.pathname === "/");
+  const [isHome, setIsHome] = useState(location.pathname === '/');
 
   const handleMenuStateChange = (state: MenuState) => {
     setIsOpen(state.isOpen);
@@ -20,18 +20,18 @@ function BurgerMenu() {
   };
 
   useEffect(() => {
-    setIsHome(location.pathname === "/");
+    setIsHome(location.pathname === '/');
   }, [location.pathname]);
 
   return (
     <Menu
       isOpen={isOpen}
       onStateChange={handleMenuStateChange}
-      width={"17%"}
-      pageWrapId={"page-wrap"}
-      outerContainerId={"outer-container"}
+      width={'17%'}
+      pageWrapId={'page-wrap'}
+      outerContainerId={'outer-container'}
       customCrossIcon={false}
-      burgerBarClassName={isHome ? "white-bg" : ""}
+      burgerBarClassName={isHome ? 'white-bg' : ''}
     >
       <div className="container">
         <div className="row">
@@ -74,6 +74,14 @@ function BurgerMenu() {
       <hr></hr>
       <Link to="/profile" className="menu-item noselect" onClick={closeMenu}>
         Profile
+      </Link>
+      <hr></hr>
+      <Link to="/test3" className="menu-item noselect" onClick={closeMenu}>
+        Test3
+      </Link>
+      <hr></hr>
+      <Link to="/test4" className="menu-item noselect" onClick={closeMenu}>
+        Test4
       </Link>
       <hr></hr>
     </Menu>
