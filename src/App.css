@@ -352,6 +352,12 @@ Note: Beware of modifying this element as it can break the animations - you shou
     left: 30px;
 }
 
+.delete-icon-container {
+    position: relative;
+    bottom: 30px;
+    right: 30px;
+}
+
 .arrow-icon {
     padding: auto;
     margin: auto;
@@ -360,6 +366,14 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 .arrow-icon:hover{
     color: #eaeaea;
+}
+
+.delete-icon {
+    transition: color 0.3s ease;
+}
+
+.delete-icon:hover{
+    color: #e45c5c;
 }
 
 .course-item {
@@ -398,7 +412,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
     }
 
 .add-category-modal-content {
-    margin: 5% 15%;
+    margin: 3% 15%;
 }
 
 .add-category-modal .btn-close {
@@ -415,7 +429,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 .add-category-modal .modal-body {
-    margin: 5% 5%;
+    margin: 1% 0%;
 }
 
 .modal-sub-headers {
@@ -457,6 +471,43 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 .add-category-modal .modal-footer {
     border-top: none;
+}
+
+.scrollable-query-outcome {
+    max-height: 20rem; /* Adjust the height as needed */
+    overflow-y: auto;
+}
+
+.query-item {
+    min-height: 6rem;
+    align-items: center;
+    position: relative;
+}
+
+.query-item:hover {
+    background-color: #eeeeee;
+}
+
+.query-item-title {
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+
+.query-item-id {
+    font-size: 0.7rem;
+    color: #B1B1B1;
+    font-style: italic;
+}
+  
+
+/* #endregion */
+
+/* ---------------- */
+
+/* #region DeleteConfirmationDialog */
+
+.delete-dialog {
+    font-family: 'Outfit' !important;
 }
 
 /* #endregion */

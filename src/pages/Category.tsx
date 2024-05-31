@@ -11,6 +11,7 @@ import AddCourseModal from "../components/AddCourseModal";
 import { TiDelete } from "react-icons/ti";
 import { GiGraduateCap } from "react-icons/gi";
 import { Divider } from "@mui/material";
+import DeleteConfirmationDialog from "../components/DeleteConfirmationDialog";
 
 const SelectedCategory: React.FC = () => {
   const navigate = useNavigate();
@@ -110,6 +111,14 @@ const SelectedCategory: React.FC = () => {
     localStorage.setItem("courseCategories", JSON.stringify(updatedCategories));
   };
 
+  const handleDeleteConfirmation = () => {
+    const updatedCategories = courseCategories.filter(
+      (category) => category.id !== id
+    );
+    localStorage.setItem("courseCategories", JSON.stringify(updatedCategories));
+    navigate("/courses");
+  };
+
   return (
     <div id="parent-container">
       <div className="top-right-element">
@@ -126,12 +135,6 @@ const SelectedCategory: React.FC = () => {
               </div>
               <div className="d-flex flex-column mb-3">
                 <span className="progress-container">
-                  {/* <div
-                    className="progress-marker"
-                    style={{ left: `calc(${overallProgress}% - 1rem)` }}
-                  >
-                    <div className="marker-label">{overallProgress + "%"}</div>
-                  </div> */}
                   <ProgressBar
                     now={Number(overallProgress)}
                     className="bar-progress"
@@ -144,12 +147,17 @@ const SelectedCategory: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="arrow-icon-container">
-            <IoIosArrowDropleftCircle
-              onClick={handleGoBack}
-              className="arrow-icon"
-              size={50}
-            />
+          <div className="row">
+            <div className="arrow-icon-container col">
+              <IoIosArrowDropleftCircle
+                onClick={handleGoBack}
+                className="arrow-icon"
+                size={50}
+              />
+            </div>
+            <div className="delete-icon-container col d-flex justify-content-end">
+              <DeleteConfirmationDialog onDelete={handleDeleteConfirmation} />
+            </div>
           </div>
         </div>
         <div className="course-list-wrapper d-flex justify-content-center">
