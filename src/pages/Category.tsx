@@ -9,7 +9,6 @@ import ErrorPage from "./ErrorPage";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
 import AddCourseModal from "../components/AddCourseModal";
 import { TiDelete } from "react-icons/ti";
-import { Divider } from "@mui/material";
 import { GiGraduateCap } from "react-icons/gi";
 import { Divider } from "@mui/material";
 import DeleteConfirmationDialog from "../components/DeleteConfirmationDialog";
@@ -183,16 +182,18 @@ const SelectedCategory: React.FC = () => {
                 <div>+ Add Course</div>
               </div>
             </div>
-            <Button className = "categorydelete" 
-            style={{
-              backgroundColor: "transparent",
-              borderColor: "red",
-              color: "red",
-              opacity: "0.8",
-              width: "15rem",
-              marginLeft: "auto",
-              marginRight: "auto",
-              }}>
+            <Button
+              className="categorydelete"
+              style={{
+                backgroundColor: "transparent",
+                borderColor: "red",
+                color: "red",
+                opacity: "0.8",
+                width: "15rem",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+            >
               Delete category
             </Button>
           </div>
