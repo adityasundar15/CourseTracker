@@ -244,10 +244,14 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* #region Categories Page */
 
+.course-categories-body {
+    padding: 10% 0 0;
+}
+
 .course-page-title {
     font-size: 3.43rem;
     font-family: 'Outfit';
-    padding: 10% 0% 1rem;
+    padding: 0% 0% 1rem;
 }
 
 .progress-container {
@@ -263,6 +267,10 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .progress-bar {
     background-color: #000000 !important;
     border-radius: 9px !important;
+}
+
+.card-progress {
+    background-color: #f7fefe !important;
 }
 
 .progress-marker {
@@ -292,7 +300,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
     left: calc(50% - 2.5rem);
 }
 
-.course {
+.category-list {
     width: 100%;
     border-radius: 0 !important;
     border: 0 !important;
@@ -305,6 +313,24 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 .card-body {
     font-family: 'Outfit';
+}
+
+/* List view */
+
+.bg-gray {
+    background-color: #c8c8c7!important;
+  }
+
+.categorydelete {
+    color: black;
+}
+
+.categorydelete:hover {
+    opacity: 1.0;
+}
+
+.category-title-listview {
+    font-size: 1.3rem;
 }
 
 /* #endregion Courses Page */
@@ -352,6 +378,12 @@ Note: Beware of modifying this element as it can break the animations - you shou
     left: 30px;
 }
 
+.delete-icon-container {
+    position: relative;
+    bottom: 30px;
+    right: 30px;
+}
+
 .arrow-icon {
     padding: auto;
     margin: auto;
@@ -360,6 +392,14 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 .arrow-icon:hover{
     color: #eaeaea;
+}
+
+.delete-icon {
+    transition: color 0.3s ease;
+}
+
+.delete-icon:hover{
+    color: #e45c5c;
 }
 
 .course-item {
@@ -398,7 +438,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
     }
 
 .add-category-modal-content {
-    margin: 5% 15%;
+    margin: 3% 15%;
 }
 
 .add-category-modal .btn-close {
@@ -415,7 +455,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 .add-category-modal .modal-body {
-    margin: 5% 5%;
+    margin: 1% 0%;
 }
 
 .modal-sub-headers {
@@ -459,6 +499,43 @@ Note: Beware of modifying this element as it can break the animations - you shou
     border-top: none;
 }
 
+.scrollable-query-outcome {
+    max-height: 20rem; /* Adjust the height as needed */
+    overflow-y: auto;
+}
+
+.query-item {
+    min-height: 6rem;
+    align-items: center;
+    position: relative;
+}
+
+.query-item:hover {
+    background-color: #eeeeee;
+}
+
+.query-item-title {
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+
+.query-item-id {
+    font-size: 0.7rem;
+    color: #B1B1B1;
+    font-style: italic;
+}
+  
+
+/* #endregion */
+
+/* ---------------- */
+
+/* #region DeleteConfirmationDialog */
+
+.delete-dialog {
+    font-family: 'Outfit' !important;
+}
+
 /* #endregion */
 
 /* ---------------- */
@@ -499,6 +576,27 @@ Note: Beware of modifying this element as it can break the animations - you shou
       transform: translateY(0);
     }
 }
+
+.parent-container {
+    animation: fadeInAnimation ease 3s;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.card {
+    transition: all ease 200ms;
+}
+
+.card:hover {
+    transform: scale(1.03);
+  }
   
 /* #endregion */
 

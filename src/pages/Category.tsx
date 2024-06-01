@@ -10,7 +10,8 @@ import { IoIosArrowDropleftCircle } from "react-icons/io";
 import AddCourseModal from "../components/AddCourseModal";
 import { TiDelete } from "react-icons/ti";
 import { GiGraduateCap } from "react-icons/gi";
-import { Divider } from "@mui/material";
+import { Box, Divider, Slide } from "@mui/material";
+import DeleteConfirmationDialog from "../components/DeleteConfirmationDialog";
 
 const SelectedCategory: React.FC = () => {
   const navigate = useNavigate();
@@ -110,9 +111,19 @@ const SelectedCategory: React.FC = () => {
     localStorage.setItem("courseCategories", JSON.stringify(updatedCategories));
   };
 
+  const handleDeleteConfirmation = () => {
+    const updatedCategories = courseCategories.filter(
+      (category) => category.id !== id
+    );
+    localStorage.setItem("courseCategories", JSON.stringify(updatedCategories));
+    navigate("/courses");
+  };
+
+  const containerRef = React.useRef<HTMLElement>(null);
+
   return (
     <div id="parent-container">
-      <div className="top-right-element">
+      <div className="top-right-element position-absolute">
         <Button className="" variant="" onClick={navigateHome} size="lg">
           <span className="mini-title text-center">Credit Ledger</span>
         </Button>
@@ -126,12 +137,6 @@ const SelectedCategory: React.FC = () => {
               </div>
               <div className="d-flex flex-column mb-3">
                 <span className="progress-container">
-                  {/* <div
-                    className="progress-marker"
-                    style={{ left: `calc(${overallProgress}% - 1rem)` }}
-                  >
-                    <div className="marker-label">{overallProgress + "%"}</div>
-                  </div> */}
                   <ProgressBar
                     now={Number(overallProgress)}
                     className="bar-progress"
@@ -144,36 +149,53 @@ const SelectedCategory: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="arrow-icon-container">
-            <IoIosArrowDropleftCircle
-              onClick={handleGoBack}
-              className="arrow-icon"
-              size={50}
-            />
+          <div className="row">
+            <div className="arrow-icon-container col">
+              <IoIosArrowDropleftCircle
+                onClick={handleGoBack}
+                className="arrow-icon"
+                size={50}
+              />
+            </div>
+            <div className="delete-icon-container col d-flex justify-content-end">
+              <DeleteConfirmationDialog onDelete={handleDeleteConfirmation} />
+            </div>
           </div>
         </div>
         <div className="course-list-wrapper d-flex justify-content-center">
           <div className="course-list w-75 d-flex flex-column my-5">
-            {courseList.map((course) => (
-              <CourseItem
-                id={course.id}
-                name={course.name}
-                name_jp={course.name_jp}
-                credit={course.credit}
-                progress={course.progress}
-                removeCourse={removeCourse}
-                school={course.school}
-              />
-            ))}
-            <div className="course-item-wrapper my-2">
-              <div
-                className="add-course course-item p-3 row"
-                onClick={handleShowAddModal}
-                style={{ cursor: "pointer" }}
-              >
-                <div>+ Add Course</div>
+            <Box ref={containerRef}>
+              {courseList.map((course, index) => (
+                <Slide
+                  direction="up"
+                  in={true}
+                  container={containerRef.current}
+                  timeout={index * 200}
+                >
+                  <div>
+                    <CourseItem
+                      key={index}
+                      id={course.id}
+                      name={course.name}
+                      name_jp={course.name_jp}
+                      credit={course.credit}
+                      progress={course.progress}
+                      removeCourse={removeCourse}
+                      school={course.school}
+                    />
+                  </div>
+                </Slide>
+              ))}
+              <div className="course-item-wrapper my-2">
+                <div
+                  className="add-course course-item p-3 row"
+                  onClick={handleShowAddModal}
+                  style={{ cursor: "pointer" }}
+                >
+                  <div>+ Add Course</div>
+                </div>
               </div>
-            </div>
+            </Box>
           </div>
         </div>
       </div>
