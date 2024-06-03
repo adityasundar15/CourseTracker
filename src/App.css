@@ -265,7 +265,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 .progress-bar {
-    background-color: #000000 !important;
+    background-color: #212529 !important;
     border-radius: 9px !important;
 }
 
@@ -406,6 +406,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
     background-color: #E9E9E9;
     font-weight: 300;
     border-radius: 3px;
+    transition: all ease 200ms;
 }
 
 .completed {
@@ -415,12 +416,13 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .add-course {
     background-color: #ffffff;
     border: 1px solid #E9E9E9;
-    transition: background-color 0.3s ease;
+    transition: all ease 200ms;
 }
 
 .add-course:hover {
     background-color: #E9E9E9;
     border: 1px solid #ffffff;
+    transform: scale(1.03);
 }
 
 /* #endregion */

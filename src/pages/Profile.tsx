@@ -1,6 +1,15 @@
+import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Button, Stack } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { auth, db, signinWithGoogle } from "../firebase-config";
+import { Course } from "./Courses";
+
+interface UserInfo {
+  displayName: string;
+  email: string;
+  uid: string;
+}
 
 function Profile() {
   const navigate = useNavigate();
@@ -83,6 +92,60 @@ function Profile() {
     { value: "5th+", label: "5th Year or above" },
   ];
 
+  const [currentUser, setCurrentUser] = useState<UserInfo | null>(null);
+  const usersCollectionRef = collection(db, "users");
+  const [selectedCourses, setSelectedCourses] = useState<Course[]>([]);
+
+  useEffect(() => {
+    // Listen for authentication state changes
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        const currentUser: UserInfo = {
+          displayName: user.displayName!,
+          email: user.email!,
+          uid: user.uid,
+        };
+        setCurrentUser(currentUser);
+        // Create user document in Firestore
+        await setDoc(
+          doc(usersCollectionRef, currentUser.uid),
+          {
+            uid: currentUser.uid,
+          },
+          { merge: true }
+        );
+        await fetchSelectedCourses(currentUser.uid); // Fetch selected courses for the authenticated user
+      } else {
+        setCurrentUser(null);
+        setSelectedCourses([]); // Reset selected courses on logout
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const fetchSelectedCourses = async (uid: string) => {
+    try {
+      const userDocRef = doc(db, "users", uid);
+      const userDoc = await getDoc(userDocRef);
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        setSelectedCourses(userData?.Advance || []);
+      } else {
+        setSelectedCourses([]); // Reset if no data exists
+      }
+    } catch (error) {
+      console.error("Error fetching selected courses: ", error);
+    }
+  };
+
+  const handleSigninWithGoogle = async () => {
+    await signinWithGoogle();
+  };
+
+  const handleSignOut = async () => {
+    await auth.signOut();
+  };
+
   return (
     <div id="parent-container">
       <div className="top-right-element">
@@ -156,6 +219,20 @@ function Profile() {
                 </Button>
               </div>
             </form>
+          </div>
+          <div className="right-section">
+            {currentUser ? (
+              <div>
+                <p>Display Name: {currentUser.displayName}</p>
+                <p>Email: {currentUser.email}</p>
+                <p>UID: {currentUser.uid}</p>
+                <button onClick={handleSignOut}>Sign Out</button>
+              </div>
+            ) : (
+              <button onClick={handleSigninWithGoogle}>
+                Sign In With Google
+              </button>
+            )}
           </div>
         </Stack>
       </div>
