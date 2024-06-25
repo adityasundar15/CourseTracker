@@ -2,6 +2,9 @@ import { Button, Modal } from "react-bootstrap";
 import { useState } from "react";
 import { CourseCategory } from "../pages/Courses";
 import { v4 as uuidv4 } from "uuid";
+import placeHolderPic1 from "../assets/default_courses1.png";
+import placeHolderPic2 from "../assets/default_courses2.png";
+import placeHolderPic3 from "../assets/default_courses3.png";
 
 interface AddCategoryModalProps {
   show: boolean;
@@ -108,7 +111,7 @@ function AddCategoryModal({
                     className={`d-block modal-img ${
                       picture === 1 ? "selected" : ""
                     }`}
-                    src="/src/assets/default_courses1.png"
+                    src={placeHolderPic1}
                     alt="First slide"
                     onClick={() => setPicture(1)}
                   />
@@ -121,7 +124,7 @@ function AddCategoryModal({
                     className={`d-block modal-img ${
                       picture === 2 ? "selected" : ""
                     }`}
-                    src="/src/assets/default_courses2.png"
+                    src={placeHolderPic2}
                     alt="Second slide"
                     onClick={() => setPicture(2)}
                   />
@@ -134,7 +137,7 @@ function AddCategoryModal({
                     className={`d-block modal-img ${
                       picture === 3 ? "selected" : ""
                     }`}
-                    src="/src/assets/default_courses3.png"
+                    src={placeHolderPic3}
                     alt="Third slide"
                     onClick={() => setPicture(3)}
                   />
