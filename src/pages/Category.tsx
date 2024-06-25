@@ -1,17 +1,17 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { Course, CourseCategory } from "./Courses";
-import placeHolderPic1 from "../assets/default_courses1.png";
-import placeHolderPic2 from "../assets/default_courses2.png";
-import placeHolderPic3 from "../assets/default_courses3.png";
-import { Button, ProgressBar } from "react-bootstrap";
-import ErrorPage from "./ErrorPage";
-import { IoIosArrowDropleftCircle } from "react-icons/io";
-import AddCourseModal from "../components/AddCourseModal";
-import { TiDelete } from "react-icons/ti";
-import { GiGraduateCap } from "react-icons/gi";
-import { Box, Divider, Slide } from "@mui/material";
-import DeleteConfirmationDialog from "../components/DeleteConfirmationDialog";
+import React, { useEffect, useMemo, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Course, CourseCategory } from './Courses';
+import placeHolderPic1 from '/src/assets/default_courses1.png';
+import placeHolderPic2 from '/src/assets/default_courses2.png';
+import placeHolderPic3 from '/src/assets/default_courses3.png';
+import { Button, ProgressBar } from 'react-bootstrap';
+import ErrorPage from './ErrorPage';
+import { IoIosArrowDropleftCircle } from 'react-icons/io';
+import AddCourseModal from '../components/AddCourseModal';
+import { TiDelete } from 'react-icons/ti';
+import { GiGraduateCap } from 'react-icons/gi';
+import { Box, Divider, Slide } from '@mui/material';
+import DeleteConfirmationDialog from '../components/DeleteConfirmationDialog';
 
 const SelectedCategory: React.FC = () => {
   const navigate = useNavigate();
@@ -29,16 +29,16 @@ const SelectedCategory: React.FC = () => {
   };
 
   const handleGoBack = () => {
-    navigate("/courses");
+    navigate('/courses');
   };
 
   const navigateHome = () => {
-    navigate("/");
+    navigate('/');
   };
 
   let backgroundImage: string | undefined;
 
-  const storedCategories = localStorage.getItem("courseCategories");
+  const storedCategories = localStorage.getItem('courseCategories');
   const courseCategories: CourseCategory[] = storedCategories
     ? JSON.parse(storedCategories)
     : [];
@@ -60,7 +60,7 @@ const SelectedCategory: React.FC = () => {
   const totalCredits = selectedCategory.total;
   const completedCredits = selectedCategory.courses.reduce(
     (total, course) => total + (course.progress ? course.credit : 0),
-    0
+    0,
   );
   const overallProgress =
     totalCredits === 0
@@ -94,7 +94,7 @@ const SelectedCategory: React.FC = () => {
     if (!courseToRemove) return;
 
     const updatedCourseList = courseList.filter(
-      (course) => course.id !== courseID
+      (course) => course.id !== courseID,
     );
     setCourseList(updatedCourseList);
 
@@ -108,15 +108,15 @@ const SelectedCategory: React.FC = () => {
       return category;
     });
 
-    localStorage.setItem("courseCategories", JSON.stringify(updatedCategories));
+    localStorage.setItem('courseCategories', JSON.stringify(updatedCategories));
   };
 
   const handleDeleteConfirmation = () => {
     const updatedCategories = courseCategories.filter(
-      (category) => category.id !== id
+      (category) => category.id !== id,
     );
-    localStorage.setItem("courseCategories", JSON.stringify(updatedCategories));
-    navigate("/courses");
+    localStorage.setItem('courseCategories', JSON.stringify(updatedCategories));
+    navigate('/courses');
   };
 
   const containerRef = React.useRef<HTMLElement>(null);
@@ -140,7 +140,7 @@ const SelectedCategory: React.FC = () => {
                   <ProgressBar
                     now={Number(overallProgress)}
                     className="bar-progress"
-                    label={overallProgress + "%"}
+                    label={overallProgress + '%'}
                   />
                 </span>
                 <Divider>
@@ -190,7 +190,7 @@ const SelectedCategory: React.FC = () => {
                 <div
                   className="add-course course-item p-3 row"
                   onClick={handleShowAddModal}
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: 'pointer' }}
                 >
                   <div>+ Add Course</div>
                 </div>
@@ -229,7 +229,7 @@ const CourseItem = ({
       onMouseLeave={() => setIsHovered(false)}
     >
       <div
-        className={`course-item row p-3 ${progress === 1 ? "completed" : ""}`}
+        className={`course-item row p-3 ${progress === 1 ? 'completed' : ''}`}
       >
         <div className="course-name col-9 align-self-start">{name}</div>
         <div className="course-credit col align-self-end d-flex justify-content-end">
@@ -243,7 +243,7 @@ const CourseItem = ({
         <span
           className="position-absolute top-0 start-100 translate-middle-y"
           onClick={handleDelete}
-          style={{ cursor: "pointer" }}
+          style={{ cursor: 'pointer' }}
         >
           <TiDelete className="delete-button" size={25} />
         </span>

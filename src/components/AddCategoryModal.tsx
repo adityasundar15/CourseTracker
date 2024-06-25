@@ -1,7 +1,10 @@
-import { Button, Modal } from "react-bootstrap";
-import { useState } from "react";
-import { CourseCategory } from "../pages/Courses";
-import { v4 as uuidv4 } from "uuid";
+import { Button, Modal } from 'react-bootstrap';
+import { useState } from 'react';
+import { CourseCategory } from '../pages/Courses';
+import { v4 as uuidv4 } from 'uuid';
+import placeHolderPic1 from '/src/assets/default_courses1.png';
+import placeHolderPic2 from '/src/assets/default_courses2.png';
+import placeHolderPic3 from '/src/assets/default_courses3.png';
 
 interface AddCategoryModalProps {
   show: boolean;
@@ -14,8 +17,8 @@ function AddCategoryModal({
   handleClose,
   onAddCategory,
 }: AddCategoryModalProps) {
-  const [courseGroup, setCourseGroup] = useState("");
-  const [requiredCredits, setRequiredCredits] = useState("");
+  const [courseGroup, setCourseGroup] = useState('');
+  const [requiredCredits, setRequiredCredits] = useState('');
   const [picture, setPicture] = useState(1); // Default picture
 
   const handleAddCategory = () => {
@@ -30,19 +33,19 @@ function AddCategoryModal({
     };
 
     // Add new category to local storage
-    const existingCategoriesJSON = localStorage.getItem("courseCategories");
+    const existingCategoriesJSON = localStorage.getItem('courseCategories');
     const existingCategories: CourseCategory[] = existingCategoriesJSON
       ? JSON.parse(existingCategoriesJSON)
       : [];
     const updatedCategories = [...existingCategories, newCategory];
-    localStorage.setItem("courseCategories", JSON.stringify(updatedCategories));
+    localStorage.setItem('courseCategories', JSON.stringify(updatedCategories));
 
     // Call the onAddCategory function to pass the new category to the parent component
     onAddCategory(newCategory);
 
     // Reset input fields and close modal
-    setCourseGroup("");
-    setRequiredCredits("");
+    setCourseGroup('');
+    setRequiredCredits('');
     setPicture(1); // Reset picture to default
     handleClose();
   };
@@ -106,9 +109,9 @@ function AddCategoryModal({
                 <div className="modal-img-container">
                   <img
                     className={`d-block modal-img ${
-                      picture === 1 ? "selected" : ""
+                      picture === 1 ? 'selected' : ''
                     }`}
-                    src="/src/assets/default_courses1.png"
+                    src={placeHolderPic1}
                     alt="First slide"
                     onClick={() => setPicture(1)}
                   />
@@ -119,9 +122,9 @@ function AddCategoryModal({
                 <div className="modal-img-container">
                   <img
                     className={`d-block modal-img ${
-                      picture === 2 ? "selected" : ""
+                      picture === 2 ? 'selected' : ''
                     }`}
-                    src="/src/assets/default_courses2.png"
+                    src={placeHolderPic2}
                     alt="Second slide"
                     onClick={() => setPicture(2)}
                   />
@@ -132,9 +135,9 @@ function AddCategoryModal({
                 <div className="modal-img-container">
                   <img
                     className={`d-block modal-img ${
-                      picture === 3 ? "selected" : ""
+                      picture === 3 ? 'selected' : ''
                     }`}
-                    src="/src/assets/default_courses3.png"
+                    src={placeHolderPic3}
                     alt="Third slide"
                     onClick={() => setPicture(3)}
                   />
@@ -149,7 +152,7 @@ function AddCategoryModal({
             variant="primary"
             className="mx-auto rounded-pill btn-lg"
             onClick={handleAddCategory}
-            style={{ backgroundColor: "black", borderColor: "black" }}
+            style={{ backgroundColor: 'black', borderColor: 'black' }}
           >
             <div className="px-4 py-1">Add</div>
           </Button>
