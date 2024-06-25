@@ -76,14 +76,14 @@ function BurgerMenu() {
         Profile
       </Link>
       <hr></hr>
-      {/* <Link to="/test3" className="menu-item noselect" onClick={closeMenu}>
+      <Link to="/test3" className="menu-item noselect" onClick={closeMenu}>
         Test3
       </Link>
       <hr></hr>
       <Link to="/test4" className="menu-item noselect" onClick={closeMenu}>
         Test4
       </Link>
-      <hr></hr> */}
+      <hr></hr>
     </Menu>
   );
 }

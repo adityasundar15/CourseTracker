@@ -227,6 +227,28 @@ function Profile() {
                 <p>Email: {currentUser.email}</p>
                 <p>UID: {currentUser.uid}</p>
                 <button onClick={handleSignOut}>Sign Out</button>
+                <div
+                  style={{
+                    textAlign: "center",
+                    backgroundColor: "lightgreen",
+                    padding: "20px",
+                    margin: "10px",
+                    overflowY: "auto", // Enable scrolling if content exceeds space
+                    flex: 1, // Expand to fill available space
+                  }}
+                >
+                  <div className="query-section">
+                    <div className="query-outcome">
+                      {selectedCourses.map((course) => (
+                        <div key={course.id}>
+                          <p>Course Title: {course.name}</p>
+                          <p>Course ID: {course.id}</p>
+                          <button onClick={() => course}>Delete course</button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
             ) : (
               <button onClick={handleSigninWithGoogle}>
