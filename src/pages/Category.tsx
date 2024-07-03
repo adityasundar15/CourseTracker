@@ -4,11 +4,13 @@ import { Course, CourseCategory } from "./Courses";
 import placeHolderPic1 from "../assets/default_courses1.png";
 import placeHolderPic2 from "../assets/default_courses2.png";
 import placeHolderPic3 from "../assets/default_courses3.png";
-import { Button, ProgressBar } from "react-bootstrap";
+import placeHolderPic4 from "../assets/default_courses4.png";
+import { Button, Col, ProgressBar } from "react-bootstrap";
 import ErrorPage from "./ErrorPage";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
 import AddCourseModal from "../components/AddCourseModal";
 import { TiDelete } from "react-icons/ti";
+import { FaRegCheckCircle } from "react-icons/fa";
 import { GiGraduateCap } from "react-icons/gi";
 import { Box, Divider, Slide } from "@mui/material";
 import DeleteConfirmationDialog from "../components/DeleteConfirmationDialog";
@@ -80,6 +82,9 @@ const SelectedCategory: React.FC = () => {
       case 3:
         backgroundImage = `url(${placeHolderPic3})`;
         break;
+      case 4:
+        backgroundImage = `url(${placeHolderPic4})`;
+        break;
       default:
         backgroundImage = `url(${placeHolderPic1})`;
         break;
@@ -143,13 +148,20 @@ const SelectedCategory: React.FC = () => {
                 {selectedCategory?.name}
               </div>
               <div className="d-flex flex-column mb-3">
-                <span className="progress-container">
-                  <ProgressBar
-                    now={Number(overallProgress)}
-                    className="bar-progress"
-                    label={overallProgress + "%"}
-                  />
-                </span>
+                <div className="progress-container">
+                  <div
+                    className="progress-marker"
+                    style={{ left: `calc(${overallProgress}% - 1.5rem)` }}
+                  >
+                    <div className="marker-label">{overallProgress + "%"}</div>
+                  </div>
+                  <Col>
+                    <ProgressBar
+                      now={Number(overallProgress)}
+                      className="bar-progress row"
+                    />
+                  </Col>
+                </div>
                 <Divider>
                   {completedCredits} / {totalCredits} credits completed
                 </Divider>
@@ -241,10 +253,11 @@ const CourseItem = ({
       >
         <div className="course-name col-9 align-self-start">{name}</div>
         <div className="course-credit col align-self-end d-flex justify-content-end">
-          <div className="col-9 align-self-end d-flex justify-content-end">
+          <div className="col-9 align-self-end d-flex justify-content-end align-items-center">
+            {progress === 1 && <FaRegCheckCircle className="me-3" size={15} />}
             <GiGraduateCap size={25} />
           </div>
-          <div className="col px-4">{credit}</div>
+          <div className="col-1 px-4">{credit}</div>
         </div>
       </div>
       {isHovered && (

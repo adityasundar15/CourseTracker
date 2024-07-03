@@ -4,6 +4,11 @@ import { CourseCategory } from "../pages/Courses";
 import { v4 as uuidv4 } from "uuid";
 import { updateCourseCategoriesInFirestore } from "../firestoreUtils";
 
+import placeHolderPic1 from "../assets/default_courses1.png";
+import placeHolderPic2 from "../assets/default_courses2.png";
+import placeHolderPic3 from "../assets/default_courses3.png";
+import placeHolderPic4 from "../assets/default_courses4.png";
+
 interface AddCategoryModalProps {
   show: boolean;
   handleClose: () => void;
@@ -107,45 +112,50 @@ function AddCategoryModal({
             </div>
           </div>
           <div className="mb-1 pt-3">
-            <div className="row">
-              <div className="col-4">
-                <div className="modal-img-container">
-                  <img
-                    className={`d-block modal-img ${
-                      picture === 1 ? "selected" : ""
-                    }`}
-                    src="/src/assets/default_courses1.png"
-                    alt="First slide"
-                    onClick={() => setPicture(1)}
-                  />
-                  {picture === 1 && <div className="img-overlay">Selected</div>}
-                </div>
+            <div className="d-flex flex-wrap justify-content-between">
+              <div className="modal-img-container">
+                <img
+                  className={`d-block modal-img ${
+                    picture === 1 ? "selected" : ""
+                  }`}
+                  src={placeHolderPic1}
+                  alt="First slide"
+                  onClick={() => setPicture(1)}
+                />
+                {picture === 1 && <div className="img-overlay">Selected</div>}
               </div>
-              <div className="col-4">
-                <div className="modal-img-container">
-                  <img
-                    className={`d-block modal-img ${
-                      picture === 2 ? "selected" : ""
-                    }`}
-                    src="/src/assets/default_courses2.png"
-                    alt="Second slide"
-                    onClick={() => setPicture(2)}
-                  />
-                  {picture === 2 && <div className="img-overlay">Selected</div>}
-                </div>
+              <div className="modal-img-container">
+                <img
+                  className={`d-block modal-img ${
+                    picture === 2 ? "selected" : ""
+                  }`}
+                  src={placeHolderPic2}
+                  alt="Second slide"
+                  onClick={() => setPicture(2)}
+                />
+                {picture === 2 && <div className="img-overlay">Selected</div>}
               </div>
-              <div className="col-4">
-                <div className="modal-img-container">
-                  <img
-                    className={`d-block modal-img ${
-                      picture === 3 ? "selected" : ""
-                    }`}
-                    src="/src/assets/default_courses3.png"
-                    alt="Third slide"
-                    onClick={() => setPicture(3)}
-                  />
-                  {picture === 3 && <div className="img-overlay">Selected</div>}
-                </div>
+              <div className="modal-img-container">
+                <img
+                  className={`d-block modal-img ${
+                    picture === 3 ? "selected" : ""
+                  }`}
+                  src={placeHolderPic3}
+                  alt="Third slide"
+                  onClick={() => setPicture(3)}
+                />
+                {picture === 3 && <div className="img-overlay">Selected</div>}
+              </div>
+              <div className="modal-img-container">
+                <img
+                  className={`d-block modal-img ${
+                    picture === 4 ? "selected" : ""
+                  }`}
+                  src={placeHolderPic4}
+                  alt="Fourth slide"
+                  onClick={() => setPicture(4)}
+                />
+                {picture === 4 && <div className="img-overlay">Selected</div>}
               </div>
             </div>
           </div>

@@ -98,24 +98,8 @@ function Courses() {
         </Button>
       </div>
       <div className="w-75 h-100 d-flex flex-column mx-auto course-categories-body">
-        <Row>
+        <Row className="">
           <span className="course-page-title col">Course Categories</span>
-          <div className="view-toggle-container d-flex justify-content-end col">
-            <ButtonGroup className="view-toggle py-4">
-              <Button
-                variant={viewType === "card" ? "dark" : "light"}
-                onClick={() => setViewType("card")}
-              >
-                <PiCardsThreeFill size={25} />
-              </Button>
-              <Button
-                variant={viewType === "list" ? "dark" : "light"}
-                onClick={() => setViewType("list")}
-              >
-                <FaListUl size={25} />
-              </Button>
-            </ButtonGroup>
-          </div>
         </Row>
         <div className="progress-container">
           <div
@@ -131,10 +115,31 @@ function Courses() {
             <ProgressBar
               now={Number(overallProgress)}
               className="bar-progress row"
-              label={overallProgress + "%"}
             />
           </Col>
         </div>
+        <div className="view-toggle-container pb-2 d-flex align-items-center">
+          <ButtonGroup className="view-toggle">
+            <Button
+              className={`toggle-button ${
+                viewType === "card" ? "selected" : ""
+              }`}
+              onClick={() => setViewType("card")}
+            >
+              <PiCardsThreeFill size={25} />
+            </Button>
+            <div className="separator"></div>
+            <Button
+              className={`toggle-button ${
+                viewType === "list" ? "selected" : ""
+              }`}
+              onClick={() => setViewType("list")}
+            >
+              <FaListUl size={25} />
+            </Button>
+          </ButtonGroup>
+        </div>
+
         {viewType === "card" ? (
           <Row xs={1} md={2} lg={3}>
             {courseCategories.map((category, index) => (
@@ -192,7 +197,6 @@ function Courses() {
                     }
                     className="position-absolute w-100 h-100 p-3"
                     style={{ zIndex: 0 }}
-                    variant="gray"
                   />
                   {/* Text Content */}
                   <Card.Body className="position-relative text-black h-100">
@@ -225,43 +229,3 @@ function Courses() {
 
 export default Courses;
 export type { CourseCategory, Course };
-
-/*
-<div className="course-list">
-            {courseCategories.map((category, index) => (
-              <Card
-                key={index}
-                className="mb-3 course rounded"
-                style={{ cursor: "pointer" }}
-                onClick={() => handleCategorySelect(category)}
-              >
-                <Row noGutters>
-                  <Col md={4}>
-                    <Card.Img
-                      src={
-                        category.picture === 1
-                          ? placeHolderPic1
-                          : category.picture === 2
-                          ? placeHolderPic2
-                          : category.picture === 3
-                          ? placeHolderPic3
-                          : placeHolderPic1 // Default picture
-                      }
-                      className="card-image"
-                    />
-                  </Col>
-                  <Col md={8}>
-                    <Card.Body>
-                      <Card.Title>{category.name}</Card.Title>
-                      <Card.Text>{`${category.completed}/${category.total} completed`}</Card.Text>
-                      <ProgressBar
-                        now={category.total === 0 ? 0 : (category.completed / category.total) * 100}
-                        className="mt-2"
-                      />
-                    </Card.Body>
-                  </Col>
-                </Row>
-              </Card>
-            ))}
-          </div>
-*/
