@@ -4,6 +4,7 @@ import { Course, CourseCategory } from "../pages/Courses";
 import { database } from "../firebase-config"; // Make sure the path is correct
 import { onValue, ref } from "firebase/database";
 import { IoIosAddCircle } from "react-icons/io";
+import { updateCourseCategoriesInFirestore } from "../firestoreUtils";
 
 // FirebaseCourse interface matching the structure
 interface FirebaseCourse {
@@ -81,7 +82,7 @@ function AddCourseModal({
     setShowManualForm(true);
   };
 
-  const handleAddCourse = () => {
+  const handleAddCourse = async () => {
     const newCourse: Course = {
       id: courseKey,
       name: courseName,
@@ -104,6 +105,9 @@ function AddCourseModal({
       }
       return category;
     });
+
+    // Sync local data with Firestore
+    await updateCourseCategoriesInFirestore(updatedCategories);
 
     onAddCourse(newCourse);
 

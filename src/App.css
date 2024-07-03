@@ -261,11 +261,11 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 .bar-progress {
     height: 2rem !important;
-    border-radius: 7px !important;
+    padding: 5px;
 }
 
 .progress-bar {
-    background-color: #212529 !important;
+    background-color: #000000 !important;
     border-radius: 9px !important;
 }
 
@@ -406,7 +406,6 @@ Note: Beware of modifying this element as it can break the animations - you shou
     background-color: #E9E9E9;
     font-weight: 300;
     border-radius: 3px;
-    transition: all ease 200ms;
 }
 
 .completed {
@@ -416,13 +415,12 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .add-course {
     background-color: #ffffff;
     border: 1px solid #E9E9E9;
-    transition: all ease 200ms;
+    transition: background-color 0.3s ease;
 }
 
 .add-course:hover {
     background-color: #E9E9E9;
     border: 1px solid #ffffff;
-    transform: scale(1.03);
 }
 
 /* #endregion */
@@ -444,8 +442,11 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 .add-category-modal .btn-close {
-    align-self: self-start;
+    position: absolute;
+    top: 5%;
+    right: 5%;
 }
+
 
 .add-category-modal-header {
     justify-content: center;

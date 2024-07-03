@@ -118,12 +118,12 @@ function Courses() {
           </div>
         </Row>
         <div className="progress-container">
-          {/* <div
-              className="progress-marker"
-              style={{ left: `calc(${overallProgress}% - 1.5rem)` }}
-            >
-              <div className="marker-label">{overallProgress + "%"}</div>
-            </div> */}
+          <div
+            className="progress-marker"
+            style={{ left: `calc(${overallProgress}% - 1.5rem)` }}
+          >
+            <div className="marker-label">{overallProgress + "%"}</div>
+          </div>
           <Col>
             <span className="row d-flex justify-content-end text-body-tertiary">
               {totalCompleted} / {totalCourses} credits completed

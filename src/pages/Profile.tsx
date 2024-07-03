@@ -11,6 +11,15 @@ interface UserInfo {
   uid: string;
 }
 
+interface CourseCategory {
+  id: string;
+  name: string;
+  completed: number;
+  total: number;
+  picture: number;
+  courses: Course[];
+}
+
 function Profile() {
   const navigate = useNavigate();
 
@@ -95,11 +104,15 @@ function Profile() {
   const [currentUser, setCurrentUser] = useState<UserInfo | null>(null);
   const usersCollectionRef = collection(db, "users");
   const [selectedCourses, setSelectedCourses] = useState<Course[]>([]);
+  const [courseCategories, setCourseCategories] = useState<CourseCategory[]>(
+    []
+  );
 
   useEffect(() => {
     // Listen for authentication state changes
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
+        console.log("User logged in, fetching selected courses...");
         const currentUser: UserInfo = {
           displayName: user.displayName!,
           email: user.email!,
@@ -116,8 +129,10 @@ function Profile() {
         );
         await fetchSelectedCourses(currentUser.uid); // Fetch selected courses for the authenticated user
       } else {
+        console.log("User logged out, resetting state...");
         setCurrentUser(null);
         setSelectedCourses([]); // Reset selected courses on logout
+        setCourseCategories([]); // Reset course categories on logout
       }
     });
     return () => unsubscribe();
@@ -125,13 +140,32 @@ function Profile() {
 
   const fetchSelectedCourses = async (uid: string) => {
     try {
+      console.log("Fetching selected courses for user:", uid);
       const userDocRef = doc(db, "users", uid);
       const userDoc = await getDoc(userDocRef);
       if (userDoc.exists()) {
         const userData = userDoc.data();
+        console.log("User data from API:", userData); // Log raw user data
         setSelectedCourses(userData?.Advance || []);
+
+        // Replace local storage with API data
+        const apiCategories = userData?.Advance || [];
+        localStorage.setItem("courseCategories", JSON.stringify(apiCategories));
+        setCourseCategories(apiCategories);
       } else {
         setSelectedCourses([]); // Reset if no data exists
+        localStorage.removeItem("courseCategories"); // Clear local storage if no data exists in API
+        setCourseCategories([]);
+      }
+
+      const storedCategories = localStorage.getItem("courseCategories");
+      if (storedCategories) {
+        console.log(
+          "Updated stored categories from local storage:",
+          JSON.parse(storedCategories)
+        );
+      } else {
+        console.log("No stored categories in local storage.");
       }
     } catch (error) {
       console.error("Error fetching selected courses: ", error);
@@ -220,33 +254,30 @@ function Profile() {
               </div>
             </form>
           </div>
-          <div className="right-section">
+          <div className="user-section">
             {currentUser ? (
               <div>
                 <p>Display Name: {currentUser.displayName}</p>
                 <p>Email: {currentUser.email}</p>
                 <p>UID: {currentUser.uid}</p>
                 <button onClick={handleSignOut}>Sign Out</button>
-                <div
-                  style={{
-                    textAlign: "center",
-                    backgroundColor: "lightgreen",
-                    padding: "20px",
-                    margin: "10px",
-                    overflowY: "auto", // Enable scrolling if content exceeds space
-                    flex: 1, // Expand to fill available space
-                  }}
-                >
-                  <div className="query-section">
-                    <div className="query-outcome">
-                      {selectedCourses.map((course) => (
-                        <div key={course.id}>
-                          <p>Course Title: {course.name}</p>
-                          <p>Course ID: {course.id}</p>
-                          <button onClick={() => course}>Delete course</button>
-                        </div>
-                      ))}
-                    </div>
+                <div className="query-section">
+                  <div className="query-outcome">
+                    <h2>Selected Courses</h2>
+                    {selectedCourses.map((course) => (
+                      <div key={course.id}>
+                        <p>Course Title: {course.name}</p>
+                        <p>Course ID: {course.id}</p>
+                      </div>
+                    ))}
+                    <h2>Course Categories</h2>
+                    {courseCategories.map((category) => (
+                      <div key={category.id}>
+                        <p>Category Name: {category.name}</p>
+                        <p>Completed: {category.completed}</p>
+                        <p>Total: {category.total}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -261,5 +292,4 @@ function Profile() {
     </div>
   );
 }
-
 export default Profile;

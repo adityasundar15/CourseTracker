@@ -12,6 +12,7 @@ import { TiDelete } from "react-icons/ti";
 import { GiGraduateCap } from "react-icons/gi";
 import { Box, Divider, Slide } from "@mui/material";
 import DeleteConfirmationDialog from "../components/DeleteConfirmationDialog";
+import { updateCourseCategoriesInFirestore } from "../firestoreUtils";
 
 const SelectedCategory: React.FC = () => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const SelectedCategory: React.FC = () => {
 
   const [showAddModal, setShowAddModal] = useState(false);
   const [courseList, setCourseList] = useState<Course[]>([]);
+  const containerRef = React.useRef<HTMLElement>(null);
 
   const handleShowAddModal = () => {
     setShowAddModal(true);
@@ -88,7 +90,7 @@ const SelectedCategory: React.FC = () => {
     setCourseList([...courseList, newCourse]);
   };
 
-  const removeCourse = (courseID: string) => {
+  const removeCourse = async (courseID: string) => {
     const courseToRemove = courseList.find((course) => course.id === courseID);
 
     if (!courseToRemove) return;
@@ -108,18 +110,23 @@ const SelectedCategory: React.FC = () => {
       return category;
     });
 
+    // Sync local data with Firestore
+    await updateCourseCategoriesInFirestore(updatedCategories);
+
     localStorage.setItem("courseCategories", JSON.stringify(updatedCategories));
   };
 
-  const handleDeleteConfirmation = () => {
+  const handleDeleteConfirmation = async () => {
     const updatedCategories = courseCategories.filter(
       (category) => category.id !== id
     );
+
+    // Sync local data with Firestore
+    await updateCourseCategoriesInFirestore(updatedCategories);
+
     localStorage.setItem("courseCategories", JSON.stringify(updatedCategories));
     navigate("/courses");
   };
-
-  const containerRef = React.useRef<HTMLElement>(null);
 
   return (
     <div id="parent-container">
@@ -171,6 +178,7 @@ const SelectedCategory: React.FC = () => {
                   in={true}
                   container={containerRef.current}
                   timeout={index * 200}
+                  key={index}
                 >
                   <div>
                     <CourseItem

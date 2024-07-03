@@ -2,6 +2,7 @@ import { Button, Modal } from "react-bootstrap";
 import { useState } from "react";
 import { CourseCategory } from "../pages/Courses";
 import { v4 as uuidv4 } from "uuid";
+import { updateCourseCategoriesInFirestore } from "../firestoreUtils";
 
 interface AddCategoryModalProps {
   show: boolean;
@@ -18,7 +19,7 @@ function AddCategoryModal({
   const [requiredCredits, setRequiredCredits] = useState("");
   const [picture, setPicture] = useState(1); // Default picture
 
-  const handleAddCategory = () => {
+  const handleAddCategory = async () => {
     // Create new category object
     const newCategory: CourseCategory = {
       id: uuidv4(),
@@ -35,10 +36,15 @@ function AddCategoryModal({
       ? JSON.parse(existingCategoriesJSON)
       : [];
     const updatedCategories = [...existingCategories, newCategory];
-    localStorage.setItem("courseCategories", JSON.stringify(updatedCategories));
 
     // Call the onAddCategory function to pass the new category to the parent component
     onAddCategory(newCategory);
+
+    // Sync local data with Firestore
+    await updateCourseCategoriesInFirestore(updatedCategories);
+
+    localStorage.setItem("courseCategories", JSON.stringify(updatedCategories));
+    console.log("Category added to local storage");
 
     // Reset input fields and close modal
     setCourseGroup("");
