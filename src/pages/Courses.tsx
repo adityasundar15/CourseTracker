@@ -101,24 +101,24 @@ function Courses() {
         <Row className="">
           <span className="course-page-title col">Course Categories</span>
         </Row>
-        <div className="progress-container">
+        <div className="progress-container mt-2">
           <div
             className="progress-marker"
-            style={{ left: `calc(${overallProgress}% - 1.5rem)` }}
+            style={{ left: `calc(${overallProgress}% - 1rem)` }}
           >
             <div className="marker-label">{overallProgress + "%"}</div>
           </div>
           <Col>
-            <span className="row d-flex justify-content-end text-body-tertiary">
-              {totalCompleted} / {totalCourses} credits completed
-            </span>
             <ProgressBar
               now={Number(overallProgress)}
               className="bar-progress row"
             />
           </Col>
         </div>
-        <div className="view-toggle-container pb-2 d-flex align-items-center">
+        <span className="row d-flex justify-content-end text-body-tertiary mb-2">
+          {totalCompleted} / {totalCourses} credits completed
+        </span>
+        <div className="view-toggle-container pb-3 d-flex align-items-center">
           <ButtonGroup className="view-toggle">
             <Button
               className={`toggle-button ${

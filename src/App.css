@@ -251,11 +251,10 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .course-page-title {
     font-size: 3.43rem;
     font-family: 'Outfit';
-    padding: 0% 0% 1rem;
+    padding: 0% 0% 2rem;
 }
 
 .progress-container {
-    padding: 0 0 1rem;
     position: relative;
 }
 
@@ -264,9 +263,12 @@ Note: Beware of modifying this element as it can break the animations - you shou
     border-radius: 13px !important;
 }
 
+
+
 .progress-bar {
     background-color: #000000 !important;
     border-radius: 13px !important;
+    padding: 0 !important;
 }
 
 .card-progress {
@@ -281,8 +283,8 @@ Note: Beware of modifying this element as it can break the animations - you shou
     height: 2rem; 
     border: 0.5rem solid #000000; 
     background-color: #E4E4E4;
-    border-radius: 50%; 
-    bottom: calc(0.75rem);
+    border-radius: 50%;
+    bottom: calc(50% - 1rem); /* Center vertically */
 }
 
 .marker-label {

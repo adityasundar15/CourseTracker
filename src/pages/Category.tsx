@@ -148,10 +148,10 @@ const SelectedCategory: React.FC = () => {
                 {selectedCategory?.name}
               </div>
               <div className="d-flex flex-column mb-3">
-                <div className="progress-container">
+                <div className="progress-container category-course-progress-container mt-2">
                   <div
                     className="progress-marker"
-                    style={{ left: `calc(${overallProgress}% - 1.5rem)` }}
+                    style={{ left: `calc(${overallProgress}% - 1rem)` }}
                   >
                     <div className="marker-label">{overallProgress + "%"}</div>
                   </div>
@@ -162,9 +162,11 @@ const SelectedCategory: React.FC = () => {
                     />
                   </Col>
                 </div>
-                <Divider>
-                  {completedCredits} / {totalCredits} credits completed
-                </Divider>
+                <div className="pt-4">
+                  <Divider>
+                    {completedCredits} / {totalCredits} credits completed
+                  </Divider>
+                </div>
               </div>
             </div>
           </div>
