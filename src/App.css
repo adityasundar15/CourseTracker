@@ -50,7 +50,7 @@ html, body, #root, #outer-container, #page-wrap, #parent-container, #profile-pag
 }  
 
 .home-background {
-    background-image: url("/src/assets/background.png");
+    /* background-image: url("/src/assets/background.png"); */
     background-size: auto;
     background-position: center; 
 }
@@ -251,26 +251,29 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .course-page-title {
     font-size: 3.43rem;
     font-family: 'Outfit';
-    padding: 0% 0% 1rem;
+    padding: 0% 0% 2rem;
 }
 
 .progress-container {
-    padding: 0 0 2rem;
     position: relative;
 }
 
 .bar-progress {
-    height: 2rem !important;
-    border-radius: 7px !important;
+    height: 1.5rem !important;
+    border-radius: 13px !important;
 }
+
+
 
 .progress-bar {
     background-color: #000000 !important;
-    border-radius: 9px !important;
+    border-radius: 13px !important;
+    padding: 0 !important;
 }
 
 .card-progress {
     background-color: #f7fefe !important;
+    border-radius: 13px !important;
 }
 
 .progress-marker {
@@ -280,8 +283,8 @@ Note: Beware of modifying this element as it can break the animations - you shou
     height: 2rem; 
     border: 0.5rem solid #000000; 
     background-color: #E4E4E4;
-    border-radius: 50%; 
-    bottom: calc(1.75rem);
+    border-radius: 50%;
+    bottom: calc(50% - 1rem); /* Center vertically */
 }
 
 .marker-label {
@@ -304,33 +307,72 @@ Note: Beware of modifying this element as it can break the animations - you shou
     width: 100%;
     border-radius: 0 !important;
     border: 0 !important;
-    background-color: #E5E5E5 !important;
+    background-color: #F4F4F4 !important;
 }
 
-.card-image {
+.category-list .card-image {
     border-radius: 0 !important;
 }
 
-.card-body {
+.category-list .card-body {
     font-family: 'Outfit';
 }
 
+.category-list .card-title {
+    font-weight: 400 !important;
+    margin-bottom: 4px;
+}
+
+.category-list .card-text {
+    font-weight: 300;
+    color: #929292;
+}
+
+.category-list .card-progress {
+    height: 1rem !important;
+}
+
+.category-list .progress-bar {
+    height: 1rem;
+    background-color: #4A6478 !important;
+}
+
+.view-toggle-container {
+    display: flex;
+    align-items: center;
+}
+  
+.view-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.toggle-button {
+background-color: #ffffff00 !important;
+border: none !important;
+color: #A6A6A6 !important;
+}
+
+.toggle-button.selected {
+color: #4A6478 !important;
+}
+.separator {
+width: 1px;
+height: 40px;
+background-color: #dee2e6;
+margin: 0 5px;
+}
+  
+
 /* List view */
 
-.bg-gray {
-    background-color: #c8c8c7!important;
-  }
-
-.categorydelete {
-    color: black;
+.category-list-view .progress {
+    border-radius: 25px !important;
 }
 
-.categorydelete:hover {
-    opacity: 1.0;
-}
-
-.category-title-listview {
-    font-size: 1.3rem;
+.category-list-view .progress-bar {
+    background-color: white !important;
+    border-radius: 20px !important;
 }
 
 /* #endregion Courses Page */
@@ -372,6 +414,32 @@ Note: Beware of modifying this element as it can break the animations - you shou
     padding: 15% 0% 2rem;
 }
 
+.add-course-modal .modal-sub-headers{
+    font-size: 1.2rem !important;
+}
+
+.add-course-modal .modal-info {
+    font-size: 0.8rem;
+}
+
+.add-course-modal .add-course-input {
+    border-color: #E1E1E1;
+    padding-top: 9px;
+    padding-bottom: 9px;
+}
+
+.add-course-btn {
+    border-color: #E1E1E1 !important;
+    background-color: white !important;
+    color: #767676 !important;
+    border-radius: 10px !important;
+}
+
+.add-course-selected {
+    background-color: #767676 !important;
+    color: white !important;
+}
+
 .arrow-icon-container {
     position: relative;
     bottom: 30px;
@@ -403,17 +471,17 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 .course-item {
-    background-color: #E9E9E9;
+    background-color: #D6D6D6;
     font-weight: 300;
-    border-radius: 3px;
+    border-radius: 10px;
 }
 
 .completed {
-    background-color: #B1B1B1;
+    background-color: #F4F4F4;
 }
 
 .add-course {
-    background-color: #ffffff;
+    background-color: #f6f6f6;
     border: 1px solid #E9E9E9;
     transition: background-color 0.3s ease;
 }
@@ -421,6 +489,16 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .add-course:hover {
     background-color: #E9E9E9;
     border: 1px solid #ffffff;
+}
+
+.search-courses {
+    background-color: #ECEBEB !important;
+    border: none !important;
+    height: 3rem;
+}
+
+.search-courses::placeholder {
+    color: #767676 !important;
 }
 
 /* #endregion */
@@ -442,8 +520,11 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 .add-category-modal .btn-close {
-    align-self: self-start;
+    position: absolute;
+    top: 5%;
+    right: 5%;
 }
+
 
 .add-category-modal-header {
     justify-content: center;
@@ -470,15 +551,16 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 .modal-img-container {
-    position: relative;
-}
-
-.modal-img {
+    flex: 1 1 22%; /* Adjust this value to control the size of each image container */
+    margin: 0.5%; /* Add some margin to create space between images */
+    position: relative; /* For positioning the overlay */
+  }
+  
+  .modal-img {
     width: 100%;
-    height: 8rem;
+    height: 6rem;
     object-fit: cover;
-    background-color: #000000;
-}
+  }
 
 .img-overlay {
     position: absolute;
@@ -597,6 +679,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .card:hover {
     transform: scale(1.03);
   }
+  
   
 /* #endregion */
 

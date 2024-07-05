@@ -4,14 +4,17 @@ import { Course, CourseCategory } from "./Courses";
 import placeHolderPic1 from "../assets/default_courses1.png";
 import placeHolderPic2 from "../assets/default_courses2.png";
 import placeHolderPic3 from "../assets/default_courses3.png";
-import { Button, ProgressBar } from "react-bootstrap";
+import placeHolderPic4 from "../assets/default_courses4.png";
+import { Button, Col, ProgressBar } from "react-bootstrap";
 import ErrorPage from "./ErrorPage";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
 import AddCourseModal from "../components/AddCourseModal";
 import { TiDelete } from "react-icons/ti";
+import { FaRegCheckCircle } from "react-icons/fa";
 import { GiGraduateCap } from "react-icons/gi";
 import { Box, Divider, Slide } from "@mui/material";
 import DeleteConfirmationDialog from "../components/DeleteConfirmationDialog";
+import { updateCourseCategoriesInFirestore } from "../firestoreUtils";
 
 const SelectedCategory: React.FC = () => {
   const navigate = useNavigate();
@@ -19,6 +22,7 @@ const SelectedCategory: React.FC = () => {
 
   const [showAddModal, setShowAddModal] = useState(false);
   const [courseList, setCourseList] = useState<Course[]>([]);
+  const containerRef = React.useRef<HTMLElement>(null);
 
   const handleShowAddModal = () => {
     setShowAddModal(true);
@@ -78,6 +82,9 @@ const SelectedCategory: React.FC = () => {
       case 3:
         backgroundImage = `url(${placeHolderPic3})`;
         break;
+      case 4:
+        backgroundImage = `url(${placeHolderPic4})`;
+        break;
       default:
         backgroundImage = `url(${placeHolderPic1})`;
         break;
@@ -88,7 +95,7 @@ const SelectedCategory: React.FC = () => {
     setCourseList([...courseList, newCourse]);
   };
 
-  const removeCourse = (courseID: string) => {
+  const removeCourse = async (courseID: string) => {
     const courseToRemove = courseList.find((course) => course.id === courseID);
 
     if (!courseToRemove) return;
@@ -108,18 +115,23 @@ const SelectedCategory: React.FC = () => {
       return category;
     });
 
+    // Sync local data with Firestore
+    await updateCourseCategoriesInFirestore(updatedCategories);
+
     localStorage.setItem("courseCategories", JSON.stringify(updatedCategories));
   };
 
-  const handleDeleteConfirmation = () => {
+  const handleDeleteConfirmation = async () => {
     const updatedCategories = courseCategories.filter(
       (category) => category.id !== id
     );
+
+    // Sync local data with Firestore
+    await updateCourseCategoriesInFirestore(updatedCategories);
+
     localStorage.setItem("courseCategories", JSON.stringify(updatedCategories));
     navigate("/courses");
   };
-
-  const containerRef = React.useRef<HTMLElement>(null);
 
   return (
     <div id="parent-container">
@@ -136,16 +148,25 @@ const SelectedCategory: React.FC = () => {
                 {selectedCategory?.name}
               </div>
               <div className="d-flex flex-column mb-3">
-                <span className="progress-container">
-                  <ProgressBar
-                    now={Number(overallProgress)}
-                    className="bar-progress"
-                    label={overallProgress + "%"}
-                  />
-                </span>
-                <Divider>
-                  {completedCredits} / {totalCredits} credits completed
-                </Divider>
+                <div className="progress-container category-course-progress-container mt-2">
+                  <div
+                    className="progress-marker"
+                    style={{ left: `calc(${overallProgress}% - 1rem)` }}
+                  >
+                    <div className="marker-label">{overallProgress + "%"}</div>
+                  </div>
+                  <Col>
+                    <ProgressBar
+                      now={Number(overallProgress)}
+                      className="bar-progress row"
+                    />
+                  </Col>
+                </div>
+                <div className="pt-4">
+                  <Divider>
+                    {completedCredits} / {totalCredits} credits completed
+                  </Divider>
+                </div>
               </div>
             </div>
           </div>
@@ -171,6 +192,7 @@ const SelectedCategory: React.FC = () => {
                   in={true}
                   container={containerRef.current}
                   timeout={index * 200}
+                  key={index}
                 >
                   <div>
                     <CourseItem
@@ -233,10 +255,11 @@ const CourseItem = ({
       >
         <div className="course-name col-9 align-self-start">{name}</div>
         <div className="course-credit col align-self-end d-flex justify-content-end">
-          <div className="col-9 align-self-end d-flex justify-content-end">
+          <div className="col-9 align-self-end d-flex justify-content-end align-items-center">
+            {progress === 1 && <FaRegCheckCircle className="me-3" size={15} />}
             <GiGraduateCap size={25} />
           </div>
-          <div className="col px-4">{credit}</div>
+          <div className="col-1 px-4">{credit}</div>
         </div>
       </div>
       {isHovered && (

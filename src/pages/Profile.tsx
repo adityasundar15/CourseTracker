@@ -1,6 +1,24 @@
+import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Button, Stack } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { auth, db, signinWithGoogle } from "../firebase-config";
+import { Course } from "./Courses";
+
+interface UserInfo {
+  displayName: string;
+  email: string;
+  uid: string;
+}
+
+interface CourseCategory {
+  id: string;
+  name: string;
+  completed: number;
+  total: number;
+  picture: number;
+  courses: Course[];
+}
 
 function Profile() {
   const navigate = useNavigate();
@@ -83,6 +101,85 @@ function Profile() {
     { value: "5th+", label: "5th Year or above" },
   ];
 
+  const [currentUser, setCurrentUser] = useState<UserInfo | null>(null);
+  const usersCollectionRef = collection(db, "users");
+  const [selectedCourses, setSelectedCourses] = useState<Course[]>([]);
+  const [courseCategories, setCourseCategories] = useState<CourseCategory[]>(
+    []
+  );
+
+  useEffect(() => {
+    // Listen for authentication state changes
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        console.log("User logged in, fetching selected courses...");
+        const currentUser: UserInfo = {
+          displayName: user.displayName!,
+          email: user.email!,
+          uid: user.uid,
+        };
+        setCurrentUser(currentUser);
+        // Create user document in Firestore
+        await setDoc(
+          doc(usersCollectionRef, currentUser.uid),
+          {
+            uid: currentUser.uid,
+          },
+          { merge: true }
+        );
+        await fetchSelectedCourses(currentUser.uid); // Fetch selected courses for the authenticated user
+      } else {
+        console.log("User logged out, resetting state...");
+        setCurrentUser(null);
+        setSelectedCourses([]); // Reset selected courses on logout
+        setCourseCategories([]); // Reset course categories on logout
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const fetchSelectedCourses = async (uid: string) => {
+    try {
+      console.log("Fetching selected courses for user:", uid);
+      const userDocRef = doc(db, "users", uid);
+      const userDoc = await getDoc(userDocRef);
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        console.log("User data from API:", userData); // Log raw user data
+        setSelectedCourses(userData?.Advance || []);
+
+        // Replace local storage with API data
+        const apiCategories = userData?.Advance || [];
+        localStorage.setItem("courseCategories", JSON.stringify(apiCategories));
+        setCourseCategories(apiCategories);
+      } else {
+        setSelectedCourses([]); // Reset if no data exists
+        localStorage.removeItem("courseCategories"); // Clear local storage if no data exists in API
+        setCourseCategories([]);
+      }
+
+      const storedCategories = localStorage.getItem("courseCategories");
+      if (storedCategories) {
+        console.log(
+          "Updated stored categories from local storage:",
+          JSON.parse(storedCategories)
+        );
+      } else {
+        console.log("No stored categories in local storage.");
+      }
+    } catch (error) {
+      console.error("Error fetching selected courses: ", error);
+    }
+  };
+
+  const handleSigninWithGoogle = async () => {
+    await signinWithGoogle();
+  };
+
+  const handleSignOut = async () => {
+    await auth.signOut();
+  };
+
   return (
     <div id="parent-container">
       <div className="top-right-element">
@@ -157,10 +254,42 @@ function Profile() {
               </div>
             </form>
           </div>
+          <div className="user-section">
+            {currentUser ? (
+              <div>
+                <p>Display Name: {currentUser.displayName}</p>
+                <p>Email: {currentUser.email}</p>
+                <p>UID: {currentUser.uid}</p>
+                <button onClick={handleSignOut}>Sign Out</button>
+                <div className="query-section">
+                  <div className="query-outcome">
+                    <h2>Selected Courses</h2>
+                    {selectedCourses.map((course) => (
+                      <div key={course.id}>
+                        <p>Course Title: {course.name}</p>
+                        <p>Course ID: {course.id}</p>
+                      </div>
+                    ))}
+                    <h2>Course Categories</h2>
+                    {courseCategories.map((category) => (
+                      <div key={category.id}>
+                        <p>Category Name: {category.name}</p>
+                        <p>Completed: {category.completed}</p>
+                        <p>Total: {category.total}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <button onClick={handleSigninWithGoogle}>
+                Sign In With Google
+              </button>
+            )}
+          </div>
         </Stack>
       </div>
     </div>
   );
 }
-
 export default Profile;

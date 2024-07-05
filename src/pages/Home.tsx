@@ -1,5 +1,6 @@
 import { Button, Stack } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import MouseTrail from "../components/MouseTrail";
 
 function Home() {
   const navigate = useNavigate();
@@ -10,10 +11,11 @@ function Home() {
 
   return (
     <div id="parent-container" className="home-background">
+      <MouseTrail /> {/* Add the MouseTrail component */}
       <div className="top-right-element">
         <Button
           className="profile-button"
-          variant="outline-light"
+          variant="outline-dark"
           onClick={navigateProfile}
           size="lg"
         >
@@ -21,7 +23,7 @@ function Home() {
         </Button>
       </div>
       <Stack className="d-flex justify-content-center">
-        <div className="d-flex justify-content-center align-items-center text-white">
+        <div className="d-flex justify-content-center align-items-center">
           <span className="app-title left-title text-center noselect">
             Credit
           </span>

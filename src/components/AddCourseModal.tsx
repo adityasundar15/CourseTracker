@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import { Course, CourseCategory } from "../pages/Courses";
 import { database } from "../firebase-config"; // Make sure the path is correct
 import { onValue, ref } from "firebase/database";
-import { IoIosAddCircle } from "react-icons/io";
+import { IoIosAddCircleOutline } from "react-icons/io";
+import { updateCourseCategoriesInFirestore } from "../firestoreUtils";
 
 // FirebaseCourse interface matching the structure
 interface FirebaseCourse {
@@ -81,7 +82,7 @@ function AddCourseModal({
     setShowManualForm(true);
   };
 
-  const handleAddCourse = () => {
+  const handleAddCourse = async () => {
     const newCourse: Course = {
       id: courseKey,
       name: courseName,
@@ -105,6 +106,9 @@ function AddCourseModal({
       return category;
     });
 
+    // Sync local data with Firestore
+    await updateCourseCategoriesInFirestore(updatedCategories);
+
     onAddCourse(newCourse);
 
     localStorage.setItem("courseCategories", JSON.stringify(updatedCategories));
@@ -125,42 +129,23 @@ function AddCourseModal({
     <Modal
       show={show}
       onHide={handleCloseModal}
-      dialogClassName="add-category-modal"
+      dialogClassName="add-category-modal add-course-modal"
     >
       <div className="add-category-modal-content">
         <Modal.Header className="add-category-modal-header" closeButton>
           <div className="col mt-3 mb-3">
             <Modal.Title className="text-center">Add Course</Modal.Title>
-            <div className="modal-subtitle text-secondary text-center center pt-3">
-              Enter your course details
-            </div>
           </div>
         </Modal.Header>
         <Modal.Body>
           {showManualForm ? (
             <div>
               <div className="mb-3">
-                <span className="modal-sub-headers">Course Key</span>
-                <div className="mt-2">
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={courseKey}
-                    onChange={(e) => setCourseKey(e.target.value)}
-                    placeholder="Enter Course Key"
-                    id="courseKeyInput"
-                  />
-                </div>
-                <div className="modal-info mt-1 text-secondary">
-                  e.g.) 26M0013701
-                </div>
-              </div>
-              <div className="mb-3">
                 <span className="modal-sub-headers">Course Name</span>
                 <div className="mt-2">
                   <input
                     type="text"
-                    className="form-control"
+                    className="add-course-input form-control"
                     value={courseName}
                     onChange={(e) => setCourseName(e.target.value)}
                     placeholder="Enter Course Name"
@@ -171,6 +156,22 @@ function AddCourseModal({
                   e.g.) Fundamentals of Visual Expression and Design
                 </div>
               </div>
+              <div className="mb-3">
+                <span className="modal-sub-headers">Course Key</span>
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    className="add-course-input form-control"
+                    value={courseKey}
+                    onChange={(e) => setCourseKey(e.target.value)}
+                    placeholder="Enter Course Key"
+                    id="courseKeyInput"
+                  />
+                </div>
+                <div className="modal-info mt-1 text-secondary">
+                  e.g.) 26M0013701
+                </div>
+              </div>
               <div className="mb-3 row">
                 <div className="col">
                   <span className="modal-sub-headers">Credits</span>
@@ -179,7 +180,7 @@ function AddCourseModal({
                       <div className="col-4">
                         <input
                           type="number"
-                          className="form-control"
+                          className="add-course-input form-control"
                           value={requiredCredits}
                           onChange={(e) => setRequiredCredits(e.target.value)}
                           min="1"
@@ -195,26 +196,35 @@ function AddCourseModal({
                     e.g.) 2 credits
                   </div>
                 </div>
-                <div className="col align-self-center justify-content-end d-flex">
-                  <Button
-                    variant={courseCompleted ? "dark" : "outline-dark"}
-                    className="mx-auto btn-sm"
-                    onClick={() => setCourseCompleted(!courseCompleted)}
-                  >
-                    <div className="px-4 py-1">
-                      {courseCompleted ? "Complete" : "Incomplete"}
-                    </div>
-                  </Button>
-                </div>
+              </div>
+              <div className="col align-self-center justify-content-between d-flex">
+                <Button
+                  className={`btn-sm add-course-btn ${
+                    courseCompleted ? "add-course-selected" : ""
+                  }`}
+                  style={{ width: "45%" }}
+                  onClick={() => setCourseCompleted(true)}
+                >
+                  <div className="py-1">Complete</div>
+                </Button>
+                <Button
+                  className={`btn-sm add-course-btn ${
+                    !courseCompleted ? "add-course-selected" : ""
+                  }`}
+                  style={{ width: "45%" }}
+                  onClick={() => setCourseCompleted(false)}
+                >
+                  <div className="py-1">Incomplete</div>
+                </Button>
               </div>
             </div>
           ) : (
             <div>
-              <div className="px-1">
+              <div className="search-courses-container px-1">
                 <input
                   type="text"
-                  placeholder="Search for courses"
-                  className="form-control mb-3"
+                  placeholder="Enter course name / key"
+                  className="form-control mb-3 search-courses"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
@@ -232,10 +242,10 @@ function AddCourseModal({
                       <div className="query-item-id">{course.a}</div>
                     </div>
                     <div className="col align-self-center d-flex justify-content-end">
-                      <IoIosAddCircle
+                      <IoIosAddCircleOutline
                         onClick={() => handleAddManually(course)}
                         className="add-query-button"
-                        size={35}
+                        size={30}
                       />
                     </div>
                   </div>
@@ -243,10 +253,12 @@ function AddCourseModal({
               </div>
               <Button
                 onClick={() => handleAddManually()}
-                className="w-100 mt-3"
+                className="mx-auto rounded-pill mt-4 align-items-center d-flex"
                 variant="dark"
               >
-                Can't find your course?
+                <span className="px-2 py-1 fw-light">
+                  Can't find your course?
+                </span>
               </Button>
             </div>
           )}
@@ -259,7 +271,7 @@ function AddCourseModal({
               onClick={handleAddCourse}
               style={{ backgroundColor: "black", borderColor: "black" }}
             >
-              <div className="px-4 py-1">Add</div>
+              <div className="px-5">Add</div>
             </Button>
           )}
         </Modal.Footer>
