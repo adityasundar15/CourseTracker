@@ -50,8 +50,8 @@ html, body, #root, #outer-container, #page-wrap, #parent-container, #profile-pag
 }  
 
 .home-background {
-    /* background-image: url("/src/assets/background.png"); */
-    background-size: auto;
+    background-image: url("/src/assets/background_new.png");
+    background-size: contain;
     background-position: center; 
 }
 

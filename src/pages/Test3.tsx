@@ -136,12 +136,12 @@ function Test3() {
       const userDocRef = doc(db, 'users', currentUser?.uid);
       const userDocSnap = await getDoc(userDocRef);
       const userData = userDocSnap.data();
-      const currentSelectedCourses = userData?.Advance || [];
+      const currentSelectedCourses = userData?.Catagories || [];
 
       if (!currentSelectedCourses.find((c: Course) => c.id === newCourse.id)) {
         // Update Firestore with the new course
         await updateDoc(userDocRef, {
-          Advance: [...currentSelectedCourses, newCourse],
+          Catagories: [...currentSelectedCourses, newCourse],
         });
 
         // Update the state to reflect the new selected course

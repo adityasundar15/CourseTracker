@@ -9,7 +9,11 @@ export const updateCourseCategoriesInFirestore = async (
   if (currentUser) {
     try {
       const userDocRef = doc(db, "users", currentUser.uid);
-      await setDoc(userDocRef, { Advance: updatedCategories }, { merge: true });
+      await setDoc(
+        userDocRef,
+        { Categories: updatedCategories },
+        { merge: true }
+      );
       console.log("Categories updated in Firestore.");
     } catch (error) {
       console.error("Error updating categories in Firestore:", error);

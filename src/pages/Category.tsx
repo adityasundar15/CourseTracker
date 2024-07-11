@@ -151,7 +151,11 @@ const SelectedCategory: React.FC = () => {
                 <div className="progress-container category-course-progress-container mt-2">
                   <div
                     className="progress-marker"
-                    style={{ left: `calc(${overallProgress}% - 1rem)` }}
+                    style={{
+                      left: `calc(${
+                        Number(overallProgress) > 100 ? 100 : overallProgress
+                      }% - 1.5rem)`,
+                    }}
                   >
                     <div className="marker-label">{overallProgress + "%"}</div>
                   </div>

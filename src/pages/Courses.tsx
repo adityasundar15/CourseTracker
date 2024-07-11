@@ -104,7 +104,11 @@ function Courses() {
         <div className="progress-container mt-2">
           <div
             className="progress-marker"
-            style={{ left: `calc(${overallProgress}% - 1rem)` }}
+            style={{
+              left: `calc(${
+                Number(overallProgress) > 100 ? 100 : overallProgress
+              }% - 1rem)`,
+            }}
           >
             <div className="marker-label">{overallProgress + "%"}</div>
           </div>
