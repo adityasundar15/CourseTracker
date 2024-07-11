@@ -14,7 +14,7 @@ function Home() {
       <div className="top-right-element">
         <Button
           className="profile-button"
-          variant="outline-dark"
+          variant="outline-light"
           onClick={navigateProfile}
           size="lg"
         >
@@ -23,12 +23,14 @@ function Home() {
       </div>
       <Stack className="d-flex justify-content-center">
         <div className="d-flex justify-content-center align-items-center">
-          <span className="app-title left-title text-center noselect">
+          <span className="app-title left-title text-center noselect text-light">
             Credit
           </span>
-          <div className="text-center d-flex flex-column ">
-            <span className="app-title right-title noselect">Ledger</span>
-            <span className="app-desc noselect fade-slide-in">
+          <div className="text-center d-flex flex-column">
+            <span className="app-title right-title noselect text-light">
+              Ledger
+            </span>
+            <span className="app-desc noselect fade-slide-in text-light">
               Track your progress with us
             </span>
           </div>
