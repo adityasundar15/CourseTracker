@@ -133,6 +133,7 @@ function Profile() {
         setCurrentUser(null);
         setSelectedCourses([]); // Reset selected courses on logout
         setCourseCategories([]); // Reset course categories on logout
+        navigate("/login");
       }
     });
     return () => unsubscribe();
