@@ -36,6 +36,7 @@ function Profile() {
   const [grade, setGrade] = useState("");
   const [userDataExists, setUserDataExists] = useState(false);
   const [greetingName, setGreetingName] = useState("");
+  const [signIn, setSignIn] = useState(false);
 
   useEffect(() => {
     // Check if userData exists in local storage
@@ -52,7 +53,7 @@ function Profile() {
   }, []);
 
   const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, value } = event.target;
     switch (name) {
@@ -105,12 +106,12 @@ function Profile() {
   const usersCollectionRef = collection(db, "users");
   const [selectedCourses, setSelectedCourses] = useState<Course[]>([]);
   const [courseCategories, setCourseCategories] = useState<CourseCategory[]>(
-    []
+    [],
   );
 
   useEffect(() => {
     // Listen for authentication state changes
-    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+    const handleUserState = auth.onAuthStateChanged(async (user) => {
       if (user) {
         console.log("User logged in, fetching selected courses...");
         const currentUser: UserInfo = {
@@ -125,7 +126,7 @@ function Profile() {
           {
             uid: currentUser.uid,
           },
-          { merge: true }
+          { merge: true },
         );
         await fetchSelectedCourses(currentUser.uid); // Fetch selected courses for the authenticated user
       } else {
@@ -135,8 +136,8 @@ function Profile() {
         setCourseCategories([]); // Reset course categories on logout
       }
     });
-    return () => unsubscribe();
-  }, []);
+    return () => handleUserState();
+  }, [signIn]);
 
   const fetchSelectedCourses = async (uid: string) => {
     try {
@@ -146,10 +147,10 @@ function Profile() {
       if (userDoc.exists()) {
         const userData = userDoc.data();
         console.log("User data from API:", userData); // Log raw user data
-        setSelectedCourses(userData?.Advance || []);
+        setSelectedCourses(userData?.Categories || []);
 
         // Replace local storage with API data
-        const apiCategories = userData?.Advance || [];
+        const apiCategories = userData?.Categories || [];
         localStorage.setItem("courseCategories", JSON.stringify(apiCategories));
         setCourseCategories(apiCategories);
       } else {
@@ -162,7 +163,7 @@ function Profile() {
       if (storedCategories) {
         console.log(
           "Updated stored categories from local storage:",
-          JSON.parse(storedCategories)
+          JSON.parse(storedCategories),
         );
       } else {
         console.log("No stored categories in local storage.");
@@ -174,10 +175,12 @@ function Profile() {
 
   const handleSigninWithGoogle = async () => {
     await signinWithGoogle();
+    setSignIn((cur) => !cur);
   };
 
   const handleSignOut = async () => {
     await auth.signOut();
+    setSignIn((cur) => !cur);
   };
 
   return (
