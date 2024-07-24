@@ -1,9 +1,9 @@
-import { collection, doc, getDoc, setDoc } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
-import { Button, Stack } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import { auth, db, signinWithGoogle } from '../firebase-config';
-import { Course } from './Courses';
+import { collection, doc, getDoc, setDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { Button, Stack } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { auth, db, signinWithGoogle } from "../firebase-config";
+import { Course } from "./Courses";
 
 interface UserInfo {
   displayName: string;
@@ -24,23 +24,23 @@ function Profile() {
   const navigate = useNavigate();
 
   const navigateHome = () => {
-    navigate('/');
+    navigate("/");
   };
 
   const navigateWelcome = () => {
-    navigate('/welcome');
+    navigate("/welcome");
   };
 
-  const [name, setName] = useState('');
-  const [school, setSchool] = useState('');
-  const [grade, setGrade] = useState('');
+  const [name, setName] = useState("");
+  const [school, setSchool] = useState("");
+  const [grade, setGrade] = useState("");
   const [userDataExists, setUserDataExists] = useState(false);
-  const [greetingName, setGreetingName] = useState('');
+  const [greetingName, setGreetingName] = useState("");
   const [signIn, setSignIn] = useState(false);
 
   useEffect(() => {
     // Check if userData exists in local storage
-    const userDataJSON = localStorage.getItem('userData');
+    const userDataJSON = localStorage.getItem("userData");
     if (userDataJSON) {
       setUserDataExists(true);
       const userData = JSON.parse(userDataJSON);
@@ -57,13 +57,13 @@ function Profile() {
   ) => {
     const { name, value } = event.target;
     switch (name) {
-      case 'name':
+      case "name":
         setName(value);
         break;
-      case 'school':
+      case "school":
         setSchool(value);
         break;
-      case 'grade':
+      case "grade":
         setGrade(value);
         break;
       default:
@@ -79,11 +79,11 @@ function Profile() {
       grade: grade,
     };
     const userDataJSON = JSON.stringify(userData);
-    localStorage.setItem('userData', userDataJSON);
+    localStorage.setItem("userData", userDataJSON);
     setUserDataExists(true);
-    console.log('Name:', name);
-    console.log('School:', school);
-    console.log('Grade:', grade);
+    console.log("Name:", name);
+    console.log("School:", school);
+    console.log("Grade:", grade);
 
     setGreetingName(name);
     navigateWelcome();
@@ -91,19 +91,19 @@ function Profile() {
 
   const message = userDataExists
     ? `Welcome Back, ${greetingName}!`
-    : 'Create Your Profile';
+    : "Create Your Profile";
 
   const gradeOptions = [
-    { value: '', label: 'Select Grade' },
-    { value: '1st', label: '1st Year' },
-    { value: '2nd', label: '2nd Year' },
-    { value: '3rd', label: '3rd Year' },
-    { value: '4th', label: '4th Year' },
-    { value: '5th+', label: '5th Year or above' },
+    { value: "", label: "Select Grade" },
+    { value: "1st", label: "1st Year" },
+    { value: "2nd", label: "2nd Year" },
+    { value: "3rd", label: "3rd Year" },
+    { value: "4th", label: "4th Year" },
+    { value: "5th+", label: "5th Year or above" },
   ];
 
   const [currentUser, setCurrentUser] = useState<UserInfo | null>(null);
-  const usersCollectionRef = collection(db, 'users');
+  const usersCollectionRef = collection(db, "users");
   const [selectedCourses, setSelectedCourses] = useState<Course[]>([]);
   const [courseCategories, setCourseCategories] = useState<CourseCategory[]>(
     [],
@@ -113,7 +113,7 @@ function Profile() {
     // Listen for authentication state changes
     const handleUserState = auth.onAuthStateChanged(async (user) => {
       if (user) {
-        console.log('User logged in, fetching selected courses...');
+        console.log("User logged in, fetching selected courses...");
         const currentUser: UserInfo = {
           displayName: user.displayName!,
           email: user.email!,
@@ -130,7 +130,7 @@ function Profile() {
         );
         await fetchSelectedCourses(currentUser.uid); // Fetch selected courses for the authenticated user
       } else {
-        console.log('User logged out, resetting state...');
+        console.log("User logged out, resetting state...");
         setCurrentUser(null);
         setSelectedCourses([]); // Reset selected courses on logout
         setCourseCategories([]); // Reset course categories on logout
@@ -141,35 +141,35 @@ function Profile() {
 
   const fetchSelectedCourses = async (uid: string) => {
     try {
-      console.log('Fetching selected courses for user:', uid);
-      const userDocRef = doc(db, 'users', uid);
+      console.log("Fetching selected courses for user:", uid);
+      const userDocRef = doc(db, "users", uid);
       const userDoc = await getDoc(userDocRef);
       if (userDoc.exists()) {
         const userData = userDoc.data();
-        console.log('User data from API:', userData); // Log raw user data
+        console.log("User data from API:", userData); // Log raw user data
         setSelectedCourses(userData?.Categories || []);
 
         // Replace local storage with API data
         const apiCategories = userData?.Categories || [];
-        localStorage.setItem('courseCategories', JSON.stringify(apiCategories));
+        localStorage.setItem("courseCategories", JSON.stringify(apiCategories));
         setCourseCategories(apiCategories);
       } else {
         setSelectedCourses([]); // Reset if no data exists
-        localStorage.removeItem('courseCategories'); // Clear local storage if no data exists in API
+        localStorage.removeItem("courseCategories"); // Clear local storage if no data exists in API
         setCourseCategories([]);
       }
 
-      const storedCategories = localStorage.getItem('courseCategories');
+      const storedCategories = localStorage.getItem("courseCategories");
       if (storedCategories) {
         console.log(
-          'Updated stored categories from local storage:',
+          "Updated stored categories from local storage:",
           JSON.parse(storedCategories),
         );
       } else {
-        console.log('No stored categories in local storage.');
+        console.log("No stored categories in local storage.");
       }
     } catch (error) {
-      console.error('Error fetching selected courses: ', error);
+      console.error("Error fetching selected courses: ", error);
     }
   };
 

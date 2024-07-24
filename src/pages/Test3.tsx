@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import { database, signinWithGoogle, auth, db } from '../firebase-config.tsx';
-import { onValue, ref } from 'firebase/database';
-import { Course } from './Courses.tsx';
-import { collection, setDoc, getDoc, updateDoc, doc } from 'firebase/firestore';
+import { useEffect, useState } from "react";
+import { database, signinWithGoogle, auth, db } from "../firebase-config.tsx";
+import { onValue, ref } from "firebase/database";
+import { Course } from "./Courses.tsx";
+import { collection, setDoc, getDoc, updateDoc, doc } from "firebase/firestore";
 
 // FirebaseCourse interface matching the structure
 interface FirebaseCourse {
@@ -31,14 +31,14 @@ interface UserInfo {
 }
 
 function Test3() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [courses, setCourses] = useState<FirebaseCourse[]>([]);
   const [filteredCourses, setFilteredCourses] = useState<FirebaseCourse[]>([]);
   const [selectedCourses, setSelectedCourses] = useState<Course[]>([]);
-  const [schoolName, setSchoolName] = useState('PSE');
+  const [schoolName, setSchoolName] = useState("PSE");
   const [currentUser, setCurrentUser] = useState<UserInfo | null>(null);
   const [signIn, setSignIn] = useState(false);
-  const usersCollectionRef = collection(db, 'users');
+  const usersCollectionRef = collection(db, "users");
 
   useEffect(() => {
     // Fetch data from Firebase
@@ -91,8 +91,8 @@ function Test3() {
 
   const fetchSelectedCourses = async (uid: string) => {
     try {
-      console.log('Fetching selected courses for user:', uid);
-      const userDocRef = doc(db, 'users', uid);
+      console.log("Fetching selected courses for user:", uid);
+      const userDocRef = doc(db, "users", uid);
       const userDoc = await getDoc(userDocRef);
       if (userDoc.exists()) {
         const userData = userDoc.data();
@@ -101,7 +101,7 @@ function Test3() {
         setSelectedCourses([]); // Reset if no data exists
       }
     } catch (error) {
-      console.error('Error fetching selected courses: ', error);
+      console.error("Error fetching selected courses: ", error);
     }
   };
 
@@ -118,14 +118,14 @@ function Test3() {
   };
 
   const changeSchool = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setSchoolName(e.currentTarget.textContent || ' ');
-    setSearchTerm('');
+    setSchoolName(e.currentTarget.textContent || " ");
+    setSearchTerm("");
   };
 
   const addCourse = async (course: FirebaseCourse) => {
     if (!currentUser) {
-      console.error('User is not authenticated');
-      window.alert('Please login first!!!');
+      console.error("User is not authenticated");
+      window.alert("Please login first!!!");
       return;
     }
     // Convert FirebaseCourse to Course
@@ -139,7 +139,7 @@ function Test3() {
     };
 
     try {
-      const userDocRef = doc(db, 'users', currentUser?.uid);
+      const userDocRef = doc(db, "users", currentUser?.uid);
       const userDocSnap = await getDoc(userDocRef);
       const userData = userDocSnap.data();
       const currentSelectedCourses = userData?.Catagories || [];
@@ -153,8 +153,8 @@ function Test3() {
         // Update the state to reflect the new selected course
         setSelectedCourses([...currentSelectedCourses, newCourse]);
       } else {
-        console.log('Course already selected');
-        alert('Course already selected');
+        console.log("Course already selected");
+        alert("Course already selected");
       }
     } catch (e) {
       console.log(e);
@@ -164,11 +164,11 @@ function Test3() {
   const deleteCourse = async (courseToDelete: Course) => {
     try {
       if (!currentUser?.uid) {
-        throw new Error('User is not authenticated');
+        throw new Error("User is not authenticated");
       }
 
       // Fetch the latest selected courses from Firestore
-      const userDocRef = doc(db, 'users', currentUser?.uid);
+      const userDocRef = doc(db, "users", currentUser?.uid);
       const userDoc = await getDoc(userDocRef);
       const userData = userDoc.data();
       const currentSelectedCourses = userData?.Categories || [];
@@ -186,32 +186,32 @@ function Test3() {
       // Update the state to reflect the deletion
       setSelectedCourses(updatedCourses);
     } catch (error) {
-      console.error('Error deleting course from Firestore: ', error);
+      console.error("Error deleting course from Firestore: ", error);
     }
   };
 
   return (
     <div
       style={{
-        display: 'flex',
-        height: '100vh',
+        display: "flex",
+        height: "100vh",
       }}
     >
       <div
         style={{
-          display: 'flex',
-          flexDirection: 'column',
-          flex: '0 0 60%', // Width for the left containers
-          height: '100%', // Ensure it spans the full height
+          display: "flex",
+          flexDirection: "column",
+          flex: "0 0 60%", // Width for the left containers
+          height: "100%", // Ensure it spans the full height
         }}
       >
         <div
           style={{
-            textAlign: 'center',
-            backgroundColor: 'lightblue',
-            padding: '20px',
-            margin: '10px',
-            overflowY: 'auto', // Enable scrolling if content exceeds space
+            textAlign: "center",
+            backgroundColor: "lightblue",
+            padding: "20px",
+            margin: "10px",
+            overflowY: "auto", // Enable scrolling if content exceeds space
             flex: 1, // Expand to fill available space
           }}
         >
@@ -238,11 +238,11 @@ function Test3() {
         </div>
         <div
           style={{
-            textAlign: 'center',
-            backgroundColor: 'lightgreen',
-            padding: '20px',
-            margin: '10px',
-            overflowY: 'auto', // Enable scrolling if content exceeds space
+            textAlign: "center",
+            backgroundColor: "lightgreen",
+            padding: "20px",
+            margin: "10px",
+            overflowY: "auto", // Enable scrolling if content exceeds space
             flex: 1, // Expand to fill available space
           }}
         >
@@ -263,10 +263,10 @@ function Test3() {
       </div>
       <div
         style={{
-          backgroundColor: 'red',
-          padding: '20px',
-          margin: '10px',
-          overflowY: 'auto', // Enable scrolling if content exceeds space
+          backgroundColor: "red",
+          padding: "20px",
+          margin: "10px",
+          overflowY: "auto", // Enable scrolling if content exceeds space
           flex: 1, // Expand to fill available space
         }}
       >
