@@ -197,31 +197,6 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* ---------------- */
 
-/* #region Profile page */
-
-.prof-msg {
-    font-family: "Outfit";
-    font-size: 2.5rem;
-    letter-spacing: 0px;
-}
-
-.form-label, .form-control, .form-select {
-    font-family: "Outfit";
-}
-
-.form-label {
-    font-size: 1.3rem;
-}
-
-.save-prof {
-    font-family: "Outfit" !important;
-    font-weight: 200;
-}
-
-/* #endregion */
-
-/* ---------------- */
-
 /* #region Welcome Page */
 
 .welcome-title {
@@ -492,14 +467,78 @@ margin: 0 5px;
     border: 1px solid #ffffff;
 }
 
-.search-courses {
+.search-courses-container {
     background-color: #ECEBEB !important;
+    border: none !important;
+    height: 3rem;
+    border-radius: 10px;
+}
+
+.search-courses {
+    background-color: transparent !important;
     border: none !important;
     height: 3rem;
 }
 
 .search-courses::placeholder {
     color: #767676 !important;
+}
+
+.add-course-modal .modal-body {
+    margin: 0 !important;
+}
+
+.school-select {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0.25rem 0.4rem !important;
+}
+
+.opened-filter {
+    background-color: #afafaf86 !important;
+}
+
+.course-filter-container {
+    background-color: #ECEBEB;
+    border-radius: 10px;
+}
+
+.image-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+}
+
+.image-container:hover {
+    background-color: rgba(255, 255, 255, 0.3); /* Optional: Lighten background on hover */
+  }
+
+.icon-holder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3px;
+}
+
+.image-container:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -7px; /* Adjust space between image and line */
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: #ccc; /* Line color */
+}
+
+.image-container.selected {
+    background-color: white;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.3s ease;
 }
 
 /* #endregion */

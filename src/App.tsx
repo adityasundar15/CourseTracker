@@ -15,8 +15,6 @@ import Profile from "./pages/Profile.tsx";
 import BurgerMenu from "./components/Hamburg.tsx";
 import Welcome from "./pages/welcome.tsx";
 import SelectedCategory from "./pages/Category.tsx";
-import Test3 from "./pages/Test3.tsx";
-import Test4 from "./pages/Test4.tsx";
 import Login from "./pages/Login.tsx";
 
 function App() {
@@ -32,8 +30,8 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/login" element={<Login />} />
             <Route path="/welcome" element={<Welcome />} />
-            <Route path="/test3" element={<Test3 />} />
-            <Route path="/test4" element={<Test4 />} />
+            {/* <Route path="/test3" element={<Test3 />} />
+            <Route path="/test4" element={<Test4 />} /> */}
           </Routes>
         </main>
       </div>

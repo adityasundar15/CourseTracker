@@ -1,10 +1,19 @@
-import { Button, Modal } from "react-bootstrap";
+import { Button, Collapse, Modal } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { Course, CourseCategory } from "../pages/Courses";
 import { database } from "../firebase-config"; // Make sure the path is correct
 import { onValue, ref } from "firebase/database";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { updateCourseCategoriesInFirestore } from "../firestoreUtils";
+import { MdOutlineBackpack } from "react-icons/md";
+
+import silsIcon from "../assets/syllabus-icons/sils.png";
+import pseIcon from "../assets/syllabus-icons/pse.png";
+import sssIcon from "../assets/syllabus-icons/sss.png";
+import fseIcon from "../assets/syllabus-icons/fse.png";
+import cseIcon from "../assets/syllabus-icons/cse.png";
+import aseIcon from "../assets/syllabus-icons/ase.png";
+import cmsIcon from "../assets/syllabus-icons/cms.png";
 
 // FirebaseCourse interface matching the structure
 interface FirebaseCourse {
@@ -47,6 +56,12 @@ function AddCourseModal({
   const [searchTerm, setSearchTerm] = useState("");
   const [courses, setCourses] = useState<FirebaseCourse[]>([]);
   const [filteredCourses, setFilteredCourses] = useState<FirebaseCourse[]>([]);
+  const [openFilter, setOpenFilter] = useState(false);
+  const [selectedSchool, setSelectedSchool] = useState<string | null>(null);
+
+  const handleIconClick = (iconName: string) => {
+    setSelectedSchool(iconName);
+  };
 
   useEffect(() => {
     // Fetch data from Firebase
@@ -133,7 +148,7 @@ function AddCourseModal({
     >
       <div className="add-category-modal-content">
         <Modal.Header className="add-category-modal-header" closeButton>
-          <div className="col mt-3 mb-3">
+          <div className="col my-3">
             <Modal.Title className="text-center">Add Course</Modal.Title>
           </div>
         </Modal.Header>
@@ -220,14 +235,62 @@ function AddCourseModal({
             </div>
           ) : (
             <div>
-              <div className="search-courses-container px-1">
-                <input
-                  type="text"
-                  placeholder="Enter course name / key"
-                  className="form-control mb-3 search-courses"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
+              <div className="search-courses-container d-flex align-items-center px-1 mb-2 row">
+                <div className="col p-0">
+                  <input
+                    type="text"
+                    placeholder="Enter course name / key"
+                    className="form-control search-courses"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                </div>
+                <div className="col-auto pe-4">
+                  <Button
+                    className={`school-select ${
+                      openFilter ? "opened-filter" : ""
+                    }`}
+                    onClick={() => setOpenFilter(!openFilter)}
+                    aria-controls="collapse-content"
+                    aria-expanded={openFilter ? "true" : "false"}
+                  >
+                    <MdOutlineBackpack color="black" size={28} />
+                  </Button>
+                </div>
+              </div>
+              <div>
+                <Collapse in={openFilter}>
+                  <div id="collapse-content">
+                    <div className="d-flex w-100 course-filter-container mb-2 justify-content-between align-items-center p-3">
+                      {[
+                        { src: silsIcon, alt: "SILS", name: "SILS" },
+                        { src: pseIcon, alt: "PSE", name: "PSE" },
+                        { src: sssIcon, alt: "SSS", name: "SSS" },
+                        { src: fseIcon, alt: "FSE", name: "FSE" },
+                        { src: cseIcon, alt: "CSE", name: "CSE" },
+                        { src: aseIcon, alt: "ASE", name: "ASE" },
+                        { src: cmsIcon, alt: "CMS", name: "CMS" },
+                      ].map((icon) => (
+                        <div
+                          key={icon.name}
+                          className={`image-container ${
+                            selectedSchool === icon.name ? "selected" : ""
+                          }`}
+                          onClick={() => handleIconClick(icon.name)}
+                        >
+                          <div className="icon-holder">
+                            <img
+                              src={icon.src}
+                              alt={icon.alt}
+                              className="school-icon"
+                              height={50}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </Collapse>
               </div>
               <div className="scrollable-query-outcome px-2">
                 {filteredCourses.map((course) => (
