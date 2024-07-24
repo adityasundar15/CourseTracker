@@ -11,7 +11,7 @@ export const updateCourseCategoriesInFirestore = async (
       const userDocRef = doc(db, 'users', currentUser.uid);
       await setDoc(
         userDocRef,
-        { Catagories: updatedCategories },
+        { Categories: updatedCategories },
         { merge: true },
       );
       console.log('Categories updated in Firestore.');

@@ -1,6 +1,6 @@
-import { pushRotate as Menu } from "react-burger-menu";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { pushRotate as Menu } from 'react-burger-menu';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 interface MenuState {
   isOpen: boolean;
@@ -27,9 +27,9 @@ function BurgerMenu() {
     <Menu
       isOpen={isOpen}
       onStateChange={handleMenuStateChange}
-      width={"17%"}
-      pageWrapId={"page-wrap"}
-      outerContainerId={"outer-container"}
+      width={'17%'}
+      pageWrapId={'page-wrap'}
+      outerContainerId={'outer-container'}
       customCrossIcon={false}
       // burgerBarClassName={isHome ? "white-bg" : ""}
     >
@@ -79,8 +79,8 @@ function BurgerMenu() {
       {/* <Link to="/test3" className="menu-item noselect" onClick={closeMenu}>
         Test3
       </Link>
-      <hr></hr>
-      <Link to="/test4" className="menu-item noselect" onClick={closeMenu}>
+      <hr></hr> */}
+      {/* <Link to="/test4" className="menu-item noselect" onClick={closeMenu}>
         Test4
       </Link> */}
       {/* <hr></hr> */}

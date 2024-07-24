@@ -37,6 +37,7 @@ function Test3() {
   const [selectedCourses, setSelectedCourses] = useState<Course[]>([]);
   const [schoolName, setSchoolName] = useState('PSE');
   const [currentUser, setCurrentUser] = useState<UserInfo | null>(null);
+  const [signIn, setSignIn] = useState(false);
   const usersCollectionRef = collection(db, 'users');
 
   useEffect(() => {
@@ -63,7 +64,7 @@ function Test3() {
 
   useEffect(() => {
     // Listen for authentication state changes
-    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+    const handleUserState = auth.onAuthStateChanged(async (user) => {
       if (user) {
         const currentUser: UserInfo = {
           displayName: user.displayName!,
@@ -85,16 +86,17 @@ function Test3() {
         setSelectedCourses([]); // Reset selected courses on logout
       }
     });
-    return () => unsubscribe();
-  }, []);
+    return () => handleUserState();
+  }, [signIn]);
 
   const fetchSelectedCourses = async (uid: string) => {
     try {
+      console.log('Fetching selected courses for user:', uid);
       const userDocRef = doc(db, 'users', uid);
       const userDoc = await getDoc(userDocRef);
       if (userDoc.exists()) {
         const userData = userDoc.data();
-        setSelectedCourses(userData?.Advance || []);
+        setSelectedCourses(userData?.Categories || []);
       } else {
         setSelectedCourses([]); // Reset if no data exists
       }
@@ -105,10 +107,14 @@ function Test3() {
 
   const handleSigninWithGoogle = async () => {
     await signinWithGoogle();
+
+    setSignIn((cur) => !cur);
   };
 
   const handleSignOut = async () => {
     await auth.signOut();
+
+    setSignIn((cur) => !cur);
   };
 
   const changeSchool = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -141,7 +147,7 @@ function Test3() {
       if (!currentSelectedCourses.find((c: Course) => c.id === newCourse.id)) {
         // Update Firestore with the new course
         await updateDoc(userDocRef, {
-          Catagories: [...currentSelectedCourses, newCourse],
+          Categories: [...currentSelectedCourses, newCourse],
         });
 
         // Update the state to reflect the new selected course
@@ -165,7 +171,7 @@ function Test3() {
       const userDocRef = doc(db, 'users', currentUser?.uid);
       const userDoc = await getDoc(userDocRef);
       const userData = userDoc.data();
-      const currentSelectedCourses = userData?.Advance || [];
+      const currentSelectedCourses = userData?.Categories || [];
 
       // Filter out the course to be deleted
       const updatedCourses = currentSelectedCourses.filter(
