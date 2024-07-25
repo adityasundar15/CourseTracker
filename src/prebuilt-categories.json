@@ -454,5 +454,131 @@
       "picture": 1,
       "courses": []
     }
+  ],
+  "PS": [
+    {
+      "id": "PS-R",
+      "name": "Political Science (Required)",
+      "completed": 0,
+      "total": 36,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "ECON-R",
+      "name": "Economics (Required)",
+      "completed": 0,
+      "total": 8,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "MTH-R",
+      "name": "Methodology (Required)",
+      "completed": 0,
+      "total": 8,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "SEMI-R",
+      "name": "Seminar (Required)",
+      "completed": 0,
+      "total": 8,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "FL/G-R",
+      "name": "Foreign Languages / General Studies (Required)",
+      "completed": 0,
+      "total": 6,
+      "picture": 1,
+      "courses": []
+    }
+  ],
+  "ECON": [
+    {
+      "id": "PS-R",
+      "name": "Political Science (Required)",
+      "completed": 0,
+      "total": 8,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "ECON-R",
+      "name": "Economics (Required)",
+      "completed": 0,
+      "total": 36,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "MTH-R",
+      "name": "Methodology (Required)",
+      "completed": 0,
+      "total": 12,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "SEMI-R",
+      "name": "Seminar (Required)",
+      "completed": 0,
+      "total": 8,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "FL/G-R",
+      "name": "Foreign Languages / General Studies (Required)",
+      "completed": 0,
+      "total": 6,
+      "picture": 1,
+      "courses": []
+    }
+  ],
+  "GPE": [
+    {
+      "id": "PS-R",
+      "name": "Political Science (Required)",
+      "completed": 0,
+      "total": 22,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "ECON-R",
+      "name": "Economics (Required)",
+      "completed": 0,
+      "total": 22,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "MTH-R",
+      "name": "Methodology (Required)",
+      "completed": 0,
+      "total": 12,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "SEMI-R",
+      "name": "Seminar (Required)",
+      "completed": 0,
+      "total": 8,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "FL/G-R",
+      "name": "Foreign Languages / General Studies (Required)",
+      "completed": 0,
+      "total": 6,
+      "picture": 1,
+      "courses": []
+    }
   ]
 }

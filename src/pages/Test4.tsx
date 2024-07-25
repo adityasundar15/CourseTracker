@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { auth, db, signinWithGoogle } from '../firebase-config';
 import { Course } from './Courses';
 import { updateCourseCategoriesInFirestore } from '../firestoreUtils';
-import { v4 as uuidv4 } from 'uuid';
-import { MS, CSCE, ME, CEE } from '../prebuilt-categories.json';
+// import { v4 as uuidv4 } from 'uuid';
+import prebuiltList from '../prebuilt-categories.json';
 
 interface UserInfo {
   displayName: string;
@@ -23,14 +23,11 @@ interface CourseCategory {
   courses: Course[];
 }
 
-const prebuiltCategory: CourseCategory = {
-  id: uuidv4(),
-  name: 'Test Category',
-  completed: 0,
-  total: 15,
-  picture: 1,
-  courses: [],
-};
+interface PrebuiltList {
+  [key: string]: CourseCategory[];
+}
+
+const prebuiltListTyped: PrebuiltList = prebuiltList;
 
 function Test4() {
   const navigate = useNavigate();
@@ -102,28 +99,36 @@ function Test4() {
     if (userData.major) {
       console.log('There is a mojor');
       updatePrebuiltCategoriesInFirestore(userData.major);
-      localStorage.setItem(
-        'courseCategories',
-        JSON.stringify([prebuiltCategory]),
-      );
-      console.log('Category added to local storage');
     } else {
       console.log("User didn't select major");
     }
   };
 
   function updatePrebuiltCategoriesInFirestore(major: string) {
-    if (major === 'MS') {
-      updateCourseCategoriesInFirestore(MS);
-    }
-    if (major === 'CSCE') {
-      updateCourseCategoriesInFirestore(CSCE);
-    }
-    if (major === 'ME') {
-      updateCourseCategoriesInFirestore(ME);
-    }
-    if (major === 'CEE') {
-      updateCourseCategoriesInFirestore(CEE);
+    // const selectedCategories = prebuiltList[major];
+
+    // if (selectedCategories) {
+    //   updateCourseCategoriesInFirestore(selectedCategories);
+    //   localStorage.setItem(
+    //     'courseCategories',
+    //     JSON.stringify(selectedCategories),
+    //   );
+    //   console.log('Category added to local storage');
+    // } else {
+    //   console.log(`No categories found for major: ${major}`);
+    // }
+
+    const selectedCategories = prebuiltListTyped[major];
+
+    if (selectedCategories) {
+      updateCourseCategoriesInFirestore(selectedCategories);
+      localStorage.setItem(
+        'courseCategories',
+        JSON.stringify(selectedCategories),
+      );
+      console.log('Category added to local storage');
+    } else {
+      console.log(`No categories found for major: ${major}`);
     }
   }
 
@@ -137,6 +142,9 @@ function Test4() {
     { value: 'CSCE', label: 'Computer Science and Communications Enginnering' },
     { value: 'ME', label: 'Mechnical Engineering' },
     { value: 'CEE', label: 'Civil and Environmental Engineering' },
+    { value: 'PS', label: 'Political Science' },
+    { value: 'ECON', label: 'Economics' },
+    { value: 'GPE', label: 'Global Political Economy' },
   ];
 
   const [currentUser, setCurrentUser] = useState<UserInfo | null>(null);
@@ -221,10 +229,6 @@ function Test4() {
     setSignIn((cur) => !cur);
   };
 
-  const testBUttonFunction = () => {
-    console.log(MS);
-  };
-
   return (
     <div id="parent-container">
       <div className="top-right-element">
@@ -281,9 +285,6 @@ function Test4() {
                 >
                   Save Changes
                 </Button>
-              </div>
-              <div>
-                <button onClick={testBUttonFunction}>Test</button>
               </div>
             </form>
           </div>
