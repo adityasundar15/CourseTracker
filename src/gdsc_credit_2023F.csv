@@ -1,0 +1,5 @@
+﻿Major,Faculty,Abbreviation(major),Abbreviation(faculty),A1HSS,A2ESE,A2ESL,A2J/LEJ,B1CM,B2CP,B2CC,B2CB,B3CL,B4CCS,CR,CRE,CE,AE,Total,upper_limit(J),upper_limit(OMC),upper_limit(OCJBSE),upper_limit(OCOF)
+Mathematical Sciences,Fundamental Science and Engineering,MS,FSE,10,2,0,4,20,6,2,0,3,4,28,16,17,14,126,8,None,4,4
+Computer Science and Communications Engineering,Fundamental Science and Engineering,CSCE,FSE,10,2,0,4,12,6,0,0,2,6,22,38,4,20,126,8,None,8,4
+Mechanical Engineering,Creative Science and Engineering,ME,CSE,10,2,0,4,10,6,0,0,4,4,44,0,26,20,130,20,None,16,16
+Civil and Envionrmental Engineering,Creative Science and Engineering,CEE,CSE,10,2,0,4,10,6,4,2,3,4,41,0,20,24,130,8,None,8,8

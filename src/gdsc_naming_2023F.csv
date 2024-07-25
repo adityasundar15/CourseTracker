@@ -1,0 +1,20 @@
+﻿Name ,Explanation
+A1HSS,Group A1: Humanities and Social Sciences
+A2ESE,Group A2: English for Science and Engineering
+A2ESL ,Group A2: English as a Second Language
+A2J/LEL,Group A2: Japanese / Language other than English or Japanese
+B1CM,Group B1: Core Mathematics
+B2CP,Group B2: Core Physics
+B2CC,Group B2: Core Chemistry
+B2CB,Group B3: Core Bioscience
+B3CL,Group B3: Core Laboratory
+B4CCS,Group B4: Core Comupter Science
+CR,Group C: Requried
+CRE,Group C: Requried Elective
+CE,Group C: Elective
+AE,Additional Electives
+Total,Total credit required for graduation
+upper_limit(J),Maximum number of credits counted for graduation (A2J)
+upper_limit(OMC),Maximum number of credits counted for graduation (other major courses)
+upper_limit(OCJBSE),Maximum number of credits counted for graduation (other JBSE courses)
+upper_limit(OCOF),Maximum number of credits counted for graduation (other faculty courses)

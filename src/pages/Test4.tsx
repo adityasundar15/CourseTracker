@@ -6,6 +6,7 @@ import { auth, db, signinWithGoogle } from '../firebase-config';
 import { Course } from './Courses';
 import { updateCourseCategoriesInFirestore } from '../firestoreUtils';
 import { v4 as uuidv4 } from 'uuid';
+import { MS, CSCE, ME, CEE } from '../prebuilt-categories.json';
 
 interface UserInfo {
   displayName: string;
@@ -49,8 +50,6 @@ function Test4() {
   const [greetingName, setGreetingName] = useState('');
   const [signIn, setSignIn] = useState(false);
 
-  const majorList = ['Economics', 'Computer Science'];
-
   useEffect(() => {
     // Check if userData exists in local storage
     const userDataJSON = localStorage.getItem('userData');
@@ -73,14 +72,12 @@ function Test4() {
       case 'name':
         setName(value);
         break;
-      // case 'school':
-      //   setSchool(value);
-      //   break;
-      // case 'grade':
-      //   setGrade(value);
-      //   break;
-      // default:
-      //   break;
+
+      case 'major':
+        setSelectedMajor(value);
+        break;
+      default:
+        break;
     }
   };
 
@@ -98,13 +95,13 @@ function Test4() {
     localStorage.setItem('userData', userDataJSON);
     setUserDataExists(true);
     console.log('Name:', name);
-    console.log('Majo:', selectedMajor);
+    console.log('Major:', selectedMajor);
     console.log(userData);
 
     setGreetingName(name);
     if (userData.major) {
       console.log('There is a mojor');
-      updateCourseCategoriesInFirestore([prebuiltCategory]);
+      updatePrebuiltCategoriesInFirestore(userData.major);
       localStorage.setItem(
         'courseCategories',
         JSON.stringify([prebuiltCategory]),
@@ -115,18 +112,32 @@ function Test4() {
     }
   };
 
+  function updatePrebuiltCategoriesInFirestore(major: string) {
+    if (major === 'MS') {
+      updateCourseCategoriesInFirestore(MS);
+    }
+    if (major === 'CSCE') {
+      updateCourseCategoriesInFirestore(CSCE);
+    }
+    if (major === 'ME') {
+      updateCourseCategoriesInFirestore(ME);
+    }
+    if (major === 'CEE') {
+      updateCourseCategoriesInFirestore(CEE);
+    }
+  }
+
   const message = userDataExists
     ? `Welcome Back, ${greetingName}!`
     : 'Create Your Profile';
 
-  // const gradeOptions = [
-  //   { value: '', label: 'Select Grade' },
-  //   { value: '1st', label: '1st Year' },
-  //   { value: '2nd', label: '2nd Year' },
-  //   { value: '3rd', label: '3rd Year' },
-  //   { value: '4th', label: '4th Year' },
-  //   { value: '5th+', label: '5th Year or above' },
-  // ];
+  const majorOptions = [
+    { value: '', label: 'Select Major' },
+    { value: 'MS', label: 'Mathematical Science' },
+    { value: 'CSCE', label: 'Computer Science and Communications Enginnering' },
+    { value: 'ME', label: 'Mechnical Engineering' },
+    { value: 'CEE', label: 'Civil and Environmental Engineering' },
+  ];
 
   const [currentUser, setCurrentUser] = useState<UserInfo | null>(null);
   const usersCollectionRef = collection(db, 'users');
@@ -210,6 +221,10 @@ function Test4() {
     setSignIn((cur) => !cur);
   };
 
+  const testBUttonFunction = () => {
+    console.log(MS);
+  };
+
   return (
     <div id="parent-container">
       <div className="top-right-element">
@@ -239,48 +254,22 @@ function Test4() {
                   required
                 />
               </div>
-              {/* <div className="mb-3">
-                <label htmlFor="school" className="form-label fw-semibold">
-                  School
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="school"
-                  name="school"
-                  value={school}
-                  onChange={handleChange}
-                  placeholder="e.g. SILS, SPSE, etc."
-                  required
-                />
-              </div>
               <div className="mb-3">
                 <label htmlFor="grade" className="form-label fw-semibold">
-                  Grade
+                  Major
                 </label>
                 <select
-                  id="grade"
-                  name="grade"
-                  value={grade}
+                  id="major"
+                  name="major"
+                  value={selectedMajor}
                   onChange={handleChange}
                   className="form-select"
                   required
                 >
-                  {gradeOptions.map((option) => (
+                  {majorOptions.map((option) => (
                     <option key={option.value} value={option.value}>
                       {option.label}
                     </option>
-                  ))}
-                </select>
-              </div> */}
-              <div>
-                <select
-                  value={selectedMajor}
-                  onChange={(e) => setSelectedMajor(e.target.value)}
-                >
-                  <option>Please Choose Your Major...</option>
-                  {majorList.map((major) => (
-                    <option key={major}>{major}</option>
                   ))}
                 </select>
               </div>
@@ -292,6 +281,9 @@ function Test4() {
                 >
                   Save Changes
                 </Button>
+              </div>
+              <div>
+                <button onClick={testBUttonFunction}>Test</button>
               </div>
             </form>
           </div>
@@ -307,16 +299,16 @@ function Test4() {
                     <h2>Selected Courses</h2>
                     {selectedCourses.map((course) => (
                       <div key={course.id}>
-                        <p>Course Title: {course.name}</p>
-                        <p>Course ID: {course.id}</p>
+                        {/* <p>Course Title: {course.name}</p>
+                        <p>Course ID: {course.id}</p> */}
                       </div>
                     ))}
                     <h2>Course Categories</h2>
                     {courseCategories.map((category) => (
                       <div key={category.id}>
-                        <p>Category Name: {category.name}</p>
+                        {/* <p>Category Name: {category.name}</p>
                         <p>Completed: {category.completed}</p>
-                        <p>Total: {category.total}</p>
+                        <p>Total: {category.total}</p> */}
                       </div>
                     ))}
                   </div>
