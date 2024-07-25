@@ -562,54 +562,6 @@ margin: 0 5px;
     transition: background-color 0.3s ease;
 }
 
-/* #endregion */
-
-/* ---------------- */
-
-/* #region AddCategoryModal */
-
-/* For PC screens, adjusting width a bit */
-@media (min-width: 576px) {
-    /* default: var(--bs-modal-width) <- 500px*/
-        .add-category-modal {
-            max-width: 55% !important;
-        }
-    }
-
-.add-category-modal-content {
-    margin: 3% 15%;
-}
-
-.add-category-modal .btn-close {
-    position: absolute;
-    top: 5%;
-    right: 5%;
-}
-
-
-.add-category-modal-header {
-    justify-content: center;
-    border-bottom: 1px solid black !important;
-}
-
-.add-category-modal .modal-title {
-    font-size: 2.5rem;
-}
-
-.add-category-modal .modal-body {
-    margin: 1% 0%;
-}
-
-.modal-sub-headers {
-    font-family: 'Outfit';
-    font-size: 1.5rem !important;
-}
-
-.selected {
-    border: 5px solid rgb(0, 0, 0);
-    transition: border 0.2s ease-in-out;
-    position: relative;
-}
 
 .modal-img-container {
     flex: 1 1 22%; /* Adjust this value to control the size of each image container */
@@ -672,7 +624,59 @@ margin: 0 5px;
     color: #B1B1B1;
     /* font-style: italic; */
 }
-  
+
+.edit-course-icon {
+    color: #4e4e4e;
+}
+
+/* #endregion */
+
+/* ---------------- */
+
+/* #region AddCategoryModal */
+
+/* For PC screens, adjusting width a bit */
+@media (min-width: 576px) {
+    /* default: var(--bs-modal-width) <- 500px*/
+        .add-category-modal {
+            max-width: 55% !important;
+        }
+    }
+
+.add-category-modal-content {
+    margin: 3% 15%;
+}
+
+.add-category-modal .btn-close {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+}
+
+
+.add-category-modal-header {
+    justify-content: center;
+    border-bottom: 1px solid black !important;
+}
+
+.add-category-modal .modal-title {
+    font-size: 2.5rem;
+}
+
+.add-category-modal .modal-body {
+    margin: 1% 0%;
+}
+
+.modal-sub-headers {
+    font-family: 'Outfit';
+    font-size: 1.5rem !important;
+}
+
+.selected {
+    border: 5px solid rgb(0, 0, 0);
+    transition: border 0.2s ease-in-out;
+    position: relative;
+} 
 
 /* #endregion */
 

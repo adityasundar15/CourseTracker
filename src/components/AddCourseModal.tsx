@@ -40,6 +40,7 @@ interface AddCourseModalProps {
   show: boolean;
   handleClose: () => void;
   onAddCourse: (newCourse: Course) => void;
+  courseToEdit: Course | null; // Optional course data for editing
 }
 
 function AddCourseModal({
@@ -47,6 +48,7 @@ function AddCourseModal({
   show,
   handleClose,
   onAddCourse,
+  courseToEdit,
 }: AddCourseModalProps) {
   const [showManualForm, setShowManualForm] = useState(false);
   const [courseKey, setCourseKey] = useState("");
@@ -62,6 +64,16 @@ function AddCourseModal({
   const handleIconClick = (iconName: string) => {
     setSelectedSchool(iconName);
   };
+
+  useEffect(() => {
+    if (courseToEdit) {
+      setCourseKey(courseToEdit.id);
+      setCourseName(courseToEdit.name);
+      setRequiredCredits(courseToEdit.credit.toString());
+      setCourseCompleted(courseToEdit.progress === 1);
+      setShowManualForm(true);
+    }
+  }, [courseToEdit]);
 
   useEffect(() => {
     // Fetch data from Firebase
@@ -111,11 +123,30 @@ function AddCourseModal({
     const courseCategories: CourseCategory[] = storedCategories
       ? JSON.parse(storedCategories)
       : [];
+
     const updatedCategories = courseCategories.map((category) => {
       if (category.id === categoryID) {
-        category.courses.push(newCourse);
-        if (newCourse.progress === 1) {
-          category.completed += newCourse.credit;
+        const courseIndex = category.courses.findIndex(
+          (course) => course.id === newCourse.id
+        );
+
+        if (courseIndex === -1) {
+          category.courses.push(newCourse);
+          if (newCourse.progress === 1) {
+            category.completed += newCourse.credit;
+          }
+        } else {
+          const existingCourse = category.courses[courseIndex];
+
+          if (existingCourse.progress === 1 && newCourse.progress !== 1) {
+            category.completed -= existingCourse.credit;
+          }
+
+          if (existingCourse.progress !== 1 && newCourse.progress === 1) {
+            category.completed += newCourse.credit;
+          }
+
+          category.courses[courseIndex] = newCourse;
         }
       }
       return category;
