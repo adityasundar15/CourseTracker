@@ -30,8 +30,6 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/login" element={<Login />} />
             <Route path="/welcome" element={<Welcome />} />
-            {/* <Route path="/test3" element={<Test3 />} />
-            <Route path="/test4" element={<Test4 />} /> */}
           </Routes>
         </main>
       </div>

@@ -39,6 +39,12 @@ html, body, #root, #outer-container, #page-wrap, #parent-container, #profile-pag
     font-family: "ClashDisplay" !important;
     font-size: 20px;
     border-width: 3px !important;
+    border-radius: 30px !important;
+}
+
+.profile-button:hover {
+    background-color: rgba(255, 255, 255, 0.314) !important;
+    color: white !important;
 }
 
 /* Total wrapper */
@@ -128,12 +134,12 @@ html, body, #root, #outer-container, #page-wrap, #parent-container, #profile-pag
     height: 30px;
     left: 36px;
     top: 36px;
+    z-index: 10000 !important;
 }
   
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
     background: #212529;
-    
 }
 
 .white-bg {
@@ -167,9 +173,11 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* General sidebar styles */
 .bm-menu {
-    background: #373a47;
-    padding: 1em 1.5em 0;
+    background: rgba(21, 22, 24, 0.506);
+    padding: 6em 3.5em 1.5em 1.5em;
     font-size: 1.15em;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
 }
 
 /* Morph shape necessary with bubble or elastic */
@@ -190,7 +198,8 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* Styling of overlay */
 .bm-overlay {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.1) !important;
+    backdrop-filter: blur(2px);
 }
 
 /* #endregion */
@@ -227,7 +236,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .course-page-title {
     font-size: 3.43rem;
     font-family: 'Outfit';
-    padding: 0% 0% 2rem;
+    padding: 0% 0% 3rem;
 }
 
 .progress-container {
@@ -236,14 +245,12 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 .bar-progress {
     height: 1.5rem !important;
-    border-radius: 13px !important;
+    border-radius: 7px !important;
 }
-
-
 
 .progress-bar {
     background-color: #000000 !important;
-    border-radius: 13px !important;
+    border-radius: 7px !important;
     padding: 0 !important;
 }
 
@@ -257,7 +264,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
     position: absolute;
     width: 2rem; 
     height: 2rem; 
-    border: 0.5rem solid #000000; 
+    border: 0.45rem solid #000000; 
     background-color: #E4E4E4;
     border-radius: 50%;
     bottom: calc(50% - 1rem); /* Center vertically */
@@ -269,10 +276,10 @@ Note: Beware of modifying this element as it can break the animations - you shou
     bottom: 2rem;
     background-color: #000000;
     color: #ffffff;
-    width: 5rem;
+    width: 4rem;
     height: 2.5rem;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -384,10 +391,20 @@ margin: 0 5px;
     background-size: cover;
 }
 
+.upper-course-list {
+    padding-top: 12%;
+}
+
+.category-course-progress-container .bar-progress {
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(3px);
+}
+
 .category-page-title {
     font-size: 2.75rem;
     font-family: 'Outfit';
-    padding: 15% 0% 2rem;
+    padding: 3.5% 0%;
+    width: 78%;
 }
 
 .add-course-modal .modal-sub-headers{
@@ -418,14 +435,14 @@ margin: 0 5px;
 
 .arrow-icon-container {
     position: relative;
-    bottom: 30px;
-    left: 30px;
+    bottom: 25px;
+    left: 35px;
 }
 
 .delete-icon-container {
     position: relative;
-    bottom: 30px;
-    right: 30px;
+    bottom: 25px;
+    right: 50px;
 }
 
 .arrow-icon {
@@ -449,7 +466,7 @@ margin: 0 5px;
 .course-item {
     background-color: #D6D6D6;
     font-weight: 300;
-    border-radius: 10px;
+    border-radius: 7px;
 }
 
 .completed {
@@ -472,6 +489,8 @@ margin: 0 5px;
     border: none !important;
     height: 3rem;
     border-radius: 10px;
+    margin-left: 0.1rem !important;
+    margin-right: 0.1rem !important;
 }
 
 .search-courses {
@@ -486,6 +505,8 @@ margin: 0 5px;
 
 .add-course-modal .modal-body {
     margin: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 
 .school-select {
@@ -627,9 +648,14 @@ margin: 0 5px;
 }
 
 .query-item {
-    min-height: 6rem;
+    min-height: 5.5rem;
+    max-height: 6rem;
     align-items: center;
     position: relative;
+    border-color: #E1E1E1;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 10px;
 }
 
 .query-item:hover {
@@ -637,14 +663,14 @@ margin: 0 5px;
 }
 
 .query-item-title {
-    font-size: 1.3rem;
+    font-size: 1.25em;
     font-weight: 400;
 }
 
 .query-item-id {
     font-size: 0.7rem;
     color: #B1B1B1;
-    font-style: italic;
+    /* font-style: italic; */
 }
   
 

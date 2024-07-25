@@ -235,7 +235,7 @@ function AddCourseModal({
             </div>
           ) : (
             <div>
-              <div className="search-courses-container d-flex align-items-center px-1 mb-2 row">
+              <div className="search-courses-container d-flex align-items-center px-1 mb-2 row mt-2">
                 <div className="col p-0">
                   <input
                     type="text"
@@ -292,12 +292,12 @@ function AddCourseModal({
                   </div>
                 </Collapse>
               </div>
-              <div className="scrollable-query-outcome px-2">
+              <div className="scrollable-query-outcome pt-1">
                 {filteredCourses.map((course) => (
                   <div
                     key={course.a}
-                    className="query-item my-0 p-2 row border-top"
-                    onClick={() => handleAddManually()}
+                    className="query-item my-0 px-3 my-3 d-flex"
+                    onClick={() => handleAddManually(course)}
                     role="button"
                   >
                     <div className="col-10 flex-grow-1 d-flex flex-column h-100">

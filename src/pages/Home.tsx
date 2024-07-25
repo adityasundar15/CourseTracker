@@ -31,7 +31,7 @@ function Home() {
       {/* <MouseTrail /> Add the MouseTrail component */}
       <div className="top-right-element">
         <Button
-          className="profile-button rounded-pill"
+          className="profile-button"
           variant="outline-light"
           onClick={navigateProfile}
           size="lg"
