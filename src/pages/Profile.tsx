@@ -51,8 +51,12 @@ const schoolsAndMajors: Record<string, Major[]> = {
   ],
   'School of International Liberal Studies (SILS)': [
     {
-      value: 'internationalLiberalStudies',
-      label: 'International Liberal Studies',
+      value: 'SILS(A)',
+      label: 'International Liberal Studies (April)',
+    },
+    {
+      value: 'SILS(S)',
+      label: 'International Liberal Studies (September)',
     },
   ],
   'School of Culture, Media and Society': [

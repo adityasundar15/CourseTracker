@@ -580,5 +580,179 @@
       "picture": 1,
       "courses": []
     }
+  ],
+  "SILS(A)": [
+    {
+      "id": "FLJ",
+      "name": "Foreign Language: Japanese",
+      "completed": 0,
+      "total": 24,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "FLE",
+      "name": "Foreign Language: English III",
+      "completed": 0,
+      "total": 3,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "FLOFL",
+      "name": "Foreign Language: Other",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "SFYSB",
+      "name": "Seminar: First Year Seminar B",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "SISE",
+      "name": "Seminar: Intermediate Seminar",
+      "completed": 0,
+      "total": 2,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "SAO",
+      "name": "Seminar: Advance / Other",
+      "completed": 0,
+      "total": 10,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "SIST",
+      "name": "Statistics: Introductory Statistics",
+      "completed": 0,
+      "total": 2,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "LIR",
+      "name": "Lecture: Introductory",
+      "completed": 0,
+      "total": 8,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "LIE",
+      "name": "Lecture: Intermediate",
+      "completed": 0,
+      "total": 16,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "LA",
+      "name": "Lecture: Advanced",
+      "completed": 0,
+      "total": 16,
+      "picture": 1,
+      "courses": []
+    },
+
+    {
+      "id": "EE",
+      "name": "Elective",
+      "completed": 0,
+      "total": 35,
+      "picture": 1,
+      "courses": []
+    }
+  ],
+  "SILS(S)": [
+    {
+      "id": "FLJ",
+      "name": "Foreign Language: Japanese",
+      "completed": 0,
+      "total": 24,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "FLE",
+      "name": "Foreign Language: English III",
+      "completed": 0,
+      "total": 3,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "FLOFL",
+      "name": "Foreign Language: Other",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "SFYSB",
+      "name": "Seminar: First Year Seminar B",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "SISE",
+      "name": "Seminar: Intermediate Seminar",
+      "completed": 0,
+      "total": 2,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "SAO",
+      "name": "Seminar: Advance / Other",
+      "completed": 0,
+      "total": 10,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "LIR",
+      "name": "Lecture: Introductory",
+      "completed": 0,
+      "total": 8,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "LIE",
+      "name": "Lecture: Intermediate",
+      "completed": 0,
+      "total": 16,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "LA",
+      "name": "Lecture: Advanced",
+      "completed": 0,
+      "total": 16,
+      "picture": 1,
+      "courses": []
+    },
+
+    {
+      "id": "EE",
+      "name": "Elective",
+      "completed": 0,
+      "total": 35,
+      "picture": 1,
+      "courses": []
+    }
   ]
 }
