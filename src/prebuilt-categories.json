@@ -2,7 +2,7 @@
   "MS": [
     {
       "id": "A1HSS",
-      "name": "Gourp A1: Humamity and Social Science",
+      "name": "Gourp A1: Humanity and Social Science",
       "completed": 0,
       "total": 10,
       "picture": 1,
@@ -34,7 +34,7 @@
     },
     {
       "id": "B1CM",
-      "name": "Gourp A1: Humamity and Social Science",
+      "name": "Group B1: Core Mathematics",
       "completed": 0,
       "total": 20,
       "picture": 1,
@@ -116,7 +116,7 @@
   "CSCE": [
     {
       "id": "A1HSS",
-      "name": "Gourp A1: Humamity and Social Science",
+      "name": "Gourp A1: Humanity and Social Science",
       "completed": 0,
       "total": 10,
       "picture": 1,
@@ -148,7 +148,7 @@
     },
     {
       "id": "B1CM",
-      "name": "Gourp A1: Humamity and Social Science",
+      "name": "Group B1: Core Mathematics",
       "completed": 0,
       "total": 12,
       "picture": 1,
@@ -230,7 +230,7 @@
   "ME": [
     {
       "id": "A1HSS",
-      "name": "Gourp A1: Humamity and Social Science",
+      "name": "Gourp A1: Humanity and Social Science",
       "completed": 0,
       "total": 10,
       "picture": 1,
@@ -262,7 +262,7 @@
     },
     {
       "id": "B1CM",
-      "name": "Gourp A1: Humamity and Social Science",
+      "name": "Group B1: Core Mathematics",
       "completed": 0,
       "total": 10,
       "picture": 1,
@@ -344,7 +344,7 @@
   "CEE": [
     {
       "id": "A1HSS",
-      "name": "Gourp A1: Humamity and Social Science",
+      "name": "Gourp A1: Humanity and Social Science",
       "completed": 0,
       "total": 10,
       "picture": 1,
@@ -376,7 +376,7 @@
     },
     {
       "id": "B1CM",
-      "name": "Gourp A1: Humamity and Social Science",
+      "name": "Group B1: Core Mathematics",
       "completed": 0,
       "total": 10,
       "picture": 1,
