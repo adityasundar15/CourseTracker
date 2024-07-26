@@ -16,6 +16,7 @@ import { Box, Divider, Slide } from "@mui/material";
 import DeleteConfirmationDialog from "../components/DeleteConfirmationDialog";
 import { updateCourseCategoriesInFirestore } from "../firestoreUtils";
 import { MdEdit } from "react-icons/md";
+import AddCategoryModal from "../components/AddCategoryModal";
 
 const SelectedCategory: React.FC = () => {
   const navigate = useNavigate();
@@ -25,6 +26,21 @@ const SelectedCategory: React.FC = () => {
   const [courseList, setCourseList] = useState<Course[]>([]);
   const containerRef = React.useRef<HTMLElement>(null);
   const [courseToEdit, setCourseToEdit] = useState<Course | null>(null);
+
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [categoryToEdit, setCategoryToEdit] = useState<
+    CourseCategory | undefined
+  >(undefined);
+
+  const handleShowEditModal = (category: CourseCategory) => {
+    setCategoryToEdit(category);
+    setShowEditModal(true);
+  };
+
+  const handleCloseEditModal = () => {
+    setShowEditModal(false);
+    setCategoryToEdit(undefined);
+  };
 
   const handleShowAddModal = () => {
     setCourseToEdit(null);
@@ -154,6 +170,19 @@ const SelectedCategory: React.FC = () => {
     navigate("/courses");
   };
 
+  const handleCategoryUpdate = async (updatedCategory: CourseCategory) => {
+    const updatedCategories = courseCategories.map((category) =>
+      category.id === updatedCategory.id ? updatedCategory : category
+    );
+
+    await updateCourseCategoriesInFirestore(updatedCategories);
+
+    localStorage.setItem("courseCategories", JSON.stringify(updatedCategories));
+
+    setCategoryToEdit(updatedCategory);
+    setShowEditModal(false);
+  };
+
   return (
     <div id="parent-container">
       <div className="top-right-element position-absolute">
@@ -205,9 +234,19 @@ const SelectedCategory: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="d-flex justify-content-center">
-          <div className="category-page-title d-flex">
-            {selectedCategory?.name}
+        <div className="d-flex justify-content-center align-items-center category-sub-header">
+          <div className="w-75 row justify-content-between align-items-center">
+            <div className="category-page-title d-flex col-9">
+              {selectedCategory?.name}
+            </div>
+            <div className="col-auto justify-content-end">
+              <Button
+                className="category-edit-btn"
+                onClick={() => handleShowEditModal(selectedCategory)}
+              >
+                Edit
+              </Button>
+            </div>
           </div>
         </div>
         <div className="course-list-wrapper d-flex justify-content-center">
@@ -256,6 +295,12 @@ const SelectedCategory: React.FC = () => {
         onAddCourse={addCourse}
         courseToEdit={courseToEdit}
       ></AddCourseModal>
+      <AddCategoryModal
+        show={showEditModal}
+        handleClose={handleCloseEditModal}
+        onAddCategory={handleCategoryUpdate} // Replace with your update handler
+        categoryToEdit={categoryToEdit}
+      />
     </div>
   );
 };

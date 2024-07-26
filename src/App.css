@@ -400,11 +400,29 @@ margin: 0 5px;
     backdrop-filter: blur(3px);
 }
 
+.category-sub-header {
+    padding: 2.25% 0%;
+}
+
 .category-page-title {
-    font-size: 2.75rem;
+    font-size: 2.7rem;
     font-family: 'Outfit';
-    padding: 3.5% 0%;
     width: 78%;
+}
+
+.category-edit-btn {
+    height: 3rem;
+    padding: 0.5rem 3rem !important; 
+    background-color: transparent !important;
+    color: black !important;
+    border-color: black !important;
+    border-width: 2px !important;
+    border-radius: 20px !important;
+    font-size: 1.25rem !important;
+}
+
+.category-edit-btn:hover {
+    background-color: #2121210c !important;
 }
 
 .add-course-modal .modal-sub-headers{
@@ -562,38 +580,6 @@ margin: 0 5px;
     transition: background-color 0.3s ease;
 }
 
-
-.modal-img-container {
-    flex: 1 1 22%; /* Adjust this value to control the size of each image container */
-    margin: 0.5%; /* Add some margin to create space between images */
-    position: relative; /* For positioning the overlay */
-  }
-  
-  .modal-img {
-    width: 100%;
-    height: 6rem;
-    object-fit: cover;
-  }
-
-.img-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 1rem;
-    pointer-events: none; /* Ensures that the overlay doesn't intercept clicks */
-}
-
-.add-category-modal .modal-footer {
-    border-top: none;
-}
-
 .scrollable-query-outcome {
     max-height: 20rem; /* Adjust the height as needed */
     overflow-y: auto;
@@ -674,9 +660,42 @@ margin: 0 5px;
 
 .selected {
     border: 5px solid rgb(0, 0, 0);
+    border-radius: 10px;
     transition: border 0.2s ease-in-out;
     position: relative;
 } 
+
+.modal-img-container {
+    position: relative; /* For positioning the overlay */
+    width: 100%;
+  }
+  
+  .modal-img {
+    width: 100%;
+    height: 6rem;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+
+.img-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1rem;
+    pointer-events: none; /* Ensures that the overlay doesn't intercept clicks */
+}
+
+.add-category-modal .modal-footer {
+    border-top: none;
+}
+
 
 /* #endregion */
 
