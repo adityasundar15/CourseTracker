@@ -1,5 +1,5 @@
 import { Button, Modal } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CourseCategory } from "../pages/Courses";
 import { v4 as uuidv4 } from "uuid";
 import { updateCourseCategoriesInFirestore } from "../firestoreUtils";
@@ -13,43 +13,63 @@ interface AddCategoryModalProps {
   show: boolean;
   handleClose: () => void;
   onAddCategory: (newCategory: CourseCategory) => void;
+  categoryToEdit?: CourseCategory;
 }
 
 function AddCategoryModal({
   show,
   handleClose,
   onAddCategory,
+  categoryToEdit,
 }: AddCategoryModalProps) {
   const [courseGroup, setCourseGroup] = useState("");
   const [requiredCredits, setRequiredCredits] = useState("");
   const [picture, setPicture] = useState(1); // Default picture
 
-  const handleAddCategory = async () => {
-    // Create new category object
+  // Effect to populate fields if editing
+  useEffect(() => {
+    if (categoryToEdit) {
+      setCourseGroup(categoryToEdit.name);
+      setRequiredCredits(categoryToEdit.total.toString());
+      setPicture(categoryToEdit.picture);
+    }
+  }, [categoryToEdit]);
+
+  const handleSaveCategory = async () => {
+    // Create or update category object
     const newCategory: CourseCategory = {
-      id: uuidv4(),
+      id: categoryToEdit ? categoryToEdit.id : uuidv4(),
       name: courseGroup,
-      completed: 0,
+      completed: categoryToEdit ? categoryToEdit.completed : 0,
       total: parseInt(requiredCredits),
       picture: picture,
-      courses: [],
+      courses: categoryToEdit ? categoryToEdit.courses : [],
     };
 
-    // Add new category to local storage
+    // Update local storage and Firestore
     const existingCategoriesJSON = localStorage.getItem("courseCategories");
-    const existingCategories: CourseCategory[] = existingCategoriesJSON
+    let existingCategories: CourseCategory[] = existingCategoriesJSON
       ? JSON.parse(existingCategoriesJSON)
       : [];
-    const updatedCategories = [...existingCategories, newCategory];
 
-    // Call the onAddCategory function to pass the new category to the parent component
+    if (categoryToEdit) {
+      existingCategories = existingCategories.map((category) =>
+        category.id === categoryToEdit.id ? newCategory : category
+      );
+    } else {
+      existingCategories.push(newCategory);
+    }
+
+    // Call the onAddCategory function to pass the new/updated category to the parent component
     onAddCategory(newCategory);
 
     // Sync local data with Firestore
-    await updateCourseCategoriesInFirestore(updatedCategories);
-
-    localStorage.setItem("courseCategories", JSON.stringify(updatedCategories));
-    console.log("Category added to local storage");
+    await updateCourseCategoriesInFirestore(existingCategories);
+    localStorage.setItem(
+      "courseCategories",
+      JSON.stringify(existingCategories)
+    );
+    console.log("Category saved to local storage");
 
     // Reset input fields and close modal
     setCourseGroup("");
@@ -67,9 +87,13 @@ function AddCategoryModal({
       <div className="add-category-modal-content">
         <Modal.Header className="add-category-modal-header" closeButton>
           <div className="col mt-3 mb-3">
-            <Modal.Title className="text-center">Add Category</Modal.Title>
+            <Modal.Title className="text-center">
+              {categoryToEdit ? "Edit Category" : "Add Category"}
+            </Modal.Title>
             <div className="modal-subtitle text-secondary text-center center pt-3">
-              Enter your course category details
+              {categoryToEdit
+                ? "Edit your course category details"
+                : "Enter your course category details"}
             </div>
           </div>
         </Modal.Header>
@@ -112,51 +136,31 @@ function AddCategoryModal({
             </div>
           </div>
           <div className="mb-1 pt-3">
-            <div className="d-flex flex-wrap justify-content-between">
-              <div className="modal-img-container">
-                <img
-                  className={`d-block modal-img ${
-                    picture === 1 ? "selected" : ""
-                  }`}
-                  src={placeHolderPic1}
-                  alt="First slide"
-                  onClick={() => setPicture(1)}
-                />
-                {picture === 1 && <div className="img-overlay">Selected</div>}
-              </div>
-              <div className="modal-img-container">
-                <img
-                  className={`d-block modal-img ${
-                    picture === 2 ? "selected" : ""
-                  }`}
-                  src={placeHolderPic2}
-                  alt="Second slide"
-                  onClick={() => setPicture(2)}
-                />
-                {picture === 2 && <div className="img-overlay">Selected</div>}
-              </div>
-              <div className="modal-img-container">
-                <img
-                  className={`d-block modal-img ${
-                    picture === 3 ? "selected" : ""
-                  }`}
-                  src={placeHolderPic3}
-                  alt="Third slide"
-                  onClick={() => setPicture(3)}
-                />
-                {picture === 3 && <div className="img-overlay">Selected</div>}
-              </div>
-              <div className="modal-img-container">
-                <img
-                  className={`d-block modal-img ${
-                    picture === 4 ? "selected" : ""
-                  }`}
-                  src={placeHolderPic4}
-                  alt="Fourth slide"
-                  onClick={() => setPicture(4)}
-                />
-                {picture === 4 && <div className="img-overlay">Selected</div>}
-              </div>
+            <div className="row gx-3 d-flex justify-content-evenly align-content-center">
+              {[
+                placeHolderPic1,
+                placeHolderPic2,
+                placeHolderPic3,
+                placeHolderPic4,
+              ].map((src, index) => (
+                <div key={index} className="col-3 align-content-center">
+                  <div
+                    className={`modal-img-container ${
+                      picture === index + 1 ? "selected" : ""
+                    }`}
+                  >
+                    <img
+                      className="d-block modal-img"
+                      src={src}
+                      alt={`Slide ${index + 1}`}
+                      onClick={() => setPicture(index + 1)}
+                    />
+                    {picture === index + 1 && (
+                      <div className="img-overlay">Selected</div>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </Modal.Body>
@@ -164,10 +168,10 @@ function AddCategoryModal({
           <Button
             variant="primary"
             className="mx-auto rounded-pill btn-lg"
-            onClick={handleAddCategory}
+            onClick={handleSaveCategory}
             style={{ backgroundColor: "black", borderColor: "black" }}
           >
-            <div className="px-4 py-1">Add</div>
+            <div className="px-4 py-1">{categoryToEdit ? "Save" : "Add"}</div>
           </Button>
         </Modal.Footer>
       </div>

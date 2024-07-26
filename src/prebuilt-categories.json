@@ -2,7 +2,7 @@
   "MS": [
     {
       "id": "A1HSS",
-      "name": "Gourp A1: Humanity and Social Science",
+      "name": "Group A1: Humanity and Social Science",
       "completed": 0,
       "total": 10,
       "picture": 1,
@@ -10,7 +10,7 @@
     },
     {
       "id": "A2ESE",
-      "name": "Gourp A2: English for Science and Engineer",
+      "name": "Group A2: English for Science and Engineer",
       "completed": 0,
       "total": 2,
       "picture": 1,
@@ -18,7 +18,7 @@
     },
     {
       "id": "A2ESL",
-      "name": "Gourp A2: English as a Second Language",
+      "name": "Group A2: English as a Second Language",
       "completed": 0,
       "total": 0,
       "picture": 1,
@@ -26,7 +26,7 @@
     },
     {
       "id": "A2J/LEL",
-      "name": "Gourp A2: Japanese / Language other than English or Japanese",
+      "name": "Group A2: Japanese / Language other than English or Japanese",
       "completed": 0,
       "total": 4,
       "picture": 1,
@@ -42,7 +42,7 @@
     },
     {
       "id": "B2CP",
-      "name": "Gourp B2: Core Physics",
+      "name": "Group B2: Core Physics",
       "completed": 0,
       "total": 6,
       "picture": 1,
@@ -50,7 +50,7 @@
     },
     {
       "id": "B2CC",
-      "name": "Gourp B2: Core Chemistry",
+      "name": "Group B2: Core Chemistry",
       "completed": 0,
       "total": 2,
       "picture": 1,
@@ -58,7 +58,7 @@
     },
     {
       "id": "B2CB",
-      "name": "Gourp B2: Core Bioscience",
+      "name": "Group B2: Core Bioscience",
       "completed": 0,
       "total": 0,
       "picture": 1,
@@ -66,7 +66,7 @@
     },
     {
       "id": "B3CL",
-      "name": "Gourp B3: Core Laboratory",
+      "name": "Group B3: Core Laboratory",
       "completed": 0,
       "total": 3,
       "picture": 1,
@@ -74,7 +74,7 @@
     },
     {
       "id": "B4CCS",
-      "name": "Gourp B4: Core Computer Science",
+      "name": "Group B4: Core Computer Science",
       "completed": 0,
       "total": 4,
       "picture": 1,
@@ -82,7 +82,7 @@
     },
     {
       "id": "CR",
-      "name": "Gourp C: Required",
+      "name": "Group C: Required",
       "completed": 0,
       "total": 28,
       "picture": 1,
@@ -90,7 +90,7 @@
     },
     {
       "id": "CRE",
-      "name": "Gourp C: Required Elective",
+      "name": "Group C: Required Elective",
       "completed": 0,
       "total": 16,
       "picture": 1,
@@ -98,7 +98,7 @@
     },
     {
       "id": "CE",
-      "name": "Gourp C: Elective",
+      "name": "Group C: Elective",
       "completed": 0,
       "total": 17,
       "picture": 1,
@@ -106,7 +106,7 @@
     },
     {
       "id": "AE",
-      "name": "Gourp C: Additonal Electives",
+      "name": "Group C: Additonal Electives",
       "completed": 0,
       "total": 17,
       "picture": 1,
@@ -116,7 +116,7 @@
   "CSCE": [
     {
       "id": "A1HSS",
-      "name": "Gourp A1: Humanity and Social Science",
+      "name": "Group A1: Humanity and Social Science",
       "completed": 0,
       "total": 10,
       "picture": 1,
@@ -124,7 +124,7 @@
     },
     {
       "id": "A2ESE",
-      "name": "Gourp A2: English for Science and Engineer",
+      "name": "Group A2: English for Science and Engineer",
       "completed": 0,
       "total": 2,
       "picture": 1,
@@ -132,7 +132,7 @@
     },
     {
       "id": "A2ESL",
-      "name": "Gourp A2: English as a Second Language",
+      "name": "Group A2: English as a Second Language",
       "completed": 0,
       "total": 0,
       "picture": 1,
@@ -140,7 +140,7 @@
     },
     {
       "id": "A2J/LEL",
-      "name": "Gourp A2: Japanese / Language other than English or Japanese",
+      "name": "Group A2: Japanese / Language other than English or Japanese",
       "completed": 0,
       "total": 4,
       "picture": 1,
@@ -156,7 +156,7 @@
     },
     {
       "id": "B2CP",
-      "name": "Gourp B2: Core Physics",
+      "name": "Group B2: Core Physics",
       "completed": 0,
       "total": 6,
       "picture": 1,
@@ -164,7 +164,7 @@
     },
     {
       "id": "B2CC",
-      "name": "Gourp B2: Core Chemistry",
+      "name": "Group B2: Core Chemistry",
       "completed": 0,
       "total": 0,
       "picture": 1,
@@ -172,7 +172,7 @@
     },
     {
       "id": "B2CB",
-      "name": "Gourp B2: Core Bioscience",
+      "name": "Group B2: Core Bioscience",
       "completed": 0,
       "total": 0,
       "picture": 1,
@@ -180,7 +180,7 @@
     },
     {
       "id": "B3CL",
-      "name": "Gourp B3: Core Laboratory",
+      "name": "Group B3: Core Laboratory",
       "completed": 0,
       "total": 2,
       "picture": 1,
@@ -188,7 +188,7 @@
     },
     {
       "id": "B4CCS",
-      "name": "Gourp B4: Core Computer Science",
+      "name": "Group B4: Core Computer Science",
       "completed": 0,
       "total": 6,
       "picture": 1,
@@ -196,7 +196,7 @@
     },
     {
       "id": "CR",
-      "name": "Gourp C: Required",
+      "name": "Group C: Required",
       "completed": 0,
       "total": 22,
       "picture": 1,
@@ -204,7 +204,7 @@
     },
     {
       "id": "CRE",
-      "name": "Gourp C: Required Elective",
+      "name": "Group C: Required Elective",
       "completed": 0,
       "total": 38,
       "picture": 1,
@@ -212,7 +212,7 @@
     },
     {
       "id": "CE",
-      "name": "Gourp C: Elective",
+      "name": "Group C: Elective",
       "completed": 0,
       "total": 4,
       "picture": 1,
@@ -220,7 +220,7 @@
     },
     {
       "id": "AE",
-      "name": "Gourp C: Additonal Electives",
+      "name": "Group C: Additonal Electives",
       "completed": 0,
       "total": 20,
       "picture": 1,
@@ -230,7 +230,7 @@
   "ME": [
     {
       "id": "A1HSS",
-      "name": "Gourp A1: Humanity and Social Science",
+      "name": "Group A1: Humanity and Social Science",
       "completed": 0,
       "total": 10,
       "picture": 1,
@@ -238,7 +238,7 @@
     },
     {
       "id": "A2ESE",
-      "name": "Gourp A2: English for Science and Engineer",
+      "name": "Group A2: English for Science and Engineer",
       "completed": 0,
       "total": 2,
       "picture": 1,
@@ -246,7 +246,7 @@
     },
     {
       "id": "A2ESL",
-      "name": "Gourp A2: English as a Second Language",
+      "name": "Group A2: English as a Second Language",
       "completed": 0,
       "total": 0,
       "picture": 1,
@@ -254,7 +254,7 @@
     },
     {
       "id": "A2J/LEL",
-      "name": "Gourp A2: Japanese / Language other than English or Japanese",
+      "name": "Group A2: Japanese / Language other than English or Japanese",
       "completed": 0,
       "total": 4,
       "picture": 1,
@@ -270,7 +270,7 @@
     },
     {
       "id": "B2CP",
-      "name": "Gourp B2: Core Physics",
+      "name": "Group B2: Core Physics",
       "completed": 0,
       "total": 6,
       "picture": 1,
@@ -278,7 +278,7 @@
     },
     {
       "id": "B2CC",
-      "name": "Gourp B2: Core Chemistry",
+      "name": "Group B2: Core Chemistry",
       "completed": 0,
       "total": 0,
       "picture": 1,
@@ -286,7 +286,7 @@
     },
     {
       "id": "B2CB",
-      "name": "Gourp B2: Core Bioscience",
+      "name": "Group B2: Core Bioscience",
       "completed": 0,
       "total": 0,
       "picture": 1,
@@ -294,7 +294,7 @@
     },
     {
       "id": "B3CL",
-      "name": "Gourp B3: Core Laboratory",
+      "name": "Group B3: Core Laboratory",
       "completed": 0,
       "total": 4,
       "picture": 1,
@@ -302,7 +302,7 @@
     },
     {
       "id": "B4CCS",
-      "name": "Gourp B4: Core Computer Science",
+      "name": "Group B4: Core Computer Science",
       "completed": 0,
       "total": 4,
       "picture": 1,
@@ -310,7 +310,7 @@
     },
     {
       "id": "CR",
-      "name": "Gourp C: Required",
+      "name": "Group C: Required",
       "completed": 0,
       "total": 44,
       "picture": 1,
@@ -318,7 +318,7 @@
     },
     {
       "id": "CRE",
-      "name": "Gourp C: Required Elective",
+      "name": "Group C: Required Elective",
       "completed": 0,
       "total": 0,
       "picture": 1,
@@ -326,7 +326,7 @@
     },
     {
       "id": "CE",
-      "name": "Gourp C: Elective",
+      "name": "Group C: Elective",
       "completed": 0,
       "total": 26,
       "picture": 1,
@@ -334,7 +334,7 @@
     },
     {
       "id": "AE",
-      "name": "Gourp C: Additonal Electives",
+      "name": "Group C: Additonal Electives",
       "completed": 0,
       "total": 20,
       "picture": 1,
@@ -344,7 +344,7 @@
   "CEE": [
     {
       "id": "A1HSS",
-      "name": "Gourp A1: Humanity and Social Science",
+      "name": "Group A1: Humanity and Social Science",
       "completed": 0,
       "total": 10,
       "picture": 1,
@@ -352,7 +352,7 @@
     },
     {
       "id": "A2ESE",
-      "name": "Gourp A2: English for Science and Engineer",
+      "name": "Group A2: English for Science and Engineer",
       "completed": 0,
       "total": 2,
       "picture": 1,
@@ -360,7 +360,7 @@
     },
     {
       "id": "A2ESL",
-      "name": "Gourp A2: English as a Second Language",
+      "name": "Group A2: English as a Second Language",
       "completed": 0,
       "total": 0,
       "picture": 1,
@@ -368,7 +368,7 @@
     },
     {
       "id": "A2J/LEL",
-      "name": "Gourp A2: Japanese / Language other than English or Japanese",
+      "name": "Group A2: Japanese / Language other than English or Japanese",
       "completed": 0,
       "total": 4,
       "picture": 1,
@@ -384,7 +384,7 @@
     },
     {
       "id": "B2CP",
-      "name": "Gourp B2: Core Physics",
+      "name": "Group B2: Core Physics",
       "completed": 0,
       "total": 6,
       "picture": 1,
@@ -392,7 +392,7 @@
     },
     {
       "id": "B2CC",
-      "name": "Gourp B2: Core Chemistry",
+      "name": "Group B2: Core Chemistry",
       "completed": 0,
       "total": 4,
       "picture": 1,
@@ -400,7 +400,7 @@
     },
     {
       "id": "B2CB",
-      "name": "Gourp B2: Core Bioscience",
+      "name": "Group B2: Core Bioscience",
       "completed": 0,
       "total": 2,
       "picture": 1,
@@ -408,7 +408,7 @@
     },
     {
       "id": "B3CL",
-      "name": "Gourp B3: Core Laboratory",
+      "name": "Group B3: Core Laboratory",
       "completed": 0,
       "total": 3,
       "picture": 1,
@@ -416,7 +416,7 @@
     },
     {
       "id": "B4CCS",
-      "name": "Gourp B4: Core Computer Science",
+      "name": "Group B4: Core Computer Science",
       "completed": 0,
       "total": 4,
       "picture": 1,
@@ -424,7 +424,7 @@
     },
     {
       "id": "CR",
-      "name": "Gourp C: Required",
+      "name": "Group C: Required",
       "completed": 0,
       "total": 41,
       "picture": 1,
@@ -432,7 +432,7 @@
     },
     {
       "id": "CRE",
-      "name": "Gourp C: Required Elective",
+      "name": "Group C: Required Elective",
       "completed": 0,
       "total": 0,
       "picture": 1,
@@ -440,7 +440,7 @@
     },
     {
       "id": "CE",
-      "name": "Gourp C: Elective",
+      "name": "Group C: Elective",
       "completed": 0,
       "total": 20,
       "picture": 1,
@@ -448,7 +448,7 @@
     },
     {
       "id": "AE",
-      "name": "Gourp C: Additonal Electives",
+      "name": "Group C: Additonal Electives",
       "completed": 0,
       "total": 24,
       "picture": 1,
