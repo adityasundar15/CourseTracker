@@ -52,6 +52,7 @@ function Login() {
           { merge: true },
         );
         await fetchSelectedCourses(currentUser.uid);
+        await fetchUserDetailInfo(currentUser.uid);
       } else {
         console.log('User logged out, resetting state...');
         setCurrentUser(null);
@@ -84,6 +85,36 @@ function Login() {
         );
       } else {
         console.log('No stored categories in local storage.');
+      }
+    } catch (error) {
+      console.error('Error fetching selected courses: ', error);
+    }
+  };
+
+  const fetchUserDetailInfo = async (uid: string) => {
+    try {
+      console.log('Fetching detail info for user:', uid);
+      const userDocRef = doc(db, 'users', uid);
+      const userDoc = await getDoc(userDocRef);
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        console.log('User data from API:', userData); // Log raw user data
+
+        // Replace local storage with API data
+        const apiUserDetail = userData?.UserDetail || null;
+        localStorage.setItem('UserDetail', JSON.stringify(apiUserDetail));
+      } else {
+        localStorage.removeItem('UserDetail'); // Clear local storage if no data exists in API
+      }
+
+      const storedUserDetail = localStorage.getItem('UserDetail');
+      if (storedUserDetail) {
+        console.log(
+          'Updated stored UserDetail from local storage:',
+          JSON.parse(storedUserDetail),
+        );
+      } else {
+        console.log('No stored UserDetail in local storage.');
       }
     } catch (error) {
       console.error('Error fetching selected courses: ', error);
