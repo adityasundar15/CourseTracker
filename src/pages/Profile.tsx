@@ -67,7 +67,7 @@ const schoolsAndMajors: Record<string, Major[]> = {
     { value: 'csce', label: 'Computer Science and Communications Engineering' },
   ],
   'School of Creative Science and Engineering': [
-    { value: 'mechanicalEngineering', label: 'Mechanical Engineering' },
+    { value: 'ME', label: 'Mechanical Engineering' },
     {
       value: 'CEE',
       label: 'Civil and Environmental Engineering',
@@ -83,6 +83,7 @@ function Profile() {
     label: string;
   } | null>(null);
   const [selectedMajor, setSelectedMajor] = useState<Major | null>(null);
+  const [categoryGenerated, setCategoryGenerated] = useState(false);
 
   const navigateHome = () => {
     navigate('/');
@@ -135,6 +136,7 @@ function Profile() {
         JSON.stringify(selectedCategories),
       );
       console.log('Category added to local storage');
+      setCategoryGenerated(true);
     } else {
       console.log(`No categories found for major: ${major}`);
     }
@@ -184,13 +186,17 @@ function Profile() {
                 <div>
                   <h2>Selected Major: {selectedMajor.label}</h2>
                   <h2>Selected Major: {selectedMajor.value}</h2>
-                  <button
-                    onClick={() =>
-                      handleCategoryGeneration(selectedMajor.value)
-                    }
-                  >
-                    Generate Auto Categories
-                  </button>
+                  {categoryGenerated ? (
+                    <h2>Category Generated</h2>
+                  ) : (
+                    <button
+                      onClick={() =>
+                        handleCategoryGeneration(selectedMajor.value)
+                      }
+                    >
+                      Generate Auto Categories
+                    </button>
+                  )}
                 </div>
               )}
               <div className="py-4">

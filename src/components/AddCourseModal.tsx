@@ -1,19 +1,19 @@
-import { Button, Collapse, Modal } from "react-bootstrap";
-import { useState, useEffect } from "react";
-import { Course, CourseCategory } from "../pages/Courses";
-import { database } from "../firebase-config"; // Make sure the path is correct
-import { onValue, ref } from "firebase/database";
-import { IoIosAddCircleOutline } from "react-icons/io";
-import { updateCourseCategoriesInFirestore } from "../firestoreUtils";
-import { MdOutlineBackpack } from "react-icons/md";
+import { Button, Collapse, Modal } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
+import { Course, CourseCategory } from '../pages/Courses';
+import { database } from '../firebase-config'; // Make sure the path is correct
+import { onValue, ref } from 'firebase/database';
+import { IoIosAddCircleOutline } from 'react-icons/io';
+import { updateCourseCategoriesInFirestore } from '../firestoreUtils';
+import { MdOutlineBackpack } from 'react-icons/md';
 
-import silsIcon from "../assets/syllabus-icons/sils.png";
-import pseIcon from "../assets/syllabus-icons/pse.png";
-import sssIcon from "../assets/syllabus-icons/sss.png";
-import fseIcon from "../assets/syllabus-icons/fse.png";
-import cseIcon from "../assets/syllabus-icons/cse.png";
-import aseIcon from "../assets/syllabus-icons/ase.png";
-import cmsIcon from "../assets/syllabus-icons/cms.png";
+import silsIcon from '../assets/syllabus-icons/sils.png';
+import pseIcon from '../assets/syllabus-icons/pse.png';
+import sssIcon from '../assets/syllabus-icons/sss.png';
+import fseIcon from '../assets/syllabus-icons/fse.png';
+import cseIcon from '../assets/syllabus-icons/cse.png';
+import aseIcon from '../assets/syllabus-icons/ase.png';
+import cmsIcon from '../assets/syllabus-icons/cms.png';
 
 // FirebaseCourse interface matching the structure
 interface FirebaseCourse {
@@ -51,15 +51,15 @@ function AddCourseModal({
   courseToEdit,
 }: AddCourseModalProps) {
   const [showManualForm, setShowManualForm] = useState(false);
-  const [courseKey, setCourseKey] = useState("");
-  const [courseName, setCourseName] = useState("");
-  const [requiredCredits, setRequiredCredits] = useState("");
+  const [courseKey, setCourseKey] = useState('');
+  const [courseName, setCourseName] = useState('');
+  const [requiredCredits, setRequiredCredits] = useState('');
   const [courseCompleted, setCourseCompleted] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [courses, setCourses] = useState<FirebaseCourse[]>([]);
   const [filteredCourses, setFilteredCourses] = useState<FirebaseCourse[]>([]);
   const [openFilter, setOpenFilter] = useState(false);
-  const [selectedSchool, setSelectedSchool] = useState<string | null>(null);
+  const [selectedSchool, setSelectedSchool] = useState<string>('PSE');
 
   const handleIconClick = (iconName: string) => {
     setSelectedSchool(iconName);
@@ -77,7 +77,7 @@ function AddCourseModal({
 
   useEffect(() => {
     // Fetch data from Firebase
-    const coursesRef = ref(database, "FSE");
+    const coursesRef = ref(database, selectedSchool);
     onValue(coursesRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
@@ -85,14 +85,14 @@ function AddCourseModal({
         setCourses(fullCoursesArray);
       }
     });
-  }, []);
+  }, [selectedSchool]);
 
   useEffect(() => {
     // Filter courses based on search term
     const filtered = courses.filter(
       (course) =>
         course.b.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        course.a.toLowerCase().includes(searchTerm.toLowerCase())
+        course.a.toLowerCase().includes(searchTerm.toLowerCase()),
     );
     setFilteredCourses(filtered);
   }, [searchTerm, courses]);
@@ -113,13 +113,13 @@ function AddCourseModal({
     const newCourse: Course = {
       id: courseKey,
       name: courseName,
-      name_jp: "",
+      name_jp: '',
       credit: parseInt(requiredCredits),
       progress: courseCompleted ? 1 : 0,
-      school: "",
+      school: '',
     };
 
-    const storedCategories = localStorage.getItem("courseCategories");
+    const storedCategories = localStorage.getItem('courseCategories');
     const courseCategories: CourseCategory[] = storedCategories
       ? JSON.parse(storedCategories)
       : [];
@@ -127,7 +127,7 @@ function AddCourseModal({
     const updatedCategories = courseCategories.map((category) => {
       if (category.id === categoryID) {
         const courseIndex = category.courses.findIndex(
-          (course) => course.id === newCourse.id
+          (course) => course.id === newCourse.id,
         );
 
         if (courseIndex === -1) {
@@ -157,11 +157,11 @@ function AddCourseModal({
 
     onAddCourse(newCourse);
 
-    localStorage.setItem("courseCategories", JSON.stringify(updatedCategories));
+    localStorage.setItem('courseCategories', JSON.stringify(updatedCategories));
 
-    setCourseKey("");
-    setCourseName("");
-    setRequiredCredits("");
+    setCourseKey('');
+    setCourseName('');
+    setRequiredCredits('');
     setCourseCompleted(false);
     handleCloseModal();
   };
@@ -246,18 +246,18 @@ function AddCourseModal({
               <div className="col align-self-center justify-content-between d-flex">
                 <Button
                   className={`btn-sm add-course-btn ${
-                    courseCompleted ? "add-course-selected" : ""
+                    courseCompleted ? 'add-course-selected' : ''
                   }`}
-                  style={{ width: "45%" }}
+                  style={{ width: '45%' }}
                   onClick={() => setCourseCompleted(true)}
                 >
                   <div className="py-1">Complete</div>
                 </Button>
                 <Button
                   className={`btn-sm add-course-btn ${
-                    !courseCompleted ? "add-course-selected" : ""
+                    !courseCompleted ? 'add-course-selected' : ''
                   }`}
-                  style={{ width: "45%" }}
+                  style={{ width: '45%' }}
                   onClick={() => setCourseCompleted(false)}
                 >
                   <div className="py-1">Incomplete</div>
@@ -279,11 +279,11 @@ function AddCourseModal({
                 <div className="col-auto pe-4">
                   <Button
                     className={`school-select ${
-                      openFilter ? "opened-filter" : ""
+                      openFilter ? 'opened-filter' : ''
                     }`}
                     onClick={() => setOpenFilter(!openFilter)}
                     aria-controls="collapse-content"
-                    aria-expanded={openFilter ? "true" : "false"}
+                    aria-expanded={openFilter ? 'true' : 'false'}
                   >
                     <MdOutlineBackpack color="black" size={28} />
                   </Button>
@@ -294,18 +294,18 @@ function AddCourseModal({
                   <div id="collapse-content">
                     <div className="d-flex w-100 course-filter-container mb-2 justify-content-between align-items-center p-3">
                       {[
-                        { src: silsIcon, alt: "SILS", name: "SILS" },
-                        { src: pseIcon, alt: "PSE", name: "PSE" },
-                        { src: sssIcon, alt: "SSS", name: "SSS" },
-                        { src: fseIcon, alt: "FSE", name: "FSE" },
-                        { src: cseIcon, alt: "CSE", name: "CSE" },
-                        { src: aseIcon, alt: "ASE", name: "ASE" },
-                        { src: cmsIcon, alt: "CMS", name: "CMS" },
+                        { src: silsIcon, alt: 'SILS', name: 'SILS' },
+                        { src: pseIcon, alt: 'PSE', name: 'PSE' },
+                        { src: sssIcon, alt: 'SSS', name: 'SSS' },
+                        { src: fseIcon, alt: 'FSE', name: 'FSE' },
+                        { src: cseIcon, alt: 'CSE', name: 'CSE' },
+                        { src: aseIcon, alt: 'ASE', name: 'ASE' },
+                        { src: cmsIcon, alt: 'CMS', name: 'CMS' },
                       ].map((icon) => (
                         <div
                           key={icon.name}
                           className={`image-container ${
-                            selectedSchool === icon.name ? "selected" : ""
+                            selectedSchool === icon.name ? 'selected' : ''
                           }`}
                           onClick={() => handleIconClick(icon.name)}
                         >
@@ -363,7 +363,7 @@ function AddCourseModal({
               variant="primary"
               className="mx-auto rounded-pill btn-lg"
               onClick={handleAddCourse}
-              style={{ backgroundColor: "black", borderColor: "black" }}
+              style={{ backgroundColor: 'black', borderColor: 'black' }}
             >
               <div className="px-5">Add</div>
             </Button>
