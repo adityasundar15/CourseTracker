@@ -1,11 +1,14 @@
-import "../css/Profile.css";
+import '../css/Profile.css';
 
-import { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import Select from "react-dropdown-select";
-import { auth, signinWithGoogle } from "../firebase-config";
-import { MdOutlineLogout } from "react-icons/md";
+import { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import Select from 'react-dropdown-select';
+import { auth, signinWithGoogle } from '../firebase-config';
+import { MdOutlineLogout } from 'react-icons/md';
+import { Course } from './Courses';
+import { updateCourseCategoriesInFirestore } from '../firestoreUtils';
+import prebuiltList from '../prebuilt-categories.json';
 
 interface UserInfo {
   displayName: string;
@@ -18,41 +21,56 @@ interface Major {
   label: string;
 }
 
+interface CourseCategory {
+  id: string;
+  name: string;
+  completed: number;
+  total: number;
+  picture: number;
+  courses: Course[];
+}
+
+interface PrebuiltList {
+  [key: string]: CourseCategory[];
+}
+
+const prebuiltListTyped: PrebuiltList = prebuiltList;
+
 const schoolsAndMajors: Record<string, Major[]> = {
-  "School of Political Science and Economics": [
-    { value: "politicalScience", label: "Political Science" },
-    { value: "economics", label: "Economics" },
-    { value: "globalPoliticalEconomy", label: "Global Political Economy" },
+  'School of Political Science and Economics': [
+    { value: 'PS', label: 'Political Science' },
+    { value: 'ECON', label: 'Economics' },
+    { value: 'GPE', label: 'Global Political Economy' },
   ],
-  "School of Social Sciences": [
+  'School of Social Sciences': [
     {
-      value: "taisi",
+      value: 'taisi',
       label:
-        "Transnational and Interdisciplinary Studies in Social Innovation Program (TAISI)",
+        'Transnational and Interdisciplinary Studies in Social Innovation Program (TAISI)',
     },
   ],
-  "School of International Liberal Studies (SILS)": [
+  'School of International Liberal Studies (SILS)': [
     {
-      value: "internationalLiberalStudies",
-      label: "International Liberal Studies",
+      value: 'internationalLiberalStudies',
+      label: 'International Liberal Studies',
     },
   ],
-  "School of Culture, Media and Society": [
-    { value: "transculturalStudies", label: "Transcultural Studies" },
+  'School of Culture, Media and Society': [
+    { value: 'transculturalStudies', label: 'Transcultural Studies' },
     {
-      value: "jculp",
-      label: "Global Studies in Japanese Cultures Program (JCuIP)",
+      value: 'jculp',
+      label: 'Global Studies in Japanese Cultures Program (JCuIP)',
     },
   ],
-  "School of Fundamental Science and Engineering": [
-    { value: "mathematicalSciences", label: "Mathematical Sciences" },
-    { value: "csce", label: "Computer Science and Communications Engineering" },
+  'School of Fundamental Science and Engineering': [
+    { value: 'MS', label: 'Mathematical Sciences' },
+    { value: 'csce', label: 'Computer Science and Communications Engineering' },
   ],
-  "School of Creative Science and Engineering": [
-    { value: "mechanicalEngineering", label: "Mechanical Engineering" },
+  'School of Creative Science and Engineering': [
+    { value: 'mechanicalEngineering', label: 'Mechanical Engineering' },
     {
-      value: "civilAndEnvironmentalEngineering",
-      label: "Civil and Environmental Engineering",
+      value: 'CEE',
+      label: 'Civil and Environmental Engineering',
     },
   ],
 };
@@ -67,7 +85,7 @@ function Profile() {
   const [selectedMajor, setSelectedMajor] = useState<Major | null>(null);
 
   const navigateHome = () => {
-    navigate("/");
+    navigate('/');
   };
 
   const handleSigninWithGoogle = async () => {
@@ -77,21 +95,21 @@ function Profile() {
   const handleSignOut = async () => {
     await auth.signOut();
     setCurrentUser(null);
-    navigate("/login");
+    navigate('/login');
   };
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         const currentUser: UserInfo = {
-          displayName: user.displayName || "",
-          email: user.email || "",
+          displayName: user.displayName || '',
+          email: user.email || '',
           uid: user.uid,
         };
         setCurrentUser(currentUser);
       } else {
         setCurrentUser(null);
-        navigate("/login");
+        navigate('/login');
       }
     });
 
@@ -105,6 +123,21 @@ function Profile() {
 
   const handleMajorChange = (values: Major[]) => {
     setSelectedMajor(values[0]);
+  };
+
+  const handleCategoryGeneration = (major: string) => {
+    const selectedCategories = prebuiltListTyped[major];
+
+    if (selectedCategories) {
+      updateCourseCategoriesInFirestore(selectedCategories);
+      localStorage.setItem(
+        'courseCategories',
+        JSON.stringify(selectedCategories),
+      );
+      console.log('Category added to local storage');
+    } else {
+      console.log(`No categories found for major: ${major}`);
+    }
   };
 
   return (
@@ -150,6 +183,14 @@ function Profile() {
               {selectedMajor && (
                 <div>
                   <h2>Selected Major: {selectedMajor.label}</h2>
+                  <h2>Selected Major: {selectedMajor.value}</h2>
+                  <button
+                    onClick={() =>
+                      handleCategoryGeneration(selectedMajor.value)
+                    }
+                  >
+                    Generate Auto Categories
+                  </button>
                 </div>
               )}
               <div className="py-4">

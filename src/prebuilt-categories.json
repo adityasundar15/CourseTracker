@@ -1,0 +1,584 @@
+{
+  "MS": [
+    {
+      "id": "A1HSS",
+      "name": "Gourp A1: Humamity and Social Science",
+      "completed": 0,
+      "total": 10,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "A2ESE",
+      "name": "Gourp A2: English for Science and Engineer",
+      "completed": 0,
+      "total": 2,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "A2ESL",
+      "name": "Gourp A2: English as a Second Language",
+      "completed": 0,
+      "total": 0,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "A2J/LEL",
+      "name": "Gourp A2: Japanese / Language other than English or Japanese",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B1CM",
+      "name": "Gourp A1: Humamity and Social Science",
+      "completed": 0,
+      "total": 20,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B2CP",
+      "name": "Gourp B2: Core Physics",
+      "completed": 0,
+      "total": 6,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B2CC",
+      "name": "Gourp B2: Core Chemistry",
+      "completed": 0,
+      "total": 2,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B2CB",
+      "name": "Gourp B2: Core Bioscience",
+      "completed": 0,
+      "total": 0,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B3CL",
+      "name": "Gourp B3: Core Laboratory",
+      "completed": 0,
+      "total": 3,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B4CCS",
+      "name": "Gourp B4: Core Computer Science",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "CR",
+      "name": "Gourp C: Required",
+      "completed": 0,
+      "total": 28,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "CRE",
+      "name": "Gourp C: Required Elective",
+      "completed": 0,
+      "total": 16,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "CE",
+      "name": "Gourp C: Elective",
+      "completed": 0,
+      "total": 17,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "AE",
+      "name": "Gourp C: Additonal Electives",
+      "completed": 0,
+      "total": 17,
+      "picture": 1,
+      "courses": []
+    }
+  ],
+  "CSCE": [
+    {
+      "id": "A1HSS",
+      "name": "Gourp A1: Humamity and Social Science",
+      "completed": 0,
+      "total": 10,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "A2ESE",
+      "name": "Gourp A2: English for Science and Engineer",
+      "completed": 0,
+      "total": 2,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "A2ESL",
+      "name": "Gourp A2: English as a Second Language",
+      "completed": 0,
+      "total": 0,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "A2J/LEL",
+      "name": "Gourp A2: Japanese / Language other than English or Japanese",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B1CM",
+      "name": "Gourp A1: Humamity and Social Science",
+      "completed": 0,
+      "total": 12,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B2CP",
+      "name": "Gourp B2: Core Physics",
+      "completed": 0,
+      "total": 6,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B2CC",
+      "name": "Gourp B2: Core Chemistry",
+      "completed": 0,
+      "total": 0,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B2CB",
+      "name": "Gourp B2: Core Bioscience",
+      "completed": 0,
+      "total": 0,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B3CL",
+      "name": "Gourp B3: Core Laboratory",
+      "completed": 0,
+      "total": 2,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B4CCS",
+      "name": "Gourp B4: Core Computer Science",
+      "completed": 0,
+      "total": 6,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "CR",
+      "name": "Gourp C: Required",
+      "completed": 0,
+      "total": 22,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "CRE",
+      "name": "Gourp C: Required Elective",
+      "completed": 0,
+      "total": 38,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "CE",
+      "name": "Gourp C: Elective",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "AE",
+      "name": "Gourp C: Additonal Electives",
+      "completed": 0,
+      "total": 20,
+      "picture": 1,
+      "courses": []
+    }
+  ],
+  "ME": [
+    {
+      "id": "A1HSS",
+      "name": "Gourp A1: Humamity and Social Science",
+      "completed": 0,
+      "total": 10,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "A2ESE",
+      "name": "Gourp A2: English for Science and Engineer",
+      "completed": 0,
+      "total": 2,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "A2ESL",
+      "name": "Gourp A2: English as a Second Language",
+      "completed": 0,
+      "total": 0,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "A2J/LEL",
+      "name": "Gourp A2: Japanese / Language other than English or Japanese",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B1CM",
+      "name": "Gourp A1: Humamity and Social Science",
+      "completed": 0,
+      "total": 10,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B2CP",
+      "name": "Gourp B2: Core Physics",
+      "completed": 0,
+      "total": 6,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B2CC",
+      "name": "Gourp B2: Core Chemistry",
+      "completed": 0,
+      "total": 0,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B2CB",
+      "name": "Gourp B2: Core Bioscience",
+      "completed": 0,
+      "total": 0,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B3CL",
+      "name": "Gourp B3: Core Laboratory",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B4CCS",
+      "name": "Gourp B4: Core Computer Science",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "CR",
+      "name": "Gourp C: Required",
+      "completed": 0,
+      "total": 44,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "CRE",
+      "name": "Gourp C: Required Elective",
+      "completed": 0,
+      "total": 0,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "CE",
+      "name": "Gourp C: Elective",
+      "completed": 0,
+      "total": 26,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "AE",
+      "name": "Gourp C: Additonal Electives",
+      "completed": 0,
+      "total": 20,
+      "picture": 1,
+      "courses": []
+    }
+  ],
+  "CEE": [
+    {
+      "id": "A1HSS",
+      "name": "Gourp A1: Humamity and Social Science",
+      "completed": 0,
+      "total": 10,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "A2ESE",
+      "name": "Gourp A2: English for Science and Engineer",
+      "completed": 0,
+      "total": 2,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "A2ESL",
+      "name": "Gourp A2: English as a Second Language",
+      "completed": 0,
+      "total": 0,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "A2J/LEL",
+      "name": "Gourp A2: Japanese / Language other than English or Japanese",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B1CM",
+      "name": "Gourp A1: Humamity and Social Science",
+      "completed": 0,
+      "total": 10,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B2CP",
+      "name": "Gourp B2: Core Physics",
+      "completed": 0,
+      "total": 6,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B2CC",
+      "name": "Gourp B2: Core Chemistry",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B2CB",
+      "name": "Gourp B2: Core Bioscience",
+      "completed": 0,
+      "total": 2,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B3CL",
+      "name": "Gourp B3: Core Laboratory",
+      "completed": 0,
+      "total": 3,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B4CCS",
+      "name": "Gourp B4: Core Computer Science",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "CR",
+      "name": "Gourp C: Required",
+      "completed": 0,
+      "total": 41,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "CRE",
+      "name": "Gourp C: Required Elective",
+      "completed": 0,
+      "total": 0,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "CE",
+      "name": "Gourp C: Elective",
+      "completed": 0,
+      "total": 20,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "AE",
+      "name": "Gourp C: Additonal Electives",
+      "completed": 0,
+      "total": 24,
+      "picture": 1,
+      "courses": []
+    }
+  ],
+  "PS": [
+    {
+      "id": "PS-R",
+      "name": "Political Science (Required)",
+      "completed": 0,
+      "total": 36,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "ECON-R",
+      "name": "Economics (Required)",
+      "completed": 0,
+      "total": 8,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "MTH-R",
+      "name": "Methodology (Required)",
+      "completed": 0,
+      "total": 8,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "SEMI-R",
+      "name": "Seminar (Required)",
+      "completed": 0,
+      "total": 8,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "FL/G-R",
+      "name": "Foreign Languages / General Studies (Required)",
+      "completed": 0,
+      "total": 6,
+      "picture": 1,
+      "courses": []
+    }
+  ],
+  "ECON": [
+    {
+      "id": "PS-R",
+      "name": "Political Science (Required)",
+      "completed": 0,
+      "total": 8,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "ECON-R",
+      "name": "Economics (Required)",
+      "completed": 0,
+      "total": 36,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "MTH-R",
+      "name": "Methodology (Required)",
+      "completed": 0,
+      "total": 12,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "SEMI-R",
+      "name": "Seminar (Required)",
+      "completed": 0,
+      "total": 8,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "FL/G-R",
+      "name": "Foreign Languages / General Studies (Required)",
+      "completed": 0,
+      "total": 6,
+      "picture": 1,
+      "courses": []
+    }
+  ],
+  "GPE": [
+    {
+      "id": "PS-R",
+      "name": "Political Science (Required)",
+      "completed": 0,
+      "total": 22,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "ECON-R",
+      "name": "Economics (Required)",
+      "completed": 0,
+      "total": 22,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "MTH-R",
+      "name": "Methodology (Required)",
+      "completed": 0,
+      "total": 12,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "SEMI-R",
+      "name": "Seminar (Required)",
+      "completed": 0,
+      "total": 8,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "FL/G-R",
+      "name": "Foreign Languages / General Studies (Required)",
+      "completed": 0,
+      "total": 6,
+      "picture": 1,
+      "courses": []
+    }
+  ]
+}
