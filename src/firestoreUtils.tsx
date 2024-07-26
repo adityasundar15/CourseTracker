@@ -12,7 +12,7 @@ export const updateCourseCategoriesInFirestore = async (
       await setDoc(
         userDocRef,
         { Categories: updatedCategories },
-        { merge: true }
+        { merge: true },
       );
       console.log("Categories updated in Firestore.");
     } catch (error) {

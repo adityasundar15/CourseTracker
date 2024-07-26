@@ -5,6 +5,7 @@ import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Select from "react-dropdown-select";
 import { auth, signinWithGoogle } from "../firebase-config";
+
 import { Course } from "./Courses";
 import { updateCourseCategoriesInFirestore } from "../firestoreUtils";
 import prebuiltList from "../prebuilt-categories.json";
