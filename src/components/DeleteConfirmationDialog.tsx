@@ -4,8 +4,8 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { MdDeleteForever } from "react-icons/md";
 import { Button } from "react-bootstrap";
+import { PiTrashFill } from "react-icons/pi";
 
 interface Props {
   onDelete: () => void;
@@ -29,9 +29,9 @@ const DeleteConfirmationDialog: React.FC<Props> = ({ onDelete }) => {
 
   return (
     <>
-      <MdDeleteForever
+      <PiTrashFill
         className="delete-icon"
-        size={50}
+        size={35}
         onClick={handleClickOpen}
       />
       <Dialog

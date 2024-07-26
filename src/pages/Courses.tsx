@@ -99,7 +99,7 @@ function Courses() {
       </div>
       <div className="w-75 h-100 d-flex flex-column mx-auto course-categories-body">
         <Row className="">
-          <span className="course-page-title col">Course Categories</span>
+          <span className="course-page-title col">Categories</span>
         </Row>
         <div className="progress-container mt-2">
           <div
@@ -122,7 +122,7 @@ function Courses() {
         <span className="row d-flex justify-content-end text-body-tertiary mb-2">
           {totalCompleted} / {totalCourses} credits completed
         </span>
-        <div className="view-toggle-container pb-3 d-flex align-items-center">
+        <div className="view-toggle-container pb-4 d-flex align-items-center">
           <ButtonGroup className="view-toggle">
             <Button
               className={`toggle-button ${
@@ -185,38 +185,38 @@ function Courses() {
         ) : (
           <div className="categories-list-view">
             {courseCategories.map((category, index) => (
-              <div className="py-2">
-                <Card
-                  key={index}
-                  className="category-list-view position-relative border border-0"
-                  style={{ cursor: "pointer", height: "5rem" }}
-                  onClick={() => handleCategorySelect(category)}
-                >
-                  {/* Progress Bar as Card Background */}
-                  <ProgressBar
-                    now={
-                      category.total === 0
-                        ? 0
-                        : (category.completed / category.total) * 100
-                    }
-                    className="position-absolute w-100 h-100 p-3"
-                    style={{ zIndex: 0 }}
-                  />
-                  {/* Text Content */}
-                  <Card.Body className="position-relative text-black h-100">
-                    <Row className="m-auto d-flex align-items-center h-100">
-                      <Col className="d-flex align-items-center">
-                        <Card.Text className="category-title-listview">
-                          {category.name}
-                        </Card.Text>
-                      </Col>
-                      <Col xs="auto" className="">
-                        <Card.Text>{`${category.completed}/${category.total} completed`}</Card.Text>
-                      </Col>
-                    </Row>
-                  </Card.Body>
-                </Card>
-              </div>
+              <Grow in={true} timeout={index * 500}>
+                <div className="py-2 pb-4">
+                  <Card
+                    key={index}
+                    className="category-list-view position-relative border border-0"
+                    style={{ cursor: "pointer", height: "5rem" }}
+                    onClick={() => handleCategorySelect(category)}
+                  >
+                    <ProgressBar
+                      now={
+                        category.total === 0
+                          ? 0
+                          : (category.completed / category.total) * 100
+                      }
+                      className="position-absolute w-100 h-100 p-3"
+                      style={{ zIndex: 0 }}
+                    />
+                    <Card.Body className="position-relative text-black h-100">
+                      <Row className="m-auto d-flex align-items-center h-100">
+                        <Col className="d-flex align-items-center">
+                          <Card.Text className="category-title-listview">
+                            {category.name}
+                          </Card.Text>
+                        </Col>
+                        <Col xs="auto" className="">
+                          <Card.Text>{`${category.completed}/${category.total} completed`}</Card.Text>
+                        </Col>
+                      </Row>
+                    </Card.Body>
+                  </Card>
+                </div>
+              </Grow>
             ))}
           </div>
         )}
