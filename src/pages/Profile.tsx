@@ -161,7 +161,6 @@ function Profile() {
           "Updated stored UserDetail from local storage:",
           storedUserDetailParsed
         );
-        console.log(storedUserDetailParsed.grade);
         setSelectedSchool(storedUserDetailParsed.school);
         setSelectedMajor(storedUserDetailParsed.major);
         setSelectedGrade(storedUserDetailParsed.grade);
@@ -175,7 +174,6 @@ function Profile() {
 
   const handleSchoolChange = (values: { value: string; label: string }[]) => {
     setSelectedSchool(values[0]);
-    setSelectedMajor(null);
   };
 
   const handleMajorChange = (values: Major[]) => {
