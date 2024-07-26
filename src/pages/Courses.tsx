@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import placeHolderPic1 from "../assets/default_courses1.png";
 import placeHolderPic2 from "../assets/default_courses2.png";
 import placeHolderPic3 from "../assets/default_courses3.png";
+import placeHolderPic4 from "../assets/default_courses4.png";
 import { useEffect, useState } from "react";
 import AddCategoryButton from "../components/AddCategoryButton";
 import AddCategoryModal from "../components/AddCategoryModal";
@@ -163,6 +164,8 @@ function Courses() {
                           ? placeHolderPic2
                           : category.picture === 3
                           ? placeHolderPic3
+                          : category.picture === 4
+                          ? placeHolderPic4
                           : placeHolderPic1 // Default picture
                       }
                       className="card-image"
