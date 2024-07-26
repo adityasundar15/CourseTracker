@@ -5,10 +5,11 @@ import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Select from "react-dropdown-select";
 import { auth, signinWithGoogle } from "../firebase-config";
-import { MdOutlineLogout } from "react-icons/md";
+
 import { Course } from "./Courses";
 import { updateCourseCategoriesInFirestore } from "../firestoreUtils";
 import prebuiltList from "../prebuilt-categories.json";
+import { v4 as uuidv4 } from "uuid";
 
 interface UserInfo {
   displayName: string;
@@ -79,6 +80,14 @@ const schoolsAndMajors: Record<string, Major[]> = {
   ],
 };
 
+const gradeOptions = [
+  { value: "1st", label: "1st Year" },
+  { value: "2nd", label: "2nd Year" },
+  { value: "3rd", label: "3rd Year" },
+  { value: "4th", label: "4th Year" },
+  { value: "5th+", label: "5th Year or above" },
+];
+
 function Profile() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState<UserInfo | null>(null);
@@ -87,7 +96,10 @@ function Profile() {
     label: string;
   } | null>(null);
   const [selectedMajor, setSelectedMajor] = useState<Major | null>(null);
-  const [categoryGenerated, setCategoryGenerated] = useState(false);
+  const [selectedGrade, setSelectedGrade] = useState<{
+    value: string;
+    label: string;
+  } | null>(null);
 
   const navigateHome = () => {
     navigate("/");
@@ -130,17 +142,27 @@ function Profile() {
     setSelectedMajor(values[0]);
   };
 
+  const handleGradeChange = (values: { value: string; label: string }[]) => {
+    setSelectedGrade(values[0]);
+  };
+
   const handleCategoryGeneration = (major: string) => {
     const selectedCategories = prebuiltListTyped[major];
 
     if (selectedCategories) {
+      const pictureIndices = [1, 2, 3, 4];
+      selectedCategories.forEach((category) => {
+        category.id = uuidv4();
+        const randomIndex = Math.floor(Math.random() * pictureIndices.length);
+        category.picture = pictureIndices[randomIndex];
+      });
+
       updateCourseCategoriesInFirestore(selectedCategories);
       localStorage.setItem(
         "courseCategories",
         JSON.stringify(selectedCategories)
       );
-      console.log("Category added to local storage");
-      setCategoryGenerated(true);
+      console.log("Category added to local storage with randomized pictures");
     } else {
       console.log(`No categories found for major: ${major}`);
     }
@@ -153,20 +175,20 @@ function Profile() {
           <span className="mini-title text-center">Credit Ledger</span>
         </Button>
       </div>
-      <div className="d-flex justify-content-center align-items-center flex-grow-1">
-        <div className="text-center">
+      <div className="d-flex justify-content-start align-items-center profile-wrapper">
+        <div className="m-3 profile-container w-100">
           {currentUser ? (
             <>
-              <div>
+              <div className="pb-2">
                 <span className="prof-msg">
-                  Welcome, {currentUser.displayName}!
+                  Hello, {currentUser.displayName}
                 </span>
+                <div className="prof-email">{currentUser.email}</div>
               </div>
-              <div>
-                <p>Email: {currentUser.email}</p>
-              </div>
-              <div>
+              <div className="prof-major py-3">
+                <div className="prof-sub-header pb-2">School</div>
                 <Select
+                  className="prof-dropdown"
                   options={Object.keys(schoolsAndMajors).map((school) => ({
                     value: school,
                     label: school,
@@ -174,42 +196,64 @@ function Profile() {
                   onChange={handleSchoolChange}
                   placeholder="Select your school"
                   values={selectedSchool ? [selectedSchool] : []}
+                  searchable
+                />
+                {selectedSchool && (
+                  <div className="py-2">
+                    <Select
+                      className="prof-dropdown"
+                      options={schoolsAndMajors[selectedSchool.value]}
+                      onChange={handleMajorChange}
+                      placeholder="Select your major"
+                      values={selectedMajor ? [selectedMajor] : []}
+                      searchable
+                    />
+                  </div>
+                )}
+                {/* {selectedMajor && (
+                  <div>
+                    {categoryGenerated ? (
+                      <h2>Category Generated</h2>
+                    ) : (
+                      <button
+                        onClick={() =>
+                          handleCategoryGeneration(selectedMajor.value)
+                        }
+                      >
+                        Generate Auto Categories
+                      </button>
+                    )}
+                  </div>
+                )} */}
+              </div>
+              <div className="prof-grade py-3">
+                <div className="prof-sub-header pb-2">Grade</div>
+                <Select
+                  className="prof-dropdown"
+                  options={gradeOptions}
+                  onChange={handleGradeChange}
+                  placeholder="Select your grade"
+                  values={selectedGrade ? [selectedGrade] : []}
                 />
               </div>
-              {selectedSchool && (
-                <div>
-                  <Select
-                    options={schoolsAndMajors[selectedSchool.value]}
-                    onChange={handleMajorChange}
-                    placeholder="Select your major"
-                    values={selectedMajor ? [selectedMajor] : []}
-                  />
-                </div>
-              )}
-              {selectedMajor && (
-                <div>
-                  <h2>Selected Major: {selectedMajor.label}</h2>
-                  <h2>Selected Major: {selectedMajor.value}</h2>
-                  {categoryGenerated ? (
-                    <h2>Category Generated</h2>
-                  ) : (
-                    <button
-                      onClick={() =>
-                        handleCategoryGeneration(selectedMajor.value)
-                      }
-                    >
-                      Generate Auto Categories
-                    </button>
-                  )}
-                </div>
-              )}
-              <div className="py-4">
+              <div className="pt-4 pb-3 d-flex align-content-center justify-content-center">
                 <Button
-                  className="sign-out"
+                  className="save-button px-5 py-2"
                   variant="dark"
+                  onClick={() => {
+                    if (selectedMajor)
+                      return handleCategoryGeneration(selectedMajor.value);
+                  }}
+                >
+                  <span className="">Save</span>
+                </Button>
+              </div>
+              <div className="d-flex align-content-center justify-content-center">
+                <Button
+                  className="sign-out px-5"
+                  variant=""
                   onClick={handleSignOut}
                 >
-                  <MdOutlineLogout className="px-1" size={27} />
                   <span className="">Sign Out</span>
                 </Button>
               </div>
