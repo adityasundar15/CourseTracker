@@ -44,7 +44,7 @@ const schoolsAndMajors: Record<string, Major[]> = {
   ],
   'School of Social Sciences': [
     {
-      value: 'taisi',
+      value: 'TAISI',
       label:
         'Transnational and Interdisciplinary Studies in Social Innovation Program (TAISI)',
     },
@@ -62,13 +62,13 @@ const schoolsAndMajors: Record<string, Major[]> = {
   'School of Culture, Media and Society': [
     { value: 'transculturalStudies', label: 'Transcultural Studies' },
     {
-      value: 'jculp',
+      value: 'JCULP',
       label: 'Global Studies in Japanese Cultures Program (JCuIP)',
     },
   ],
   'School of Fundamental Science and Engineering': [
     { value: 'MS', label: 'Mathematical Sciences' },
-    { value: 'csce', label: 'Computer Science and Communications Engineering' },
+    { value: 'CSCE', label: 'Computer Science and Communications Engineering' },
   ],
   'School of Creative Science and Engineering': [
     { value: 'ME', label: 'Mechanical Engineering' },
