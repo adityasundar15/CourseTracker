@@ -1,10 +1,19 @@
-import { Button, Modal } from "react-bootstrap";
-import { useState, useEffect } from "react";
-import { Course, CourseCategory } from "../pages/Courses";
-import { database } from "../firebase-config"; // Make sure the path is correct
-import { onValue, ref } from "firebase/database";
-import { IoIosAddCircleOutline } from "react-icons/io";
-import { updateCourseCategoriesInFirestore } from "../firestoreUtils";
+import { Button, Collapse, Modal } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
+import { Course, CourseCategory } from '../pages/Courses';
+import { database } from '../firebase-config'; // Make sure the path is correct
+import { onValue, ref } from 'firebase/database';
+import { IoIosAddCircleOutline } from 'react-icons/io';
+import { updateCourseCategoriesInFirestore } from '../firestoreUtils';
+import { MdOutlineBackpack } from 'react-icons/md';
+
+import silsIcon from '../assets/syllabus-icons/sils.png';
+import pseIcon from '../assets/syllabus-icons/pse.png';
+import sssIcon from '../assets/syllabus-icons/sss.png';
+import fseIcon from '../assets/syllabus-icons/fse.png';
+import cseIcon from '../assets/syllabus-icons/cse.png';
+import aseIcon from '../assets/syllabus-icons/ase.png';
+import cmsIcon from '../assets/syllabus-icons/cms.png';
 
 // FirebaseCourse interface matching the structure
 interface FirebaseCourse {
@@ -31,6 +40,7 @@ interface AddCourseModalProps {
   show: boolean;
   handleClose: () => void;
   onAddCourse: (newCourse: Course) => void;
+  courseToEdit: Course | null; // Optional course data for editing
 }
 
 function AddCourseModal({
@@ -38,19 +48,36 @@ function AddCourseModal({
   show,
   handleClose,
   onAddCourse,
+  courseToEdit,
 }: AddCourseModalProps) {
   const [showManualForm, setShowManualForm] = useState(false);
-  const [courseKey, setCourseKey] = useState("");
-  const [courseName, setCourseName] = useState("");
-  const [requiredCredits, setRequiredCredits] = useState("");
+  const [courseKey, setCourseKey] = useState('');
+  const [courseName, setCourseName] = useState('');
+  const [requiredCredits, setRequiredCredits] = useState('');
   const [courseCompleted, setCourseCompleted] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [courses, setCourses] = useState<FirebaseCourse[]>([]);
   const [filteredCourses, setFilteredCourses] = useState<FirebaseCourse[]>([]);
+  const [openFilter, setOpenFilter] = useState(false);
+  const [selectedSchool, setSelectedSchool] = useState<string>('PSE');
+
+  const handleIconClick = (iconName: string) => {
+    setSelectedSchool(iconName);
+  };
+
+  useEffect(() => {
+    if (courseToEdit) {
+      setCourseKey(courseToEdit.id);
+      setCourseName(courseToEdit.name);
+      setRequiredCredits(courseToEdit.credit.toString());
+      setCourseCompleted(courseToEdit.progress === 1);
+      setShowManualForm(true);
+    }
+  }, [courseToEdit]);
 
   useEffect(() => {
     // Fetch data from Firebase
-    const coursesRef = ref(database, "FSE");
+    const coursesRef = ref(database, selectedSchool);
     onValue(coursesRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
@@ -58,14 +85,14 @@ function AddCourseModal({
         setCourses(fullCoursesArray);
       }
     });
-  }, []);
+  }, [selectedSchool]);
 
   useEffect(() => {
     // Filter courses based on search term
     const filtered = courses.filter(
       (course) =>
         course.b.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        course.a.toLowerCase().includes(searchTerm.toLowerCase())
+        course.a.toLowerCase().includes(searchTerm.toLowerCase()),
     );
     setFilteredCourses(filtered);
   }, [searchTerm, courses]);
@@ -86,21 +113,40 @@ function AddCourseModal({
     const newCourse: Course = {
       id: courseKey,
       name: courseName,
-      name_jp: "",
+      name_jp: '',
       credit: parseInt(requiredCredits),
       progress: courseCompleted ? 1 : 0,
-      school: "",
+      school: '',
     };
 
-    const storedCategories = localStorage.getItem("courseCategories");
+    const storedCategories = localStorage.getItem('courseCategories');
     const courseCategories: CourseCategory[] = storedCategories
       ? JSON.parse(storedCategories)
       : [];
+
     const updatedCategories = courseCategories.map((category) => {
       if (category.id === categoryID) {
-        category.courses.push(newCourse);
-        if (newCourse.progress === 1) {
-          category.completed += newCourse.credit;
+        const courseIndex = category.courses.findIndex(
+          (course) => course.id === newCourse.id,
+        );
+
+        if (courseIndex === -1) {
+          category.courses.push(newCourse);
+          if (newCourse.progress === 1) {
+            category.completed += newCourse.credit;
+          }
+        } else {
+          const existingCourse = category.courses[courseIndex];
+
+          if (existingCourse.progress === 1 && newCourse.progress !== 1) {
+            category.completed -= existingCourse.credit;
+          }
+
+          if (existingCourse.progress !== 1 && newCourse.progress === 1) {
+            category.completed += newCourse.credit;
+          }
+
+          category.courses[courseIndex] = newCourse;
         }
       }
       return category;
@@ -111,11 +157,11 @@ function AddCourseModal({
 
     onAddCourse(newCourse);
 
-    localStorage.setItem("courseCategories", JSON.stringify(updatedCategories));
+    localStorage.setItem('courseCategories', JSON.stringify(updatedCategories));
 
-    setCourseKey("");
-    setCourseName("");
-    setRequiredCredits("");
+    setCourseKey('');
+    setCourseName('');
+    setRequiredCredits('');
     setCourseCompleted(false);
     handleCloseModal();
   };
@@ -133,7 +179,7 @@ function AddCourseModal({
     >
       <div className="add-category-modal-content">
         <Modal.Header className="add-category-modal-header" closeButton>
-          <div className="col mt-3 mb-3">
+          <div className="col my-3">
             <Modal.Title className="text-center">Add Course</Modal.Title>
           </div>
         </Modal.Header>
@@ -200,18 +246,18 @@ function AddCourseModal({
               <div className="col align-self-center justify-content-between d-flex">
                 <Button
                   className={`btn-sm add-course-btn ${
-                    courseCompleted ? "add-course-selected" : ""
+                    courseCompleted ? 'add-course-selected' : ''
                   }`}
-                  style={{ width: "45%" }}
+                  style={{ width: '45%' }}
                   onClick={() => setCourseCompleted(true)}
                 >
                   <div className="py-1">Complete</div>
                 </Button>
                 <Button
                   className={`btn-sm add-course-btn ${
-                    !courseCompleted ? "add-course-selected" : ""
+                    !courseCompleted ? 'add-course-selected' : ''
                   }`}
-                  style={{ width: "45%" }}
+                  style={{ width: '45%' }}
                   onClick={() => setCourseCompleted(false)}
                 >
                   <div className="py-1">Incomplete</div>
@@ -220,21 +266,69 @@ function AddCourseModal({
             </div>
           ) : (
             <div>
-              <div className="search-courses-container px-1">
-                <input
-                  type="text"
-                  placeholder="Enter course name / key"
-                  className="form-control mb-3 search-courses"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
+              <div className="search-courses-container d-flex align-items-center px-1 mb-2 row mt-2">
+                <div className="col p-0">
+                  <input
+                    type="text"
+                    placeholder="Enter course name / key"
+                    className="form-control search-courses"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                </div>
+                <div className="col-auto pe-4">
+                  <Button
+                    className={`school-select ${
+                      openFilter ? 'opened-filter' : ''
+                    }`}
+                    onClick={() => setOpenFilter(!openFilter)}
+                    aria-controls="collapse-content"
+                    aria-expanded={openFilter ? 'true' : 'false'}
+                  >
+                    <MdOutlineBackpack color="black" size={28} />
+                  </Button>
+                </div>
               </div>
-              <div className="scrollable-query-outcome px-2">
+              <div>
+                <Collapse in={openFilter}>
+                  <div id="collapse-content">
+                    <div className="d-flex w-100 course-filter-container mb-2 justify-content-between align-items-center p-3">
+                      {[
+                        { src: silsIcon, alt: 'SILS', name: 'SILS' },
+                        { src: pseIcon, alt: 'PSE', name: 'PSE' },
+                        { src: sssIcon, alt: 'SSS', name: 'SSS' },
+                        { src: fseIcon, alt: 'FSE', name: 'FSE' },
+                        { src: cseIcon, alt: 'CSE', name: 'CSE' },
+                        { src: aseIcon, alt: 'ASE', name: 'ASE' },
+                        { src: cmsIcon, alt: 'CMS', name: 'CMS' },
+                      ].map((icon) => (
+                        <div
+                          key={icon.name}
+                          className={`image-container ${
+                            selectedSchool === icon.name ? 'selected' : ''
+                          }`}
+                          onClick={() => handleIconClick(icon.name)}
+                        >
+                          <div className="icon-holder">
+                            <img
+                              src={icon.src}
+                              alt={icon.alt}
+                              className="school-icon"
+                              height={50}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </Collapse>
+              </div>
+              <div className="scrollable-query-outcome pt-1">
                 {filteredCourses.map((course) => (
                   <div
                     key={course.a}
-                    className="query-item my-0 p-2 row border-top"
-                    onClick={() => handleAddManually()}
+                    className="query-item my-0 px-3 my-3 d-flex"
+                    onClick={() => handleAddManually(course)}
                     role="button"
                   >
                     <div className="col-10 flex-grow-1 d-flex flex-column h-100">
@@ -269,7 +363,7 @@ function AddCourseModal({
               variant="primary"
               className="mx-auto rounded-pill btn-lg"
               onClick={handleAddCourse}
-              style={{ backgroundColor: "black", borderColor: "black" }}
+              style={{ backgroundColor: 'black', borderColor: 'black' }}
             >
               <div className="px-5">Add</div>
             </Button>

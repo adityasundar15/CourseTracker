@@ -1,0 +1,758 @@
+{
+  "MS": [
+    {
+      "id": "A1HSS",
+      "name": "Group A1: Humanity and Social Science",
+      "completed": 0,
+      "total": 10,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "A2ESE",
+      "name": "Group A2: English for Science and Engineer",
+      "completed": 0,
+      "total": 2,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "A2ESL",
+      "name": "Group A2: English as a Second Language",
+      "completed": 0,
+      "total": 0,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "A2J/LEL",
+      "name": "Group A2: Japanese / Language other than English or Japanese",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B1CM",
+      "name": "Group B1: Core Mathematics",
+      "completed": 0,
+      "total": 20,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B2CP",
+      "name": "Group B2: Core Physics",
+      "completed": 0,
+      "total": 6,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B2CC",
+      "name": "Group B2: Core Chemistry",
+      "completed": 0,
+      "total": 2,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B2CB",
+      "name": "Group B2: Core Bioscience",
+      "completed": 0,
+      "total": 0,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B3CL",
+      "name": "Group B3: Core Laboratory",
+      "completed": 0,
+      "total": 3,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B4CCS",
+      "name": "Group B4: Core Computer Science",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "CR",
+      "name": "Group C: Required",
+      "completed": 0,
+      "total": 28,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "CRE",
+      "name": "Group C: Required Elective",
+      "completed": 0,
+      "total": 16,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "CE",
+      "name": "Group C: Elective",
+      "completed": 0,
+      "total": 17,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "AE",
+      "name": "Group C: Additonal Electives",
+      "completed": 0,
+      "total": 17,
+      "picture": 1,
+      "courses": []
+    }
+  ],
+  "CSCE": [
+    {
+      "id": "A1HSS",
+      "name": "Group A1: Humanity and Social Science",
+      "completed": 0,
+      "total": 10,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "A2ESE",
+      "name": "Group A2: English for Science and Engineer",
+      "completed": 0,
+      "total": 2,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "A2ESL",
+      "name": "Group A2: English as a Second Language",
+      "completed": 0,
+      "total": 0,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "A2J/LEL",
+      "name": "Group A2: Japanese / Language other than English or Japanese",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B1CM",
+      "name": "Group B1: Core Mathematics",
+      "completed": 0,
+      "total": 12,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B2CP",
+      "name": "Group B2: Core Physics",
+      "completed": 0,
+      "total": 6,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B2CC",
+      "name": "Group B2: Core Chemistry",
+      "completed": 0,
+      "total": 0,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B2CB",
+      "name": "Group B2: Core Bioscience",
+      "completed": 0,
+      "total": 0,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B3CL",
+      "name": "Group B3: Core Laboratory",
+      "completed": 0,
+      "total": 2,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B4CCS",
+      "name": "Group B4: Core Computer Science",
+      "completed": 0,
+      "total": 6,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "CR",
+      "name": "Group C: Required",
+      "completed": 0,
+      "total": 22,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "CRE",
+      "name": "Group C: Required Elective",
+      "completed": 0,
+      "total": 38,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "CE",
+      "name": "Group C: Elective",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "AE",
+      "name": "Group C: Additonal Electives",
+      "completed": 0,
+      "total": 20,
+      "picture": 1,
+      "courses": []
+    }
+  ],
+  "ME": [
+    {
+      "id": "A1HSS",
+      "name": "Group A1: Humanity and Social Science",
+      "completed": 0,
+      "total": 10,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "A2ESE",
+      "name": "Group A2: English for Science and Engineer",
+      "completed": 0,
+      "total": 2,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "A2ESL",
+      "name": "Group A2: English as a Second Language",
+      "completed": 0,
+      "total": 0,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "A2J/LEL",
+      "name": "Group A2: Japanese / Language other than English or Japanese",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B1CM",
+      "name": "Group B1: Core Mathematics",
+      "completed": 0,
+      "total": 10,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B2CP",
+      "name": "Group B2: Core Physics",
+      "completed": 0,
+      "total": 6,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B2CC",
+      "name": "Group B2: Core Chemistry",
+      "completed": 0,
+      "total": 0,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B2CB",
+      "name": "Group B2: Core Bioscience",
+      "completed": 0,
+      "total": 0,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B3CL",
+      "name": "Group B3: Core Laboratory",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B4CCS",
+      "name": "Group B4: Core Computer Science",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "CR",
+      "name": "Group C: Required",
+      "completed": 0,
+      "total": 44,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "CRE",
+      "name": "Group C: Required Elective",
+      "completed": 0,
+      "total": 0,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "CE",
+      "name": "Group C: Elective",
+      "completed": 0,
+      "total": 26,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "AE",
+      "name": "Group C: Additonal Electives",
+      "completed": 0,
+      "total": 20,
+      "picture": 1,
+      "courses": []
+    }
+  ],
+  "CEE": [
+    {
+      "id": "A1HSS",
+      "name": "Group A1: Humanity and Social Science",
+      "completed": 0,
+      "total": 10,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "A2ESE",
+      "name": "Group A2: English for Science and Engineer",
+      "completed": 0,
+      "total": 2,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "A2ESL",
+      "name": "Group A2: English as a Second Language",
+      "completed": 0,
+      "total": 0,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "A2J/LEL",
+      "name": "Group A2: Japanese / Language other than English or Japanese",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B1CM",
+      "name": "Group B1: Core Mathematics",
+      "completed": 0,
+      "total": 10,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B2CP",
+      "name": "Group B2: Core Physics",
+      "completed": 0,
+      "total": 6,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B2CC",
+      "name": "Group B2: Core Chemistry",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B2CB",
+      "name": "Group B2: Core Bioscience",
+      "completed": 0,
+      "total": 2,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B3CL",
+      "name": "Group B3: Core Laboratory",
+      "completed": 0,
+      "total": 3,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "B4CCS",
+      "name": "Group B4: Core Computer Science",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "CR",
+      "name": "Group C: Required",
+      "completed": 0,
+      "total": 41,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "CRE",
+      "name": "Group C: Required Elective",
+      "completed": 0,
+      "total": 0,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "CE",
+      "name": "Group C: Elective",
+      "completed": 0,
+      "total": 20,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "AE",
+      "name": "Group C: Additonal Electives",
+      "completed": 0,
+      "total": 24,
+      "picture": 1,
+      "courses": []
+    }
+  ],
+  "PS": [
+    {
+      "id": "PS-R",
+      "name": "Political Science (Required)",
+      "completed": 0,
+      "total": 36,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "ECON-R",
+      "name": "Economics (Required)",
+      "completed": 0,
+      "total": 8,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "MTH-R",
+      "name": "Methodology (Required)",
+      "completed": 0,
+      "total": 8,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "SEMI-R",
+      "name": "Seminar (Required)",
+      "completed": 0,
+      "total": 8,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "FL/G-R",
+      "name": "Foreign Languages / General Studies (Required)",
+      "completed": 0,
+      "total": 6,
+      "picture": 1,
+      "courses": []
+    }
+  ],
+  "ECON": [
+    {
+      "id": "PS-R",
+      "name": "Political Science (Required)",
+      "completed": 0,
+      "total": 8,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "ECON-R",
+      "name": "Economics (Required)",
+      "completed": 0,
+      "total": 36,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "MTH-R",
+      "name": "Methodology (Required)",
+      "completed": 0,
+      "total": 12,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "SEMI-R",
+      "name": "Seminar (Required)",
+      "completed": 0,
+      "total": 8,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "FL/G-R",
+      "name": "Foreign Languages / General Studies (Required)",
+      "completed": 0,
+      "total": 6,
+      "picture": 1,
+      "courses": []
+    }
+  ],
+  "GPE": [
+    {
+      "id": "PS-R",
+      "name": "Political Science (Required)",
+      "completed": 0,
+      "total": 22,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "ECON-R",
+      "name": "Economics (Required)",
+      "completed": 0,
+      "total": 22,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "MTH-R",
+      "name": "Methodology (Required)",
+      "completed": 0,
+      "total": 12,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "SEMI-R",
+      "name": "Seminar (Required)",
+      "completed": 0,
+      "total": 8,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "FL/G-R",
+      "name": "Foreign Languages / General Studies (Required)",
+      "completed": 0,
+      "total": 6,
+      "picture": 1,
+      "courses": []
+    }
+  ],
+  "SILS(A)": [
+    {
+      "id": "FLJ",
+      "name": "Foreign Language: Japanese",
+      "completed": 0,
+      "total": 24,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "FLE",
+      "name": "Foreign Language: English III",
+      "completed": 0,
+      "total": 3,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "FLOFL",
+      "name": "Foreign Language: Other",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "SFYSB",
+      "name": "Seminar: First Year Seminar B",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "SISE",
+      "name": "Seminar: Intermediate Seminar",
+      "completed": 0,
+      "total": 2,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "SAO",
+      "name": "Seminar: Advance / Other",
+      "completed": 0,
+      "total": 10,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "SIST",
+      "name": "Statistics: Introductory Statistics",
+      "completed": 0,
+      "total": 2,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "LIR",
+      "name": "Lecture: Introductory",
+      "completed": 0,
+      "total": 8,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "LIE",
+      "name": "Lecture: Intermediate",
+      "completed": 0,
+      "total": 16,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "LA",
+      "name": "Lecture: Advanced",
+      "completed": 0,
+      "total": 16,
+      "picture": 1,
+      "courses": []
+    },
+
+    {
+      "id": "EE",
+      "name": "Elective",
+      "completed": 0,
+      "total": 35,
+      "picture": 1,
+      "courses": []
+    }
+  ],
+  "SILS(S)": [
+    {
+      "id": "FLJ",
+      "name": "Foreign Language: Japanese",
+      "completed": 0,
+      "total": 24,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "FLE",
+      "name": "Foreign Language: English III",
+      "completed": 0,
+      "total": 3,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "FLOFL",
+      "name": "Foreign Language: Other",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "SFYSB",
+      "name": "Seminar: First Year Seminar B",
+      "completed": 0,
+      "total": 4,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "SISE",
+      "name": "Seminar: Intermediate Seminar",
+      "completed": 0,
+      "total": 2,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "SAO",
+      "name": "Seminar: Advance / Other",
+      "completed": 0,
+      "total": 10,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "LIR",
+      "name": "Lecture: Introductory",
+      "completed": 0,
+      "total": 8,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "LIE",
+      "name": "Lecture: Intermediate",
+      "completed": 0,
+      "total": 16,
+      "picture": 1,
+      "courses": []
+    },
+    {
+      "id": "LA",
+      "name": "Lecture: Advanced",
+      "completed": 0,
+      "total": 16,
+      "picture": 1,
+      "courses": []
+    },
+
+    {
+      "id": "EE",
+      "name": "Elective",
+      "completed": 0,
+      "total": 35,
+      "picture": 1,
+      "courses": []
+    }
+  ]
+}

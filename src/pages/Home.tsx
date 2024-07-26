@@ -1,12 +1,30 @@
+import { useEffect, useState } from "react";
 import { Button, Stack } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../firebase-config";
 
 function Home() {
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const navigateProfile = () => {
     navigate("/profile");
   };
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in
+        setIsLoggedIn(true);
+      } else {
+        // User is signed out
+        setIsLoggedIn(false);
+      }
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, []);
 
   return (
     <div id="parent-container" className="home-background">
@@ -18,7 +36,7 @@ function Home() {
           onClick={navigateProfile}
           size="lg"
         >
-          Profile
+          {isLoggedIn ? "Profile" : "Login"}
         </Button>
       </div>
       <Stack className="d-flex justify-content-center">

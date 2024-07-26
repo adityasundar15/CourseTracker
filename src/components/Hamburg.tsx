@@ -1,4 +1,4 @@
-import { pushRotate as Menu } from "react-burger-menu";
+import { slide as Menu } from "react-burger-menu";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -27,13 +27,13 @@ function BurgerMenu() {
     <Menu
       isOpen={isOpen}
       onStateChange={handleMenuStateChange}
-      width={"17%"}
+      width={"20%"}
       pageWrapId={"page-wrap"}
       outerContainerId={"outer-container"}
       customCrossIcon={false}
       burgerBarClassName={isHome ? "white-bg" : ""}
     >
-      <div className="container">
+      {/* <div className="container">
         <div className="row">
           <div className="col-md-9">
             <div className="d-flex justify-content-center align-items-center">
@@ -52,8 +52,8 @@ function BurgerMenu() {
             </div>
           </div>
         </div>
-      </div>
-      <hr className="mt-5"></hr>
+      </div> */}
+      {/* <hr className="mt-5"></hr> */}
       <Link
         id="home-link"
         className="menu-item noselect"
@@ -76,14 +76,6 @@ function BurgerMenu() {
         Profile
       </Link>
       <hr></hr>
-      {/* <Link to="/test3" className="menu-item noselect" onClick={closeMenu}>
-        Test3
-      </Link>
-      <hr></hr> */}
-      {/* <Link to="/test4" className="menu-item noselect" onClick={closeMenu}>
-        Test4
-      </Link> */}
-      {/* <hr></hr> */}
     </Menu>
   );
 }

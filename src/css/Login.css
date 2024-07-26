@@ -1,0 +1,11 @@
+.login-profile {
+    border-radius: 30px !important;
+    border-color: black !important;
+    border-width: 2px !important;
+    font-size: 1.5rem !important;
+}
+
+.login-profile:hover {
+    background-color: black !important;
+    color: white !important;
+}
