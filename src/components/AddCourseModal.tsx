@@ -91,7 +91,7 @@ function AddCourseModal({
   const [courses, setCourses] = useState<FirebaseCourse[]>([]);
   const [filteredCourses, setFilteredCourses] = useState<FirebaseCourse[]>([]);
   const [openFilter, setOpenFilter] = useState(false);
-  const [selectedSchool, setSelectedSchool] = useState<string>("PSE");
+  const [selectedSchool, setSelectedSchool] = useState<string>("SILS");
 
   const handleIconClick = (iconName: string) => {
     setSelectedSchool(iconName);
