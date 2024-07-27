@@ -11,6 +11,7 @@ import { updateCourseCategoriesInFirestore } from "../firestoreUtils";
 import prebuiltList from "../prebuilt-categories.json";
 import { v4 as uuidv4 } from "uuid";
 import { doc, setDoc, getDoc } from "firebase/firestore";
+import { motion } from "framer-motion";
 
 interface UserInfo {
   displayName: string;
@@ -231,7 +232,13 @@ function Profile() {
           <span className="mini-title text-center">Credit Ledger</span>
         </Button>
       </div>
-      <div className="d-flex justify-content-start align-items-center profile-wrapper">
+      <motion.div
+        layout
+        initial={{ opacity: 0, x: -200 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.7, delay: 0.2 }}
+        className="d-flex justify-content-start align-items-center profile-wrapper"
+      >
         <div className="m-3 profile-container w-100">
           {currentUser ? (
             <>
@@ -305,7 +312,7 @@ function Profile() {
             </Button>
           )}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

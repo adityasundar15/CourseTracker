@@ -17,6 +17,7 @@ import DeleteConfirmationDialog from "../components/DeleteConfirmationDialog";
 import { updateCourseCategoriesInFirestore } from "../firestoreUtils";
 import { MdEdit } from "react-icons/md";
 import AddCategoryModal from "../components/AddCategoryModal";
+import { motion } from "framer-motion";
 
 const SelectedCategory: React.FC = () => {
   const navigate = useNavigate();
@@ -185,12 +186,18 @@ const SelectedCategory: React.FC = () => {
 
   return (
     <div id="parent-container">
-      <div className="top-right-element position-absolute">
+      <div className="top-right-element position-absolute z-3">
         <Button className="" variant="" onClick={navigateHome} size="lg">
           <span className="mini-title text-center">Credit Ledger</span>
         </Button>
       </div>
-      <div className="w-100 h-100 d-flex flex-column">
+      <motion.div
+        layout
+        initial={{ opacity: 0, x: -200 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.7, delay: 0.3 }}
+        className="w-100 h-100 d-flex flex-column"
+      >
         <div className="course-list-header" style={{ backgroundImage }}>
           <div className="row justify-content-center align-items-center h-90">
             <div className="col-9 upper-course-list">
@@ -287,7 +294,7 @@ const SelectedCategory: React.FC = () => {
             </Box>
           </div>
         </div>
-      </div>
+      </motion.div>
       <AddCourseModal
         categoryID={id}
         show={showAddModal}

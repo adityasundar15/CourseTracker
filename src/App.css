@@ -29,6 +29,7 @@ html, body, #root, #outer-container, #page-wrap, #parent-container, #profile-pag
     position: fixed;
     right: 36px;
     top: 36px;
+    z-index: 5;
 }
 
 /* Button */
@@ -122,7 +123,7 @@ html, body, #root, #outer-container, #page-wrap, #parent-container, #profile-pag
 }
 
 .menu-item:hover {
-    color: rgb(89, 103, 100);
+    color: rgb(192, 192, 192);
 }
   
 /* Hamburg CSS */
@@ -140,6 +141,7 @@ html, body, #root, #outer-container, #page-wrap, #parent-container, #profile-pag
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
     background: #212529;
+    height: 5px !important;
 }
 
 .white-bg {
@@ -174,8 +176,9 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* General sidebar styles */
 .bm-menu {
     background: rgba(21, 22, 24, 0.506);
-    padding: 6em 3.5em 1.5em 1.5em;
-    font-size: 1.15em;
+    padding: 9em 3.5em 1.5em 1.5em;
+    font-size: 1em;
+    font-weight: 300;
     border-top-right-radius: 40px;
     border-bottom-right-radius: 40px;
 }
@@ -196,10 +199,26 @@ Note: Beware of modifying this element as it can break the animations - you shou
     display: inline-block;
 }
 
+.menu-icons {
+    margin-right: 30px;
+}
+
 /* Styling of overlay */
 .bm-overlay {
     background: rgba(0, 0, 0, 0.1) !important;
     backdrop-filter: blur(2px);
+}
+
+/* Footer */
+.menu-footer {
+    position:absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    color: white;
+    justify-content: center;
+    margin-top: auto;
+    padding-top: auto;
 }
 
 /* #endregion */
@@ -241,6 +260,8 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 .progress-container {
     position: relative;
+    width: 98%;
+    align-self: center;
 }
 
 .bar-progress {
@@ -304,6 +325,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .category-list .card-title {
     font-weight: 400 !important;
     margin-bottom: 4px;
+
 }
 
 .category-list .card-text {
@@ -331,19 +353,19 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 .toggle-button {
-background-color: #ffffff00 !important;
-border: none !important;
-color: #A6A6A6 !important;
+    background-color: #ffffff00 !important;
+    border: none !important;
+    color: #A6A6A6 !important;
 }
 
 .toggle-button.selected {
-color: #4A6478 !important;
+    color: #4A6478 !important;
 }
 .separator {
-width: 1px;
-height: 40px;
-background-color: #dee2e6;
-margin: 0 5px;
+    width: 1px;
+    height: 40px;
+    background-color: #dee2e6;
+    margin: 0 5px;
 }
   
 
