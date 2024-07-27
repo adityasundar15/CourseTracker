@@ -17,6 +17,7 @@ import AddCategoryModal from "../components/AddCategoryModal";
 import { PiCardsThreeFill } from "react-icons/pi";
 import { FaListUl } from "react-icons/fa6";
 import { Grow } from "@mui/material";
+import { motion } from "framer-motion";
 
 interface CourseCategory {
   id: string;
@@ -98,11 +99,17 @@ function Courses() {
           <span className="mini-title text-center">Credit Ledger</span>
         </Button>
       </div>
-      <div className="w-75 h-100 d-flex flex-column mx-auto course-categories-body">
+      <motion.div
+        layout
+        initial={{ opacity: 0, x: -200 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.7, delay: 0.2 }}
+        className="w-75 h-100 d-flex flex-column mx-auto course-categories-body"
+      >
         <Row className="">
           <span className="course-page-title col">Categories</span>
         </Row>
-        <div className="progress-container mt-2">
+        <div className="progress-container mt-2 text-center">
           <div
             className="progress-marker"
             style={{
@@ -120,9 +127,9 @@ function Courses() {
             />
           </Col>
         </div>
-        <span className="row d-flex justify-content-end text-body-tertiary mb-2">
+        <div className="row d-flex justify-content-end text-body-tertiary mb-2 me-1">
           {totalCompleted} / {totalCourses} credits completed
-        </span>
+        </div>
         <div className="view-toggle-container pb-4 d-flex align-items-center">
           <ButtonGroup className="view-toggle">
             <Button
@@ -171,7 +178,9 @@ function Courses() {
                       className="card-image"
                     />
                     <Card.Body>
-                      <Card.Title>{category.name}</Card.Title>
+                      <Card.Title className="flex-grow-1">
+                        {category.name}
+                      </Card.Title>
                       <Card.Text>{`${category.completed}/${category.total} completed`}</Card.Text>
                       <ProgressBar
                         now={Number(category.completed)}
@@ -229,7 +238,7 @@ function Courses() {
           handleClose={handleCloseAddModal}
           onAddCategory={handleAddCategory}
         />
-      </div>
+      </motion.div>
     </div>
   );
 }

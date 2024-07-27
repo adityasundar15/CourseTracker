@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { auth, db, signinWithGoogle } from "../firebase-config";
 import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 import { FaArrowRight } from "react-icons/fa6";
+import { motion } from "framer-motion";
 
 interface UserInfo {
   displayName: string;
@@ -128,7 +129,13 @@ function Login() {
           <span className="mini-title text-center">Credit Ledger</span>
         </Button>
       </div>
-      <div className="d-flex justify-content-center align-items-center flex-grow-1">
+      <motion.div
+        layout
+        initial={{ opacity: 0, x: -200 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.7 }}
+        className="d-flex justify-content-center align-items-center flex-grow-1"
+      >
         <Col className="justify-content-center align-items-center d-flex flex-column align-items-center">
           {currentUser ? (
             <>
@@ -206,7 +213,7 @@ function Login() {
             </>
           )}
         </Col>
-      </div>
+      </motion.div>
     </div>
   );
 }

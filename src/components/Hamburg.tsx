@@ -1,6 +1,8 @@
 import { slide as Menu } from "react-burger-menu";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { GrBook, GrHomeRounded } from "react-icons/gr";
+import { FaRegUser } from "react-icons/fa";
 
 interface MenuState {
   isOpen: boolean;
@@ -27,11 +29,11 @@ function BurgerMenu() {
     <Menu
       isOpen={isOpen}
       onStateChange={handleMenuStateChange}
-      width={"20%"}
+      width={"23%"}
       pageWrapId={"page-wrap"}
       outerContainerId={"outer-container"}
       customCrossIcon={false}
-      burgerBarClassName={isHome ? "white-bg" : ""}
+      burgerBarClassName={isOpen || isHome ? "white-bg" : ""}
     >
       {/* <div className="container">
         <div className="row">
@@ -54,28 +56,39 @@ function BurgerMenu() {
         </div>
       </div> */}
       {/* <hr className="mt-5"></hr> */}
-      <Link
-        id="home-link"
-        className="menu-item noselect"
-        to="/"
-        onClick={closeMenu}
-      >
-        Home
-      </Link>
-      <hr></hr>
-      <Link
-        id="courses-link"
-        className="menu-item noselect"
-        to="/courses"
-        onClick={closeMenu}
-      >
-        Courses
-      </Link>
-      <hr></hr>
-      <Link to="/profile" className="menu-item noselect" onClick={closeMenu}>
-        Profile
-      </Link>
-      <hr></hr>
+      <div className="h-100 position-relative">
+        <Link
+          id="home-link"
+          className="menu-item noselect d-flex align-items-center"
+          to="/"
+          onClick={closeMenu}
+        >
+          <GrHomeRounded className="menu-icons" />
+          Home
+        </Link>
+        <hr></hr>
+        <Link
+          id="courses-link"
+          className="menu-item noselect d-flex align-items-center"
+          to="/courses"
+          onClick={closeMenu}
+        >
+          <GrBook className="menu-icons" />
+          Courses
+        </Link>
+        <hr></hr>
+        <Link
+          to="/profile"
+          className="menu-item noselect d-flex align-items-center"
+          onClick={closeMenu}
+        >
+          <FaRegUser className="menu-icons" />
+          Profile
+        </Link>
+        <div className="menu-footer d-flex justify-content-center">
+          @ GDSC Waseda
+        </div>
+      </div>
     </Menu>
   );
 }
