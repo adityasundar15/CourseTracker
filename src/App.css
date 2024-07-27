@@ -540,6 +540,9 @@ margin: 0 5px;
 .course-filter-container {
     background-color: #ECEBEB;
     border-radius: 10px;
+    align-items: center;
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
 }
 
 .image-container {
@@ -566,7 +569,7 @@ margin: 0 5px;
 .image-container:not(:last-child)::after {
     content: '';
     position: absolute;
-    right: -7px; /* Adjust space between image and line */
+    right: -0.5rem; /* Adjust space between image and line */
     top: 0;
     bottom: 0;
     width: 1px;

@@ -14,6 +14,38 @@ import fseIcon from "../assets/syllabus-icons/fse.png";
 import cseIcon from "../assets/syllabus-icons/cse.png";
 import aseIcon from "../assets/syllabus-icons/ase.png";
 import cmsIcon from "../assets/syllabus-icons/cms.png";
+import artIcon from "../assets/syllabus-icons/art.png";
+import cieIcon from "../assets/syllabus-icons/cie.png";
+import cjlIcon from "../assets/syllabus-icons/cjl.png";
+import gecIcon from "../assets/syllabus-icons/gec.png";
+import eduIcon from "../assets/syllabus-icons/edu.png";
+import ehumIcon from "../assets/syllabus-icons/ehum.png";
+import hssIcon from "../assets/syllabus-icons/hss.png";
+import humIcon from "../assets/syllabus-icons/hum.png";
+import lawIcon from "../assets/syllabus-icons/law.png";
+import socIcon from "../assets/syllabus-icons/soc.png";
+import spsIcon from "../assets/syllabus-icons/sps.png";
+
+const schoolIcons = [
+  { src: silsIcon, alt: "SILS", name: "SILS" },
+  { src: pseIcon, alt: "PSE", name: "PSE" },
+  { src: sssIcon, alt: "SSS", name: "SSS" },
+  { src: fseIcon, alt: "FSE", name: "FSE" },
+  { src: cseIcon, alt: "CSE", name: "CSE" },
+  { src: aseIcon, alt: "ASE", name: "ASE" },
+  { src: cmsIcon, alt: "CMS", name: "CMS" },
+  { src: cjlIcon, alt: "CJL", name: "CJL" },
+  { src: gecIcon, alt: "GEC", name: "GEC" },
+  { src: artIcon, alt: "ART", name: "ART" },
+  { src: cieIcon, alt: "CIE", name: "CIE" },
+  { src: eduIcon, alt: "EDU", name: "EDU" },
+  { src: ehumIcon, alt: "EHUM", name: "EHUM" },
+  { src: hssIcon, alt: "HSS", name: "HSS" },
+  { src: humIcon, alt: "HUM", name: "HUM" },
+  { src: lawIcon, alt: "LAW", name: "LAW" },
+  { src: socIcon, alt: "SOC", name: "SOC" },
+  { src: spsIcon, alt: "SPS", name: "SPS" },
+];
 
 // FirebaseCourse interface matching the structure
 interface FirebaseCourse {
@@ -294,22 +326,24 @@ function AddCourseModal({
               <div>
                 <Collapse in={openFilter}>
                   <div id="collapse-content">
-                    <div className="d-flex w-100 course-filter-container mb-2 justify-content-between align-items-center p-3">
-                      {[
-                        { src: silsIcon, alt: "SILS", name: "SILS" },
-                        { src: pseIcon, alt: "PSE", name: "PSE" },
-                        { src: sssIcon, alt: "SSS", name: "SSS" },
-                        { src: fseIcon, alt: "FSE", name: "FSE" },
-                        { src: cseIcon, alt: "CSE", name: "CSE" },
-                        { src: aseIcon, alt: "ASE", name: "ASE" },
-                        { src: cmsIcon, alt: "CMS", name: "CMS" },
-                      ].map((icon) => (
+                    <div
+                      className="course-filter-container mb-2 py-3 px-1"
+                      style={{
+                        display: "flex",
+                        overflowX: "auto",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {schoolIcons.map((icon) => (
                         <div
                           key={icon.name}
-                          className={`image-container ${
+                          className={`image-container mx-2 ${
                             selectedSchool === icon.name ? "selected" : ""
                           }`}
                           onClick={() => handleIconClick(icon.name)}
+                          style={{
+                            display: "inline-block",
+                          }}
                         >
                           <div className="icon-holder">
                             <img
