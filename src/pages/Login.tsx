@@ -129,13 +129,7 @@ function Login() {
           <span className="mini-title text-center">Credit Ledger</span>
         </Button>
       </div>
-      <motion.div
-        layout
-        initial={{ opacity: 0, x: -200 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.7 }}
-        className="d-flex justify-content-center align-items-center flex-grow-1"
-      >
+      <motion.div className="d-flex justify-content-center align-items-center flex-grow-1">
         <Col className="justify-content-center align-items-center d-flex flex-column align-items-center">
           {currentUser ? (
             <>
