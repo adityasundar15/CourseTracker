@@ -1,11 +1,11 @@
-import '../css/Login.css';
+import "../css/Login.css";
 
-import { useEffect, useState } from 'react';
-import { Button, Col, Row } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import { auth, db, signinWithGoogle } from '../firebase-config';
-import { collection, doc, getDoc, setDoc } from 'firebase/firestore';
-import { FaArrowRight } from 'react-icons/fa6';
+import { useEffect, useState } from "react";
+import { Button, Col, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { auth, db, signinWithGoogle } from "../firebase-config";
+import { collection, doc, getDoc, setDoc } from "firebase/firestore";
+import { FaArrowRight } from "react-icons/fa6";
 
 interface UserInfo {
   displayName: string;
@@ -16,18 +16,18 @@ interface UserInfo {
 function Login() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState<UserInfo | null>(null);
-  const usersCollectionRef = collection(db, 'users');
+  const usersCollectionRef = collection(db, "users");
 
   const navigateHome = () => {
-    navigate('/');
+    navigate("/");
   };
 
   const navigateCourses = () => {
-    navigate('/courses');
+    navigate("/courses");
   };
 
   const navigateProfile = () => {
-    navigate('/profile');
+    navigate("/profile");
   };
 
   const handleSigninWithGoogle = async () => {
@@ -49,12 +49,12 @@ function Login() {
           {
             uid: currentUser.uid,
           },
-          { merge: true },
+          { merge: true }
         );
         await fetchSelectedCourses(currentUser.uid);
         await fetchUserDetailInfo(currentUser.uid);
       } else {
-        console.log('User logged out, resetting state...');
+        console.log("User logged out, resetting state...");
         setCurrentUser(null);
       }
     });
@@ -63,61 +63,61 @@ function Login() {
 
   const fetchSelectedCourses = async (uid: string) => {
     try {
-      console.log('Fetching selected courses for user:', uid);
-      const userDocRef = doc(db, 'users', uid);
+      console.log("Fetching selected courses for user:", uid);
+      const userDocRef = doc(db, "users", uid);
       const userDoc = await getDoc(userDocRef);
       if (userDoc.exists()) {
         const userData = userDoc.data();
-        console.log('User data from API:', userData); // Log raw user data
+        console.log("User data from API:", userData); // Log raw user data
 
         // Replace local storage with API data
         const apiCategories = userData?.Categories || [];
-        localStorage.setItem('courseCategories', JSON.stringify(apiCategories));
+        localStorage.setItem("courseCategories", JSON.stringify(apiCategories));
       } else {
-        localStorage.removeItem('courseCategories'); // Clear local storage if no data exists in API
+        localStorage.removeItem("courseCategories"); // Clear local storage if no data exists in API
       }
 
-      const storedCategories = localStorage.getItem('courseCategories');
+      const storedCategories = localStorage.getItem("courseCategories");
       if (storedCategories) {
         console.log(
-          'Updated stored categories from local storage:',
-          JSON.parse(storedCategories),
+          "Updated stored categories from local storage:",
+          JSON.parse(storedCategories)
         );
       } else {
-        console.log('No stored categories in local storage.');
+        console.log("No stored categories in local storage.");
       }
     } catch (error) {
-      console.error('Error fetching selected courses: ', error);
+      console.error("Error fetching selected courses: ", error);
     }
   };
 
   const fetchUserDetailInfo = async (uid: string) => {
     try {
-      console.log('Fetching detail info for user:', uid);
-      const userDocRef = doc(db, 'users', uid);
+      console.log("Fetching detail info for user:", uid);
+      const userDocRef = doc(db, "users", uid);
       const userDoc = await getDoc(userDocRef);
       if (userDoc.exists()) {
         const userData = userDoc.data();
-        console.log('User data from API:', userData); // Log raw user data
+        console.log("User data from API:", userData); // Log raw user data
 
         // Replace local storage with API data
         const apiUserDetail = userData?.UserDetail || null;
-        localStorage.setItem('UserDetail', JSON.stringify(apiUserDetail));
+        localStorage.setItem("UserDetail", JSON.stringify(apiUserDetail));
       } else {
-        localStorage.removeItem('UserDetail'); // Clear local storage if no data exists in API
+        localStorage.removeItem("UserDetail"); // Clear local storage if no data exists in API
       }
 
-      const storedUserDetail = localStorage.getItem('UserDetail');
+      const storedUserDetail = localStorage.getItem("UserDetail");
       if (storedUserDetail) {
         console.log(
-          'Updated stored UserDetail from local storage:',
-          JSON.parse(storedUserDetail),
+          "Updated stored UserDetail from local storage:",
+          JSON.parse(storedUserDetail)
         );
       } else {
-        console.log('No stored UserDetail in local storage.');
+        console.log("No stored UserDetail in local storage.");
       }
     } catch (error) {
-      console.error('Error fetching selected courses: ', error);
+      console.error("Error fetching selected courses: ", error);
     }
   };
 
@@ -129,7 +129,7 @@ function Login() {
         </Button>
       </div>
       <div className="d-flex justify-content-center align-items-center flex-grow-1">
-        <Col className="text-center">
+        <Col className="justify-content-center align-items-center d-flex flex-column align-items-center">
           {currentUser ? (
             <>
               <Row className="pb-5">
@@ -137,8 +137,28 @@ function Login() {
                   Welcome, {currentUser.displayName}!
                 </span>
               </Row>
-              <Row>
-                <Col>
+              <Col className="button-container">
+                <Row className="pb-2 text-center">
+                  <Button
+                    className="d-flex justify-content-center align-items-center"
+                    variant="dark"
+                    style={{
+                      backgroundColor: "#000000",
+                      borderRadius: "20px",
+                      fontSize: "1.5rem",
+                      borderWidth: "2px",
+                    }}
+                    onClick={navigateCourses}
+                  >
+                    <span
+                      className="px-4 py-1"
+                      style={{ fontFamily: "Outfit", fontWeight: 300 }}
+                    >
+                      Go to Courses <FaArrowRight />
+                    </span>
+                  </Button>
+                </Row>
+                <Row className="pt-2 text-center">
                   <Button
                     className="d-flex justify-content-center align-items-center login-profile"
                     variant="bright"
@@ -146,32 +166,13 @@ function Login() {
                   >
                     <span
                       className="px-4 py-1"
-                      style={{ fontFamily: 'Outfit', fontWeight: 300 }}
+                      style={{ fontFamily: "Outfit", fontWeight: 300 }}
                     >
                       Profile
                     </span>
                   </Button>
-                </Col>
-                <Col>
-                  <Button
-                    className="d-flex justify-content-center align-items-center"
-                    variant="dark"
-                    style={{
-                      backgroundColor: '#000000',
-                      borderRadius: '30px',
-                      fontSize: '1.5rem',
-                    }}
-                    onClick={navigateCourses}
-                  >
-                    <span
-                      className="px-4 py-1"
-                      style={{ fontFamily: 'Outfit', fontWeight: 300 }}
-                    >
-                      Go to Courses <FaArrowRight />
-                    </span>
-                  </Button>
-                </Col>
-              </Row>
+                </Row>
+              </Col>
             </>
           ) : (
             <>
@@ -188,15 +189,15 @@ function Login() {
                   className="d-flex justify-content-center align-items-center"
                   variant="dark"
                   style={{
-                    backgroundColor: '#000000',
-                    borderRadius: '17px',
-                    fontSize: '1.5rem',
+                    backgroundColor: "#000000",
+                    borderRadius: "17px",
+                    fontSize: "1.5rem",
                   }}
                   onClick={handleSigninWithGoogle}
                 >
                   <span
                     className="px-4 py-1"
-                    style={{ fontFamily: 'Outfit', fontWeight: 300 }}
+                    style={{ fontFamily: "Outfit", fontWeight: 300 }}
                   >
                     Continue with Google
                   </span>
