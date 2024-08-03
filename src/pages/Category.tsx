@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Course, CourseCategory } from "./Courses";
 import placeHolderPic1 from "../assets/default_courses1.png";
@@ -41,6 +41,8 @@ const SelectedCategory: React.FC = () => {
     CourseCategory | undefined
   >(undefined);
 
+  const previousCategoryRef = useRef<CourseCategory | undefined>();
+
   const handleShowEditModal = (category: CourseCategory) => {
     setCategoryToEdit(category);
     setShowEditModal(true);
@@ -72,21 +74,28 @@ const SelectedCategory: React.FC = () => {
   let backgroundImage: string | undefined;
 
   const storedCategories = localStorage.getItem("courseCategories");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const courseCategories: CourseCategory[] = storedCategories
     ? JSON.parse(storedCategories)
     : [];
 
   useEffect(() => {
     const category = courseCategories.find((category) => category.id === id);
-    setSelectedCategory(category);
+    const previousCategoryJSON = JSON.stringify(previousCategoryRef.current);
+    const currentCategoryJSON = JSON.stringify(category);
+
+    if (currentCategoryJSON !== previousCategoryJSON) {
+      setSelectedCategory(category);
+      previousCategoryRef.current = category;
+    }
   }, [courseCategories, id]);
 
-  // Init render
   useEffect(() => {
     if (selectedCategory) {
       setCourseList(selectedCategory.courses);
       updateCreditsAndProgress(selectedCategory.courses);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCategory]);
 
   if (!selectedCategory) {
