@@ -1,23 +1,23 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { Course, CourseCategory } from "./Courses";
-import placeHolderPic1 from "../assets/default_courses1.png";
-import placeHolderPic2 from "../assets/default_courses2.png";
-import placeHolderPic3 from "../assets/default_courses3.png";
-import placeHolderPic4 from "../assets/default_courses4.png";
-import { Button, Col, ProgressBar } from "react-bootstrap";
-import ErrorPage from "./ErrorPage";
-import { IoArrowBackCircleSharp } from "react-icons/io5";
-import AddCourseModal from "../components/AddCourseModal";
-import { TiDelete } from "react-icons/ti";
-import { FaRegCheckCircle } from "react-icons/fa";
-import { GiGraduateCap } from "react-icons/gi";
-import { Box, Divider, Slide } from "@mui/material";
-import DeleteConfirmationDialog from "../components/DeleteConfirmationDialog";
-import { updateCourseCategoriesInFirestore } from "../firestoreUtils";
-import { MdEdit } from "react-icons/md";
-import AddCategoryModal from "../components/AddCategoryModal";
-import { motion } from "framer-motion";
+import React, { useEffect, useMemo, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Course, CourseCategory } from './Courses';
+import placeHolderPic1 from '../assets/default_courses1.png';
+import placeHolderPic2 from '../assets/default_courses2.png';
+import placeHolderPic3 from '../assets/default_courses3.png';
+import placeHolderPic4 from '../assets/default_courses4.png';
+import { Button, Col, ProgressBar } from 'react-bootstrap';
+import ErrorPage from './ErrorPage';
+import { IoArrowBackCircleSharp } from 'react-icons/io5';
+import AddCourseModal from '../components/AddCourseModal';
+import { TiDelete } from 'react-icons/ti';
+import { FaRegCheckCircle } from 'react-icons/fa';
+import { GiGraduateCap } from 'react-icons/gi';
+import { Box, Divider, Slide } from '@mui/material';
+import DeleteConfirmationDialog from '../components/DeleteConfirmationDialog';
+import { updateCourseCategoriesInFirestore } from '../firestoreUtils';
+import { MdEdit } from 'react-icons/md';
+import AddCategoryModal from '../components/AddCategoryModal';
+import { motion } from 'framer-motion';
 
 const SelectedCategory: React.FC = () => {
   const navigate = useNavigate();
@@ -32,6 +32,8 @@ const SelectedCategory: React.FC = () => {
   const [categoryToEdit, setCategoryToEdit] = useState<
     CourseCategory | undefined
   >(undefined);
+  //! Adding new State hook to dead with rerender of progress bar
+  const [overallProgress, setOverallProgress] = useState<number>(0);
 
   const handleShowEditModal = (category: CourseCategory) => {
     setCategoryToEdit(category);
@@ -54,16 +56,16 @@ const SelectedCategory: React.FC = () => {
   };
 
   const handleGoBack = () => {
-    navigate("/courses");
+    navigate('/courses');
   };
 
   const navigateHome = () => {
-    navigate("/");
+    navigate('/');
   };
 
   let backgroundImage: string | undefined;
 
-  const storedCategories = localStorage.getItem("courseCategories");
+  const storedCategories = localStorage.getItem('courseCategories');
   const courseCategories: CourseCategory[] = storedCategories
     ? JSON.parse(storedCategories)
     : [];
@@ -78,6 +80,29 @@ const SelectedCategory: React.FC = () => {
     }
   }, []);
 
+  //! Adding new Effect hook to update state everytime the selected category change,
+  //! so the progress bar correctly re-render when remove course remove using removeCourse
+  useEffect(() => {
+    if (selectedCategory && selectedCategory.courses !== courseList) {
+      setCourseList(selectedCategory.courses);
+      updateProgress(selectedCategory.courses);
+    }
+  }, [selectedCategory]);
+
+  //! Adding new funtion to update overallProgress
+  const updateProgress = (courses: Course[]) => {
+    const totalCredits = selectedCategory?.total || 0;
+    const completedCredits = courses.reduce(
+      (total, course) => total + (course.progress ? course.credit : 0),
+      0,
+    );
+    const progress =
+      totalCredits === 0
+        ? 0
+        : ((completedCredits / totalCredits) * 100).toFixed(0);
+    setOverallProgress(Number(progress));
+  };
+
   if (!selectedCategory) {
     return <ErrorPage />;
   }
@@ -85,12 +110,12 @@ const SelectedCategory: React.FC = () => {
   const totalCredits = selectedCategory.total;
   const completedCredits = selectedCategory.courses.reduce(
     (total, course) => total + (course.progress ? course.credit : 0),
-    0
+    0,
   );
-  const overallProgress =
-    totalCredits === 0
-      ? 0
-      : ((completedCredits / totalCredits) * 100).toFixed(0);
+  // const overallProgress =
+  //   totalCredits === 0
+  //     ? 0
+  //     : ((completedCredits / totalCredits) * 100).toFixed(0);
 
   if (selectedCategory) {
     switch (selectedCategory.picture) {
@@ -115,7 +140,7 @@ const SelectedCategory: React.FC = () => {
   const addCourse = (newCourse: Course) => {
     setCourseList((prevCourseList) => {
       const existingCourseIndex = prevCourseList.findIndex(
-        (course) => course.id === newCourse.id
+        (course) => course.id === newCourse.id,
       );
 
       if (existingCourseIndex !== -1) {
@@ -139,9 +164,11 @@ const SelectedCategory: React.FC = () => {
     if (!courseToRemove) return;
 
     const updatedCourseList = courseList.filter(
-      (course) => course.id !== courseID
+      (course) => course.id !== courseID,
     );
     setCourseList(updatedCourseList);
+    //! Adding new function to control overallProgree data
+    updateProgress(updatedCourseList);
 
     const updatedCategories = courseCategories.map((category) => {
       if (category.id === id) {
@@ -156,29 +183,29 @@ const SelectedCategory: React.FC = () => {
     // Sync local data with Firestore
     await updateCourseCategoriesInFirestore(updatedCategories);
 
-    localStorage.setItem("courseCategories", JSON.stringify(updatedCategories));
+    localStorage.setItem('courseCategories', JSON.stringify(updatedCategories));
   };
 
   const handleDeleteConfirmation = async () => {
     const updatedCategories = courseCategories.filter(
-      (category) => category.id !== id
+      (category) => category.id !== id,
     );
 
     // Sync local data with Firestore
     await updateCourseCategoriesInFirestore(updatedCategories);
 
-    localStorage.setItem("courseCategories", JSON.stringify(updatedCategories));
-    navigate("/courses");
+    localStorage.setItem('courseCategories', JSON.stringify(updatedCategories));
+    navigate('/courses');
   };
 
   const handleCategoryUpdate = async (updatedCategory: CourseCategory) => {
     const updatedCategories = courseCategories.map((category) =>
-      category.id === updatedCategory.id ? updatedCategory : category
+      category.id === updatedCategory.id ? updatedCategory : category,
     );
 
     await updateCourseCategoriesInFirestore(updatedCategories);
 
-    localStorage.setItem("courseCategories", JSON.stringify(updatedCategories));
+    localStorage.setItem('courseCategories', JSON.stringify(updatedCategories));
 
     setCategoryToEdit(updatedCategory);
     setShowEditModal(false);
@@ -211,7 +238,7 @@ const SelectedCategory: React.FC = () => {
                       }% - 1rem)`,
                     }}
                   >
-                    <div className="marker-label">{overallProgress + "%"}</div>
+                    <div className="marker-label">{overallProgress + '%'}</div>
                   </div>
                   <Col>
                     <ProgressBar
@@ -286,7 +313,7 @@ const SelectedCategory: React.FC = () => {
                 <div
                   className="add-course course-item p-3 row"
                   onClick={handleShowAddModal}
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: 'pointer' }}
                 >
                   <div>+ Add Course</div>
                 </div>
@@ -343,10 +370,10 @@ const CourseItem: React.FC<CourseItemProps> = ({
     editCourse({
       id,
       name,
-      name_jp: name_jp || "",
+      name_jp: name_jp || '',
       credit,
       progress,
-      school: school || "",
+      school: school || '',
     });
   };
 
@@ -357,15 +384,15 @@ const CourseItem: React.FC<CourseItemProps> = ({
       onMouseLeave={() => setIsHovered(false)}
     >
       <div
-        className={`course-item row p-3 ${progress === 1 ? "completed" : ""}`}
+        className={`course-item row p-3 ${progress === 1 ? 'completed' : ''}`}
       >
         <span className="course-name col-9 align-self-start row">
-          {name}{" "}
+          {name}{' '}
           {isHovered && (
             <div
               className="edit-course col d-flex align-items-center"
               onClick={handleEdit}
-              style={{ cursor: "pointer" }}
+              style={{ cursor: 'pointer' }}
             >
               <MdEdit className="edit-course-icon" size={20} />
             </div>
@@ -383,7 +410,7 @@ const CourseItem: React.FC<CourseItemProps> = ({
         <span
           className="position-absolute top-0 start-100 translate-middle-y"
           onClick={handleDelete}
-          style={{ cursor: "pointer" }}
+          style={{ cursor: 'pointer' }}
         >
           <TiDelete className="delete-button" size={25} />
         </span>
