@@ -1,50 +1,50 @@
-import { Button, Collapse, Modal } from 'react-bootstrap';
-import { useState, useEffect } from 'react';
-import { Course, CourseCategory } from '../pages/Courses';
-import { database } from '../firebase-config'; // Make sure the path is correct
-import { onValue, ref } from 'firebase/database';
-import { IoIosAddCircleOutline } from 'react-icons/io';
-import { updateCourseCategoriesInFirestore } from '../firestoreUtils';
-import { MdOutlineBackpack } from 'react-icons/md';
+import { Button, Collapse, Modal } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { Course, CourseCategory } from "../pages/Courses";
+import { database } from "../firebase-config"; // Make sure the path is correct
+import { onValue, ref } from "firebase/database";
+import { IoIosAddCircleOutline } from "react-icons/io";
+import { updateCourseCategoriesInFirestore } from "../firestoreUtils";
+import { MdOutlineBackpack } from "react-icons/md";
 
-import silsIcon from '../assets/syllabus-icons/sils.png';
-import pseIcon from '../assets/syllabus-icons/pse.png';
-import sssIcon from '../assets/syllabus-icons/sss.png';
-import fseIcon from '../assets/syllabus-icons/fse.png';
-import cseIcon from '../assets/syllabus-icons/cse.png';
-import aseIcon from '../assets/syllabus-icons/ase.png';
-import cmsIcon from '../assets/syllabus-icons/cms.png';
-import artIcon from '../assets/syllabus-icons/art.png';
-import cieIcon from '../assets/syllabus-icons/cie.png';
-import cjlIcon from '../assets/syllabus-icons/cjl.png';
-import gecIcon from '../assets/syllabus-icons/gec.png';
-import eduIcon from '../assets/syllabus-icons/edu.png';
-import ehumIcon from '../assets/syllabus-icons/ehum.png';
-import hssIcon from '../assets/syllabus-icons/hss.png';
-import humIcon from '../assets/syllabus-icons/hum.png';
-import lawIcon from '../assets/syllabus-icons/law.png';
-import socIcon from '../assets/syllabus-icons/soc.png';
-import spsIcon from '../assets/syllabus-icons/sps.png';
+import silsIcon from "../assets/syllabus-icons/sils.png";
+import pseIcon from "../assets/syllabus-icons/pse.png";
+import sssIcon from "../assets/syllabus-icons/sss.png";
+import fseIcon from "../assets/syllabus-icons/fse.png";
+import cseIcon from "../assets/syllabus-icons/cse.png";
+import aseIcon from "../assets/syllabus-icons/ase.png";
+import cmsIcon from "../assets/syllabus-icons/cms.png";
+import artIcon from "../assets/syllabus-icons/art.png";
+import cieIcon from "../assets/syllabus-icons/cie.png";
+import cjlIcon from "../assets/syllabus-icons/cjl.png";
+import gecIcon from "../assets/syllabus-icons/gec.png";
+import eduIcon from "../assets/syllabus-icons/edu.png";
+import ehumIcon from "../assets/syllabus-icons/ehum.png";
+import hssIcon from "../assets/syllabus-icons/hss.png";
+import humIcon from "../assets/syllabus-icons/hum.png";
+import lawIcon from "../assets/syllabus-icons/law.png";
+import socIcon from "../assets/syllabus-icons/soc.png";
+import spsIcon from "../assets/syllabus-icons/sps.png";
 
 const schoolIcons = [
-  { src: silsIcon, alt: 'SILS', name: 'SILS' },
-  { src: pseIcon, alt: 'PSE', name: 'PSE' },
-  { src: sssIcon, alt: 'SSS', name: 'SSS' },
-  { src: fseIcon, alt: 'FSE', name: 'FSE' },
-  { src: cseIcon, alt: 'CSE', name: 'CSE' },
-  { src: aseIcon, alt: 'ASE', name: 'ASE' },
-  { src: cmsIcon, alt: 'CMS', name: 'CMS' },
-  { src: cjlIcon, alt: 'CJL', name: 'CJL' },
-  { src: gecIcon, alt: 'GEC', name: 'GEC' },
-  { src: artIcon, alt: 'ART', name: 'ART' },
-  { src: cieIcon, alt: 'CIE', name: 'CIE' },
-  { src: eduIcon, alt: 'EDU', name: 'EDU' },
-  { src: ehumIcon, alt: 'EHUM', name: 'EHUM' },
-  { src: hssIcon, alt: 'HSS', name: 'HSS' },
-  { src: humIcon, alt: 'HUM', name: 'HUM' },
-  { src: lawIcon, alt: 'LAW', name: 'LAW' },
-  { src: socIcon, alt: 'SOC', name: 'SOC' },
-  { src: spsIcon, alt: 'SPS', name: 'SPS' },
+  { src: silsIcon, alt: "SILS", name: "SILS" },
+  { src: pseIcon, alt: "PSE", name: "PSE" },
+  { src: sssIcon, alt: "SSS", name: "SSS" },
+  { src: fseIcon, alt: "FSE", name: "FSE" },
+  { src: cseIcon, alt: "CSE", name: "CSE" },
+  { src: aseIcon, alt: "ASE", name: "ASE" },
+  { src: cmsIcon, alt: "CMS", name: "CMS" },
+  { src: cjlIcon, alt: "CJL", name: "CJL" },
+  { src: gecIcon, alt: "GEC", name: "GEC" },
+  { src: artIcon, alt: "ART", name: "ART" },
+  { src: cieIcon, alt: "CIE", name: "CIE" },
+  { src: eduIcon, alt: "EDU", name: "EDU" },
+  { src: ehumIcon, alt: "EHUM", name: "EHUM" },
+  { src: hssIcon, alt: "HSS", name: "HSS" },
+  { src: humIcon, alt: "HUM", name: "HUM" },
+  { src: lawIcon, alt: "LAW", name: "LAW" },
+  { src: socIcon, alt: "SOC", name: "SOC" },
+  { src: spsIcon, alt: "SPS", name: "SPS" },
 ];
 
 // FirebaseCourse interface matching the structure
@@ -83,15 +83,15 @@ function AddCourseModal({
   courseToEdit,
 }: AddCourseModalProps) {
   const [showManualForm, setShowManualForm] = useState(false);
-  const [courseKey, setCourseKey] = useState('');
-  const [courseName, setCourseName] = useState('');
-  const [requiredCredits, setRequiredCredits] = useState('');
+  const [courseKey, setCourseKey] = useState("");
+  const [courseName, setCourseName] = useState("");
+  const [requiredCredits, setRequiredCredits] = useState("");
   const [courseCompleted, setCourseCompleted] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [courses, setCourses] = useState<FirebaseCourse[]>([]);
   const [filteredCourses, setFilteredCourses] = useState<FirebaseCourse[]>([]);
   const [openFilter, setOpenFilter] = useState(false);
-  const [selectedSchool, setSelectedSchool] = useState<string>('SILS');
+  const [selectedSchool, setSelectedSchool] = useState<string>("SILS");
 
   const handleIconClick = (iconName: string) => {
     setSelectedSchool(iconName);
@@ -124,7 +124,7 @@ function AddCourseModal({
     const filtered = courses.filter(
       (course) =>
         course.b.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        course.a.toLowerCase().includes(searchTerm.toLowerCase()),
+        course.a.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredCourses(filtered);
   }, [searchTerm, courses]);
@@ -145,18 +145,18 @@ function AddCourseModal({
     const newCourse: Course = {
       id: courseKey,
       name: courseName,
-      name_jp: '',
+      name_jp: "",
       credit: parseInt(requiredCredits),
       progress: courseCompleted ? 1 : 0,
-      school: '',
+      school: "",
     };
 
     if (parseInt(requiredCredits) <= 0) {
-      alert('Credit Should be larger than ZERO!!!');
+      alert("Credit Should be larger than ZERO!!!");
       return;
     }
 
-    const storedCategories = localStorage.getItem('courseCategories');
+    const storedCategories = localStorage.getItem("courseCategories");
     const courseCategories: CourseCategory[] = storedCategories
       ? JSON.parse(storedCategories)
       : [];
@@ -164,7 +164,7 @@ function AddCourseModal({
     const updatedCategories = courseCategories.map((category) => {
       if (category.id === categoryID) {
         const courseIndex = category.courses.findIndex(
-          (course) => course.id === newCourse.id,
+          (course) => course.id === newCourse.id
         );
 
         if (courseIndex === -1) {
@@ -173,16 +173,18 @@ function AddCourseModal({
             category.completed += newCourse.credit;
           }
         } else {
+          // Editing existing course
           const existingCourse = category.courses[courseIndex];
 
-          if (existingCourse.progress === 1 && newCourse.progress !== 1) {
+          // Adjust completed credits for credit change
+          if (existingCourse.progress === 1) {
             category.completed -= existingCourse.credit;
           }
-
-          if (existingCourse.progress !== 1 && newCourse.progress === 1) {
+          if (newCourse.progress === 1) {
             category.completed += newCourse.credit;
           }
 
+          // Update the course
           category.courses[courseIndex] = newCourse;
         }
       }
@@ -194,11 +196,11 @@ function AddCourseModal({
 
     onAddCourse(newCourse);
 
-    localStorage.setItem('courseCategories', JSON.stringify(updatedCategories));
+    localStorage.setItem("courseCategories", JSON.stringify(updatedCategories));
 
-    setCourseKey('');
-    setCourseName('');
-    setRequiredCredits('');
+    setCourseKey("");
+    setCourseName("");
+    setRequiredCredits("");
     setCourseCompleted(false);
     handleCloseModal();
   };
@@ -218,7 +220,7 @@ function AddCourseModal({
         <Modal.Header className="add-category-modal-header" closeButton>
           <div className="col my-3">
             <Modal.Title className="text-center">
-              {courseToEdit ? 'Edit Course' : 'Add Course'}
+              {courseToEdit ? "Edit Course" : "Add Course"}
             </Modal.Title>
           </div>
         </Modal.Header>
@@ -285,18 +287,18 @@ function AddCourseModal({
               <div className="col align-self-center justify-content-between d-flex">
                 <Button
                   className={`btn-sm add-course-btn ${
-                    courseCompleted ? 'add-course-selected' : ''
+                    courseCompleted ? "add-course-selected" : ""
                   }`}
-                  style={{ width: '45%' }}
+                  style={{ width: "45%" }}
                   onClick={() => setCourseCompleted(true)}
                 >
                   <div className="py-1">Complete</div>
                 </Button>
                 <Button
                   className={`btn-sm add-course-btn ${
-                    !courseCompleted ? 'add-course-selected' : ''
+                    !courseCompleted ? "add-course-selected" : ""
                   }`}
-                  style={{ width: '45%' }}
+                  style={{ width: "45%" }}
                   onClick={() => setCourseCompleted(false)}
                 >
                   <div className="py-1">Incomplete</div>
@@ -318,11 +320,11 @@ function AddCourseModal({
                 <div className="col-auto pe-4">
                   <Button
                     className={`school-select ${
-                      openFilter ? 'opened-filter' : ''
+                      openFilter ? "opened-filter" : ""
                     }`}
                     onClick={() => setOpenFilter(!openFilter)}
                     aria-controls="collapse-content"
-                    aria-expanded={openFilter ? 'true' : 'false'}
+                    aria-expanded={openFilter ? "true" : "false"}
                   >
                     <MdOutlineBackpack color="black" size={28} />
                   </Button>
@@ -334,20 +336,20 @@ function AddCourseModal({
                     <div
                       className="course-filter-container mb-2 py-3 px-1"
                       style={{
-                        display: 'flex',
-                        overflowX: 'auto',
-                        whiteSpace: 'nowrap',
+                        display: "flex",
+                        overflowX: "auto",
+                        whiteSpace: "nowrap",
                       }}
                     >
                       {schoolIcons.map((icon) => (
                         <div
                           key={icon.name}
                           className={`image-container mx-2 ${
-                            selectedSchool === icon.name ? 'selected' : ''
+                            selectedSchool === icon.name ? "selected" : ""
                           }`}
                           onClick={() => handleIconClick(icon.name)}
                           style={{
-                            display: 'inline-block',
+                            display: "inline-block",
                           }}
                         >
                           <div className="icon-holder">
@@ -404,9 +406,9 @@ function AddCourseModal({
               variant="primary"
               className="mx-auto rounded-pill btn-lg"
               onClick={handleAddCourse}
-              style={{ backgroundColor: 'black', borderColor: 'black' }}
+              style={{ backgroundColor: "black", borderColor: "black" }}
             >
-              <div className="px-5">{courseToEdit ? 'Save' : 'Add'}</div>
+              <div className="px-5">{courseToEdit ? "Save" : "Add"}</div>
             </Button>
           )}
         </Modal.Footer>
