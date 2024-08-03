@@ -115,7 +115,7 @@ function Courses() {
             style={{
               left: `calc(${
                 Number(overallProgress) > 100 ? 100 : overallProgress
-              }% - 1rem)`,
+              }% - 1.2rem)`,
             }}
           >
             <div className="marker-label">{overallProgress + "%"}</div>

@@ -5,7 +5,7 @@ import placeHolderPic1 from "../assets/default_courses1.png";
 import placeHolderPic2 from "../assets/default_courses2.png";
 import placeHolderPic3 from "../assets/default_courses3.png";
 import placeHolderPic4 from "../assets/default_courses4.png";
-import { Button, Col, ProgressBar } from "react-bootstrap";
+import { Button, ProgressBar } from "react-bootstrap";
 import ErrorPage from "./ErrorPage";
 import { IoArrowBackCircleSharp } from "react-icons/io5";
 import AddCourseModal from "../components/AddCourseModal";
@@ -109,7 +109,9 @@ const SelectedCategory: React.FC = () => {
       0
     );
     const newOverallProgress =
-      newTotalCredits === 0 ? 0 : (newCompletedCredits / newTotalCredits) * 100;
+      newTotalCredits === 0
+        ? 0
+        : Math.round((newCompletedCredits / newTotalCredits) * 100);
 
     setTotalCredits(newTotalCredits);
     setCompletedCredits(newCompletedCredits);
@@ -137,6 +139,7 @@ const SelectedCategory: React.FC = () => {
   }
 
   const addCourse = (newCourse: Course) => {
+    // Note backend is modified in the modal itself
     setCourseList((prevCourseList) => {
       const existingCourseIndex = prevCourseList.findIndex(
         (course) => course.id === newCourse.id
@@ -236,17 +239,15 @@ const SelectedCategory: React.FC = () => {
                     style={{
                       left: `calc(${
                         Number(overallProgress) > 100 ? 100 : overallProgress
-                      }% - 1rem)`,
+                      }% - 1.2rem)`,
                     }}
                   >
                     <div className="marker-label">{overallProgress + "%"}</div>
                   </div>
-                  <Col>
-                    <ProgressBar
-                      now={Number(overallProgress)}
-                      className="bar-progress row"
-                    />
-                  </Col>
+                  <ProgressBar
+                    now={Number(overallProgress)}
+                    className="bar-progress row"
+                  />
                 </div>
                 <div className="pt-4">
                   <Divider>

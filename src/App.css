@@ -304,7 +304,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
     display: flex;
     justify-content: center;
     align-items: center;
-    left: calc(50% - 2.5rem);
+    left: calc(50% - 2rem);
 }
 
 .category-list {
