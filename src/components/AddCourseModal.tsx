@@ -6,6 +6,7 @@ import { onValue, ref } from "firebase/database";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { updateCourseCategoriesInFirestore } from "../firestoreUtils";
 import { MdOutlineBackpack } from "react-icons/md";
+import hash from "object-hash"; // Import object-hash
 
 import silsIcon from "../assets/syllabus-icons/sils.png";
 import pseIcon from "../assets/syllabus-icons/pse.png";
@@ -99,6 +100,7 @@ function AddCourseModal({
 
   useEffect(() => {
     if (courseToEdit) {
+      // If editing, populate fields and keep courseKey uneditable
       setCourseKey(courseToEdit.id);
       setCourseName(courseToEdit.name);
       setRequiredCredits(courseToEdit.credit.toString());
@@ -106,6 +108,11 @@ function AddCourseModal({
       setShowManualForm(true);
     }
   }, [courseToEdit]);
+
+  const generateCourseKey = (courseName: string): string => {
+    // Use object-hash to generate a unique key based on the course name
+    return hash(courseName).slice(0, 8); // Generate a short hash (first 8 characters)
+  };
 
   useEffect(() => {
     // Fetch data from Firebase
@@ -141,9 +148,23 @@ function AddCourseModal({
     setShowManualForm(true);
   };
 
+  const handleCourseNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newCourseName = e.target.value;
+    setCourseName(newCourseName);
+
+    // Regenerate course key only if it's a new course (not editing)
+    if (!courseToEdit) {
+      const newCourseKey = generateCourseKey(newCourseName);
+      setCourseKey(newCourseKey);
+    }
+  };
+
   const handleAddCourse = async () => {
+    // Auto-generate key if not editing and the course key is empty
+    const finalCourseKey = courseKey || generateCourseKey(courseName);
+
     const newCourse: Course = {
-      id: courseKey,
+      id: finalCourseKey,
       name: courseName,
       name_jp: "",
       credit: parseInt(requiredCredits),
@@ -206,6 +227,10 @@ function AddCourseModal({
   };
 
   const handleCloseModal = () => {
+    setCourseKey("");
+    setCourseName("");
+    setRequiredCredits("");
+    setCourseCompleted(false);
     setShowManualForm(false);
     handleClose();
   };
@@ -228,22 +253,6 @@ function AddCourseModal({
           {showManualForm ? (
             <div>
               <div className="mb-3">
-                <span className="modal-sub-headers">Course Name</span>
-                <div className="mt-2">
-                  <input
-                    type="text"
-                    className="add-course-input form-control"
-                    value={courseName}
-                    onChange={(e) => setCourseName(e.target.value)}
-                    placeholder="Enter Course Name"
-                    id="courseNameInput"
-                  />
-                </div>
-                <div className="modal-info mt-1 text-secondary">
-                  e.g.) Fundamentals of Visual Expression and Design
-                </div>
-              </div>
-              <div className="mb-3">
                 <span className="modal-sub-headers">Course Key</span>
                 <div className="mt-2">
                   <input
@@ -253,12 +262,28 @@ function AddCourseModal({
                     onChange={(e) => setCourseKey(e.target.value)}
                     placeholder="Enter Course Key"
                     id="courseKeyInput"
+                    disabled={true}
+                  />
+                </div>
+                <div className="modal-info mt-1 text-secondary"></div>
+              </div>
+              <div className="mb-3">
+                <span className="modal-sub-headers">Course Name</span>
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    className="add-course-input form-control"
+                    value={courseName}
+                    onChange={handleCourseNameChange}
+                    placeholder="Enter Course Name"
+                    id="courseNameInput"
                   />
                 </div>
                 <div className="modal-info mt-1 text-secondary">
-                  e.g.) 26M0013701
+                  e.g.) Fundamentals of Visual Expression and Design
                 </div>
               </div>
+
               <div className="mb-3 row">
                 <div className="col">
                   <span className="modal-sub-headers">Credits</span>
